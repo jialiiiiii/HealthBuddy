@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    font size-->
+    <dimen name="font_size_logo">24sp</dimen>
+    <dimen name="font_size_trademark">14sp</dimen>
+    <dimen name="font_size_normal">14sp</dimen>
+<!--    width/height-->
+    <dimen name="width_height_icon">35dp</dimen>
+    <dimen name="width_height_icon_large">70dp</dimen>
+    <dimen name="width_header">55dp</dimen>
+    <dimen name="width_footer">75dp</dimen>
+<!--    margin/padding-->
+    <dimen name="margin_left_right_header">16dp</dimen>
+    <dimen name="margin_left_right_footer">24dp</dimen>
+    <dimen name="margin_top_icon">10dp</dimen>
+</resources>

@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">HealthBuddy</string>
+    <string name="trademark">&#8482;</string>
+    <string name="forum">Forum</string>
+    <string name="nutrition">Nutrition</string>
+    <string name="exercise">Exercise</string>
+    <string name="account">Account</string>
+
+<!--    content description-->
+    <string name="settings">Settings</string>
 </resources>
