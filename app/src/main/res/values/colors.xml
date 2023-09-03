@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="purple_200">#CE93D8</color>
+    <color name="purple_500">#9C27B0</color>
+    <color name="purple_700">#673AB7</color>
+    <color name="teal_200">#81C784</color>
+    <color name="teal_700">#009688</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
 
-<!--    activity_master-->
+    <!--    activity_master-->
     <color name="bg_green">#FFF3F8F2</color>
     <color name="dark_green">#FF2F5329</color>
     <color name="light_green">#FF7EB175</color>
