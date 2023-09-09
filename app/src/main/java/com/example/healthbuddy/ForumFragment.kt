@@ -16,10 +16,6 @@ import com.example.healthbuddy.databinding.ForumFragmentBinding
 
 class ForumFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ForumFragment()
-    }
-
     private lateinit var viewModel: ForumViewModel
     private lateinit var binding: ForumFragmentBinding
 
@@ -30,21 +26,19 @@ class ForumFragment : Fragment() {
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.account_fragment,
+            R.layout.forum_fragment,
             container,
             false
         )
 
         // Access the layout
-        val layoutFragment = binding.root.findViewById<View>(R.id.layoutFragment)
+        val layout = binding.root.findViewById<View>(R.id.layoutBottom)
 
         // Change icon and text color
-        val imageView = layoutFragment.findViewById<ImageView>(R.id.icon_account)
-        imageView.setImageResource(R.drawable.ic_account_filled)
-        val textView = layoutFragment.findViewById<TextView>(R.id.text_account)
-        textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.dark_green))
-
-
+        val thisIcon = layout.findViewById<ImageView>(R.id.icon_forum)
+        thisIcon.setImageResource(R.drawable.ic_forum_filled)
+        val thisText = layout.findViewById<TextView>(R.id.text_forum)
+        thisText.setTextColor(ContextCompat.getColor(requireContext(), R.color.dark_green))
 
         // Set the view's root from the binding object
         return binding.root
@@ -53,7 +47,6 @@ class ForumFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ForumViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }

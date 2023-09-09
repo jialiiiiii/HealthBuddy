@@ -15,10 +15,6 @@ import com.example.healthbuddy.databinding.AccountFragmentBinding
 
 class AccountFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = AccountFragment()
-    }
-
     private lateinit var viewModel: AccountViewModel
     private lateinit var binding: AccountFragmentBinding
 
@@ -37,16 +33,13 @@ class AccountFragment : Fragment() {
         )
 
         // Access the layout
-        val layoutFragment = binding.root.findViewById<View>(R.id.layoutFragment)
+        val layout = binding.root.findViewById<View>(R.id.layoutBottom)
 
         // Change icon and text color
-        val imageView = layoutFragment.findViewById<ImageView>(R.id.icon_account)
-        imageView.setImageResource(R.drawable.ic_account_filled)
-        val textView = layoutFragment.findViewById<TextView>(R.id.text_account)
-        textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.dark_green))
-
-        Log.d("Test", imageView.toString())
-        Log.d("Test", textView.toString())
+        val thisIcon = layout.findViewById<ImageView>(R.id.icon_account)
+        thisIcon.setImageResource(R.drawable.ic_account_filled)
+        val thisText = layout.findViewById<TextView>(R.id.text_account)
+        thisText.setTextColor(ContextCompat.getColor(requireContext(), R.color.dark_green))
 
         // Set the view's root from the binding object
         return binding.root
@@ -55,7 +48,6 @@ class AccountFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(AccountViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }

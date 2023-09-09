@@ -7,7 +7,11 @@
     <fragment
         android:id="@+id/forumFragment"
         android:name="com.example.healthbuddy.ForumFragment"
-        android:label="ForumFragment" />
+        android:label="ForumFragment" >
+        <action
+            android:id="@+id/action_forum_to_account"
+            app:destination="@id/accountFragment" />
+    </fragment>
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.healthbuddy.AccountFragment"

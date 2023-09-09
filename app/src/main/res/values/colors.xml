@@ -8,11 +8,12 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 
-    <!--    activity_master-->
     <color name="bg_green">#FFF3F8F2</color>
     <color name="dark_green">#FF2F5329</color>
     <color name="light_green">#FF7EB175</color>
     <color name="leaf_green">#FF5ABA4A</color>
     <color name="lighter_green">#FFC8E5C3</color>
+    <color name="button_green">#FF57C331</color>
+    <color name="disclaimer_green">#FF8CB086</color>
 
 </resources>
