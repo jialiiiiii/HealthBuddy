@@ -36,5 +36,13 @@
         android:id="@+id/loginFragment"
         android:name="com.example.healthbuddy.landing.LoginFragment"
         android:label="landing_login_fragment"
-        tools:layout="@layout/landing_login_fragment" />
+        tools:layout="@layout/landing_login_fragment" >
+        <action
+            android:id="@+id/action_login_to_terms"
+            app:destination="@id/termsAndConditionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/termsAndConditionsFragment"
+        android:name="com.example.healthbuddy.TermsAndConditionsFragment"
+        android:label="TermsAndConditionsFragment" />
 </navigation>

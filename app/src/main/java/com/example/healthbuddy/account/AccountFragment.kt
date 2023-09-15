@@ -1,5 +1,6 @@
-package com.example.healthbuddy
+package com.example.healthbuddy.com.example.healthbuddy.account
 
+import android.graphics.Color
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
+import com.example.healthbuddy.R
 import com.example.healthbuddy.databinding.AccountFragmentBinding
 
 class AccountFragment : Fragment() {
@@ -22,8 +25,6 @@ class AccountFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this).get(AccountViewModel::class.java)
-
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
             inflater,
@@ -32,22 +33,36 @@ class AccountFragment : Fragment() {
             false
         )
 
-        // Access the layout
-        val layout = binding.root.findViewById<View>(R.id.layoutBottom)
+        val top = binding.layoutTop
+        val bottom = binding.layoutBottom
 
         // Change icon and text color
-        val thisIcon = layout.findViewById<ImageView>(R.id.icon_account)
-        thisIcon.setImageResource(R.drawable.ic_account_filled)
-        val thisText = layout.findViewById<TextView>(R.id.text_account)
-        thisText.setTextColor(ContextCompat.getColor(requireContext(), R.color.dark_green))
+        bottom.iconAccount.setImageResource(R.drawable.ic_account_filled)
+        bottom.textAccount.setTextColor(ContextCompat.getColor(requireContext(), R.color.dark_green))
+        top.lineHeader.setBackgroundColor(Color.TRANSPARENT)
+
+        // Make cards clickable
+        top.iconSettings.setOnClickListener {
+
+        }
+        bottom.cardForum.setOnClickListener {
+            findNavController().navigate(R.id.action_account_to_forum)
+        }
+        bottom.cardNutrition.setOnClickListener {
+
+        }
+        bottom.cardAdd.setOnClickListener {
+
+        }
+        bottom.cardExercise.setOnClickListener {
+
+        }
+
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Profile"))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Post"))
 
         // Set the view's root from the binding object
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AccountViewModel::class.java)
     }
 
 }

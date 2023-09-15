@@ -1,8 +1,7 @@
-package com.example.healthbuddy
+package com.example.healthbuddy.com.example.healthbuddy.forum
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import com.example.healthbuddy.databinding.AccountFragmentBinding
+import androidx.navigation.fragment.findNavController
+import com.example.healthbuddy.R
 import com.example.healthbuddy.databinding.ForumFragmentBinding
 
 class ForumFragment : Fragment() {
@@ -31,22 +31,32 @@ class ForumFragment : Fragment() {
             false
         )
 
-        // Access the layout
-        val layout = binding.root.findViewById<View>(R.id.layoutBottom)
+        val top = binding.layoutTop
+        val bottom = binding.layoutBottom
 
         // Change icon and text color
-        val thisIcon = layout.findViewById<ImageView>(R.id.icon_forum)
-        thisIcon.setImageResource(R.drawable.ic_forum_filled)
-        val thisText = layout.findViewById<TextView>(R.id.text_forum)
-        thisText.setTextColor(ContextCompat.getColor(requireContext(), R.color.dark_green))
+        bottom.iconForum.setImageResource(R.drawable.ic_forum_filled)
+        bottom.textForum.setTextColor(ContextCompat.getColor(requireContext(), R.color.dark_green))
+
+        // Make cards clickable
+        top.iconSettings.setOnClickListener {
+
+        }
+        bottom.cardNutrition.setOnClickListener {
+
+        }
+        bottom.cardAdd.setOnClickListener {
+
+        }
+        bottom.cardExercise.setOnClickListener {
+
+        }
+        bottom.cardAccount.setOnClickListener {
+            findNavController().navigate(R.id.action_forum_to_account)
+        }
 
         // Set the view's root from the binding object
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ForumViewModel::class.java)
     }
 
 }

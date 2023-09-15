@@ -3,6 +3,7 @@
 <!--    font size-->
     <dimen name="font_size_logo">24sp</dimen>
     <dimen name="font_size_trademark">14sp</dimen>
+    <dimen name="font_size_title">18sp</dimen>
     <dimen name="font_size_label">16sp</dimen>
     <dimen name="font_size_normal">14sp</dimen>
 <!--    width/height-->

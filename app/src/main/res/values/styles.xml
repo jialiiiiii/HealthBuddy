@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="text_tab" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/dm_sans_medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/font_size_title</item>
+    </style>
+    <style name="text_tab_selected" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/dm_sans_medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/font_size_title</item>
+    </style>
+</resources>

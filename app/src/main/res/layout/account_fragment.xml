@@ -5,13 +5,14 @@
     <data>
         <variable
             name="AccountViewModel"
-            type="com.example.healthbuddy.AccountViewModel" />
+            type="com.example.healthbuddy.com.example.healthbuddy.account.AccountViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".AccountFragment">
+        android:background="@color/bg_green"
+        tools:context=".com.example.healthbuddy.account.AccountFragment">
 
         <include
             android:id="@+id/layoutTop"
@@ -25,6 +26,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_tab_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTop"
+            app:tabIndicatorColor="@color/leaf_green"
+            app:tabIndicatorGravity="bottom"
+            app:tabIndicatorHeight="4dp"
+            app:tabRippleColor="@android:color/transparent"
+            app:tabSelectedTextAppearance="@style/text_tab_selected"
+            app:tabSelectedTextColor="@color/leaf_green"
+            app:tabTextAppearance="@style/text_tab"
+            app:tabTextColor="@color/leaf_green_55" />
+
+        <!--        <androidx.viewpager2.widget.ViewPager2-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:id="@+id/viewPager"-->
+        <!--            android:layout_below="@id/tabLayout"/>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

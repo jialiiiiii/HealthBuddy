@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="AccountViewModel"
-            type="com.example.healthbuddy.ForumViewModel" />
+            name="ForumViewModel"
+            type="com.example.healthbuddy.com.example.healthbuddy.forum.ForumViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ForumFragment">
+        tools:context=".com.example.healthbuddy.forum.ForumFragment">
 
         <include
             android:id="@+id/layoutTop"

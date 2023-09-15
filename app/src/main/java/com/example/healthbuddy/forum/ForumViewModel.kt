@@ -1,4 +1,4 @@
-package com.example.healthbuddy
+package com.example.healthbuddy.com.example.healthbuddy.forum
 
 import androidx.lifecycle.ViewModel
 
