@@ -40,9 +40,16 @@
         <action
             android:id="@+id/action_login_to_terms"
             app:destination="@id/termsAndConditionsFragment" />
+        <action
+            android:id="@+id/action_login_to_privacy"
+            app:destination="@id/privacyPolicyFragment" />
     </fragment>
     <fragment
         android:id="@+id/termsAndConditionsFragment"
-        android:name="com.example.healthbuddy.TermsAndConditionsFragment"
+        android:name="com.example.healthbuddy.com.example.healthbuddy.settings.TermsAndConditionsFragment"
         android:label="TermsAndConditionsFragment" />
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="com.example.healthbuddy.settings.PrivacyPolicyFragment"
+        android:label="PrivacyPolicyFragment" />
 </navigation>
