@@ -15,10 +15,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
-import androidx.room.Room
 import com.example.healthbuddy.R
-import com.example.healthbuddy.com.example.healthbuddy.database.HealthDatabase
-import com.example.healthbuddy.com.example.healthbuddy.database.User
 import com.example.healthbuddy.databinding.LandingLoginFragmentBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -28,9 +25,6 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
@@ -186,17 +180,17 @@ class LoginFragment : Fragment() {
                                     Toast.makeText(context, "Error writing user data to Firestore: ${e.message}", Toast.LENGTH_SHORT).show()
                                 }
 
-                            // Create database instance
-                            val db = Room.databaseBuilder(
-                                requireContext(),
-                                HealthDatabase::class.java, "health-database"
-                            ).build()
-
-                            // Insert data into Room Database
-                            val user = User(id, name, email)
-                            GlobalScope.launch(Dispatchers.IO) {
-                                db.userDao().insert(user)
-                            }
+//                            // Create database instance
+//                            val db = Room.databaseBuilder(
+//                                requireContext(),
+//                                HealthDatabase::class.java, "health-database"
+//                            ).build()
+//
+//                            // Insert data into Room Database
+//                            val user = User(id, name, email)
+//                            GlobalScope.launch(Dispatchers.IO) {
+//                                db.userDao().insert(user)
+//                            }
                         }
                     }
                     .addOnFailureListener { e ->
