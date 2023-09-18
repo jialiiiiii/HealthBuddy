@@ -1,6 +1,8 @@
 package com.example.healthbuddy.landing
 
 import android.app.Activity
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
@@ -14,8 +16,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.healthbuddy.R
+import com.example.healthbuddy.database.AppDatabase
+import com.example.healthbuddy.database.User
+import com.example.healthbuddy.database.UserDao
 import com.example.healthbuddy.databinding.LandingLoginFragmentBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -25,12 +31,16 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: LandingLoginFragmentBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var userDao: UserDao
+    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,6 +52,13 @@ class LoginFragment : Fragment() {
             container,
             false
         )
+
+        // Initialize the database
+        val appDatabase = AppDatabase.getDatabase(requireContext())
+        userDao = appDatabase.userDao()
+
+        // Initialize SharedPreferences
+        sharedPreferences = requireContext().getSharedPreferences("HealthBuddyPrefs", Context.MODE_PRIVATE)
 
         // Find the TextView that contains disclaimer
         val disclaimerTextView = binding.disclaimer
@@ -154,7 +171,7 @@ class LoginFragment : Fragment() {
                 val name = user?.displayName
                 val email = user?.email
 
-                // Create a Firestore reference to the user's document (replace 'users' with your collection name)
+                // Create a Firestore reference to the user's document
                 val usersCollection = FirebaseFirestore.getInstance().collection("users")
                 val userDocument = usersCollection.document(id)
 
@@ -180,17 +197,19 @@ class LoginFragment : Fragment() {
                                     Toast.makeText(context, "Error writing user data to Firestore: ${e.message}", Toast.LENGTH_SHORT).show()
                                 }
 
-//                            // Create database instance
-//                            val db = Room.databaseBuilder(
-//                                requireContext(),
-//                                HealthDatabase::class.java, "health-database"
-//                            ).build()
-//
-//                            // Insert data into Room Database
-//                            val user = User(id, name, email)
-//                            GlobalScope.launch(Dispatchers.IO) {
-//                                db.userDao().insert(user)
-//                            }
+                            // Insert data into Room Database using coroutine
+                            val user = User(0, id, name, email)
+                            var insertedUserId: Long = -1
+
+                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                                // Insert data into the database and retrieve the auto-generated ID
+                                insertedUserId = userDao.insertUser(user)
+
+                                // Set the user's ID in SharedPreferences
+                                val editor = sharedPreferences.edit()
+                                editor.putLong("userId", insertedUserId)
+                                editor.apply()
+                            }
                         }
                     }
                     .addOnFailureListener { e ->
@@ -199,11 +218,19 @@ class LoginFragment : Fragment() {
                     }
 
                 // Navigate to Profile
+                setLoginState(true)
+                findNavController().navigate(R.id.action_login_to_main)
             }
             else{
                 Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun setLoginState(loggedIn: Boolean) {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("loggedIn", loggedIn)
+        editor.apply()
     }
 
 }
