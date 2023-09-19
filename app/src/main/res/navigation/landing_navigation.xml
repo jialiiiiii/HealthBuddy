@@ -45,7 +45,9 @@
             app:destination="@id/privacyPolicyFragment" />
         <action
             android:id="@+id/action_login_to_main"
-            app:destination="@id/mainActivity" />
+            app:destination="@id/mainActivity"
+            app:popUpTo="@id/mainActivity"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/termsAndConditionsFragment"

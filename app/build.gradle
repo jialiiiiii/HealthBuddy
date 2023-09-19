@@ -45,8 +45,6 @@ dependencies {
     // Firebase
     implementation 'com.google.firebase:firebase-auth-ktx:22.1.2'
     implementation platform('com.google.firebase:firebase-bom:32.3.1')
-    implementation 'com.google.firebase:firebase-firestore-ktx:24.8.1'
-    implementation 'com.firebaseui:firebase-ui-firestore:8.0.2'
 
     // Google services
     implementation 'com.google.android.gms:play-services-auth:20.7.0'
@@ -56,12 +54,9 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.3.0"
 
     // Room
-//    implementation 'androidx.room:room-runtime:2.4.2'
-//    implementation 'androidx.room:room-common:2.4.2'
-//    implementation 'androidx.room:room-ktx:2.5.0'
-//    annotationProcessor "androidx.room:room-compiler:2.5.0"
     implementation "androidx.room:room-ktx:2.4.2"
     implementation "androidx.room:room-runtime:2.4.2"
+    implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
     kapt "androidx.room:room-compiler:2.4.2"
 
     // Lifecycle

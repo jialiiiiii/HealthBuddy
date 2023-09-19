@@ -19,10 +19,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.healthbuddy.R
-import com.example.healthbuddy.database.AppDatabase
-import com.example.healthbuddy.database.User
-import com.example.healthbuddy.database.UserDao
+import com.example.healthbuddy.room_db.AppDatabase
+import com.example.healthbuddy.room_db.User
+import com.example.healthbuddy.room_db.UserDao
 import com.example.healthbuddy.databinding.LandingLoginFragmentBinding
+import com.example.healthbuddy.realtime_db.Users
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -30,7 +31,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -41,6 +46,9 @@ class LoginFragment : Fragment() {
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var userDao: UserDao
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var db: FirebaseDatabase
+    private lateinit var reference: DatabaseReference
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,12 +61,25 @@ class LoginFragment : Fragment() {
             false
         )
 
-        // Initialize the database
+        // Initialize room database
         val appDatabase = AppDatabase.getDatabase(requireContext())
         userDao = appDatabase.userDao()
 
+        // Initialize realtime database
+        db = FirebaseDatabase.getInstance()
+        reference = db.getReference("Users")
+
         // Initialize SharedPreferences
         sharedPreferences = requireContext().getSharedPreferences("HealthBuddyPrefs", Context.MODE_PRIVATE)
+
+        // Initialize google sign-In client
+        auth = FirebaseAuth.getInstance()
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
         // Find the TextView that contains disclaimer
         val disclaimerTextView = binding.disclaimer
@@ -119,15 +140,7 @@ class LoginFragment : Fragment() {
         disclaimerTextView.text = spannableDisclaimer
         disclaimerTextView.movementMethod = LinkMovementMethod.getInstance()
 
-        // Google sign-in
-        auth = FirebaseAuth.getInstance()
-
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
-
+        // Set listener for login button
         binding.button.setOnClickListener{
             signInGoogle()
         }
@@ -162,6 +175,14 @@ class LoginFragment : Fragment() {
     }
 
     private fun updateUI(account: GoogleSignInAccount){
+        // Find the ProgressBar
+        val loadingContainer = binding.loadingContainer
+        val button = binding.button
+
+        // Show the ProgressBar
+        loadingContainer.visibility = View.VISIBLE
+        button.isEnabled = false
+
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if(it.isSuccessful){
@@ -171,65 +192,84 @@ class LoginFragment : Fragment() {
                 val name = user?.displayName
                 val email = user?.email
 
-                // Create a Firestore reference to the user's document
-                val usersCollection = FirebaseFirestore.getInstance().collection("users")
-                val userDocument = usersCollection.document(id)
+                // Store login message
+                var loginMsg = ""
 
-                // Check if the document already exists
-                userDocument.get()
-                    .addOnSuccessListener { documentSnapshot ->
-                        if (!documentSnapshot.exists()) {
-                            // Document does not exist; create and write data
-                            val userData = HashMap<String, Any>()
-                            if (name != null) {
-                                userData["name"] = name
-                            }
-                            if (email != null) {
-                                userData["email"] = email
-                            }
+                // Reference to the Firebase Realtime Database node
+                val userRef = reference.child(id)
 
-                            userDocument.set(userData)
-                                .addOnSuccessListener {
-                                    // Data has been successfully written to Firestore
+                userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        // Check if the data already exists
+                        if (dataSnapshot.exists()) {
+                            // Data exist
+                            loginMsg = "Welcome back!"
+
+                            // Hide the loading indicator after all operations are completed
+                            loadingContainer.visibility = View.GONE
+                            button.isEnabled = true
+
+                            // Navigate to Forum
+                            setLoginState(true, loginMsg)
+                            findNavController().navigate(R.id.action_login_to_main)
+                        }
+                        else{
+                            // Data does not exist, add it to realtime database
+                            val realtimeUser = Users(id, name, email)
+                            userRef.setValue(realtimeUser).addOnCompleteListener {
+                                if (it.isSuccessful) {
+                                    // Data added successfully
+                                    loginMsg = "Welcome to HealthBuddy!"
+
+                                    // Insert data into room database using coroutine
+                                    val roomUser = User(0, id, name, email)
+                                    var insertedUserId: Long = -1
+
+                                    viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                                        // Insert data into room database and retrieve the auto-generated ID
+                                        insertedUserId = userDao.insertUser(roomUser)
+
+                                        // Set the user's ID in SharedPreferences
+                                        val editor = sharedPreferences.edit()
+                                        editor.putLong("userId", insertedUserId)
+                                        editor.apply()
+                                    }
+
+                                    // Hide the loading indicator after all operations are completed
+                                    loadingContainer.visibility = View.GONE
+                                    button.isEnabled = true
+
+                                    // Navigate to Forum
+                                    setLoginState(true, loginMsg)
+                                    findNavController().navigate(R.id.action_login_to_main)
                                 }
-                                .addOnFailureListener { e ->
-                                    // Handle the error if data couldn't be written to Firestore
-                                    Toast.makeText(context, "Error writing user data to Firestore: ${e.message}", Toast.LENGTH_SHORT).show()
-                                }
-
-                            // Insert data into Room Database using coroutine
-                            val user = User(0, id, name, email)
-                            var insertedUserId: Long = -1
-
-                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-                                // Insert data into the database and retrieve the auto-generated ID
-                                insertedUserId = userDao.insertUser(user)
-
-                                // Set the user's ID in SharedPreferences
-                                val editor = sharedPreferences.edit()
-                                editor.putLong("userId", insertedUserId)
-                                editor.apply()
                             }
                         }
                     }
-                    .addOnFailureListener { e ->
-                        // Handle the error if checking document existence fails
-                        Toast.makeText(context, "Error checking user data in Firestore: ${e.message}", Toast.LENGTH_SHORT).show()
-                    }
 
-                // Navigate to Profile
-                setLoginState(true)
-                findNavController().navigate(R.id.action_login_to_main)
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        // Hide the loading indicator in case of an error
+                        loadingContainer.visibility = View.GONE
+                        button.isEnabled = true
+
+                        Toast.makeText(context, databaseError.message, Toast.LENGTH_SHORT).show()
+                    }
+                })
             }
             else{
+                // Hide the loading indicator in case of an error
+                loadingContainer.visibility = View.GONE
+                button.isEnabled = true
+
                 Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun setLoginState(loggedIn: Boolean) {
+    private fun setLoginState(loggedIn: Boolean, loginMsg: String) {
         val editor = sharedPreferences.edit()
         editor.putBoolean("loggedIn", loggedIn)
+        editor.putString("loginMsg", loginMsg)
         editor.apply()
     }
 

@@ -1,12 +1,8 @@
 package com.example.healthbuddy
 
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.healthbuddy.R
-import com.example.healthbuddy.database.AppDatabase
-import com.example.healthbuddy.databinding.MainActivityBinding
 
 class MainActivity : AppCompatActivity() {
 

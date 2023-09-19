@@ -13,8 +13,10 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.example.healthbuddy.R
 import com.example.healthbuddy.databinding.AccountFragmentBinding
+import com.google.android.material.tabs.TabLayout
 
 class AccountFragment : Fragment() {
 
@@ -58,8 +60,33 @@ class AccountFragment : Fragment() {
 
         }
 
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Profile"))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Post"))
+        // Set up tab layouts
+        var tabLayout = binding.tabLayout
+        var viewPager2 = binding.viewPager
+        var viewPagerAdapter = ViewPagerAdapter(requireActivity())
+
+        // Add tab items
+        tabLayout.addTab(binding.tabLayout.newTab().setText("Profile"))
+        tabLayout.addTab(binding.tabLayout.newTab().setText("Post"))
+
+        // Set up viewpager
+        viewPager2.setAdapter(viewPagerAdapter)
+
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                viewPager2.setCurrentItem(tab.position)
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
+
+        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                tabLayout.getTabAt(position)!!.select()
+            }
+        })
 
         // Set the view's root from the binding object
         return binding.root
