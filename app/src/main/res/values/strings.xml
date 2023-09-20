@@ -19,6 +19,10 @@
     <string name="kg">KG</string>
     <string name="cm">CM</string>
 
+    <string-array name="spinner_options">
+        <item>Nutrition</item>
+        <item>Exercise</item>
+    </string-array>
     <string-array name="gender_selection">
         <item>Male</item>
         <item>Female</item>
@@ -35,4 +39,6 @@
     <string name="privacy_policy">Privacy Policy</string>
 
     <string name="default_web_client_id">12354325827-n9pu3frt9obkgv3hgbqbs74087vg2icm.apps.googleusercontent.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

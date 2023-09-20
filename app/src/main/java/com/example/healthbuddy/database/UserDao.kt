@@ -8,7 +8,7 @@ import androidx.room.Query
 @Dao
 interface UserDao {
     @Insert
-    fun insertUser(user: User) : Long
+    fun insertUser(user: User)
 
     @Delete
     fun deleteUser(user: User)

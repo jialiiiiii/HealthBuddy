@@ -186,10 +186,13 @@ class LoginFragment : Fragment() {
         auth.signInWithCredential(credential).addOnCompleteListener {
             if(it.isSuccessful){
                 // The user has successfully signed in with Google
-                val user = auth.currentUser
-                val id = user?.uid ?: ""
-                val name = user?.displayName
-                val email = user?.email
+                val authUser = auth.currentUser
+                val id = authUser?.uid ?: ""
+                val name = authUser?.displayName
+                val email = authUser?.email
+
+                // User object
+                val user = User(id = id, name = name, email = email)
 
                 // Store login message
                 var loginMsg = ""
@@ -204,41 +207,25 @@ class LoginFragment : Fragment() {
                             // Data exist
                             loginMsg = "Welcome back!"
 
-                            // Hide the loading indicator after all operations are completed
-                            loadingContainer.visibility = View.GONE
-                            button.isEnabled = true
+                            // Insert data into room database using coroutine
+                            addToRoomDB(user)
 
                             // Navigate to Forum
-                            setLoginState(true, loginMsg)
+                            setLoginState(true, loginMsg, id)
                             findNavController().navigate(R.id.action_login_to_main)
                         }
                         else{
                             // Data does not exist, add it to realtime database
-                            val user = User(tokenId = id, name = name, email = email)
                             userRef.setValue(user).addOnCompleteListener {
                                 if (it.isSuccessful) {
                                     // Data added successfully
                                     loginMsg = "Welcome to HealthBuddy!"
 
                                     // Insert data into room database using coroutine
-                                    var insertedUserId: Long = -1
-
-                                    viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-                                        // Insert data into room database and retrieve the auto-generated ID
-                                        insertedUserId = userDao.insertUser(user)
-
-                                        // Set the user's ID in SharedPreferences
-                                        val editor = sharedPreferences.edit()
-                                        editor.putLong("userId", insertedUserId)
-                                        editor.apply()
-                                    }
-
-                                    // Hide the loading indicator after all operations are completed
-                                    loadingContainer.visibility = View.GONE
-                                    button.isEnabled = true
+                                    addToRoomDB(user)
 
                                     // Navigate to Forum
-                                    setLoginState(true, loginMsg)
+                                    setLoginState(true, loginMsg, id)
                                     findNavController().navigate(R.id.action_login_to_main)
                                 }
                             }
@@ -264,11 +251,22 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun setLoginState(loggedIn: Boolean, loginMsg: String) {
+    private fun setLoginState(loggedIn: Boolean, loginMsg: String, userId: String) {
         val editor = sharedPreferences.edit()
         editor.putBoolean("loggedIn", loggedIn)
         editor.putString("loginMsg", loginMsg)
+        editor.putString("userId", userId)
         editor.apply()
+    }
+
+    private fun addToRoomDB(user: User){
+        // Insert data into room database using coroutine
+        var insertedUserId: Int = -1
+
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            // Insert data into room database and retrieve the auto-generated ID
+            userDao.insertUser(user)
+        }
     }
 
 }

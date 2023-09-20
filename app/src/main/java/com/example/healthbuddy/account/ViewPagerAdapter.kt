@@ -3,7 +3,7 @@ package com.example.healthbuddy.com.example.healthbuddy.account
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.healthbuddy.account.PostFragment
+import com.example.healthbuddy.post.PostFragment
 import com.example.healthbuddy.account.ProfileFragment
 
 class ViewPagerAdapter(fragmentActivity: FragmentActivity) :

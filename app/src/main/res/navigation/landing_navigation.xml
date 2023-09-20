@@ -59,7 +59,7 @@
         android:label="PrivacyPolicyFragment" />
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.example.healthbuddy.MainActivity"
+        android:name="com.example.healthbuddy.com.example.healthbuddy.MainActivity"
         android:label="main_activity"
         tools:layout="@layout/main_activity" />
 </navigation>
