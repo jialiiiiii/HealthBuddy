@@ -19,11 +19,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.healthbuddy.R
-import com.example.healthbuddy.room_db.AppDatabase
-import com.example.healthbuddy.room_db.User
-import com.example.healthbuddy.room_db.UserDao
+import com.example.healthbuddy.database.AppDatabase
+import com.example.healthbuddy.database.User
+import com.example.healthbuddy.database.UserDao
 import com.example.healthbuddy.databinding.LandingLoginFragmentBinding
-import com.example.healthbuddy.realtime_db.Users
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -215,19 +214,18 @@ class LoginFragment : Fragment() {
                         }
                         else{
                             // Data does not exist, add it to realtime database
-                            val realtimeUser = Users(id, name, email)
-                            userRef.setValue(realtimeUser).addOnCompleteListener {
+                            val user = User(tokenId = id, name = name, email = email)
+                            userRef.setValue(user).addOnCompleteListener {
                                 if (it.isSuccessful) {
                                     // Data added successfully
                                     loginMsg = "Welcome to HealthBuddy!"
 
                                     // Insert data into room database using coroutine
-                                    val roomUser = User(0, id, name, email)
                                     var insertedUserId: Long = -1
 
                                     viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
                                         // Insert data into room database and retrieve the auto-generated ID
-                                        insertedUserId = userDao.insertUser(roomUser)
+                                        insertedUserId = userDao.insertUser(user)
 
                                         // Set the user's ID in SharedPreferences
                                         val editor = sharedPreferences.edit()

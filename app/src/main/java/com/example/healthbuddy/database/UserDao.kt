@@ -1,4 +1,4 @@
-package com.example.healthbuddy.room_db
+package com.example.healthbuddy.database
 
 import androidx.room.Dao
 import androidx.room.Delete

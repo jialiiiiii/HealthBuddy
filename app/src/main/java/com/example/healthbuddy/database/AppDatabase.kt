@@ -1,4 +1,4 @@
-package com.example.healthbuddy.room_db
+package com.example.healthbuddy.database
 
 import android.content.Context
 import androidx.room.Database
