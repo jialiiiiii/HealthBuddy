@@ -13,13 +13,10 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.ViewModelProvider
 import com.example.healthbuddy.R
-import com.example.healthbuddy.database.UserNutritionDao
 import com.example.healthbuddy.database.UserNutritionData
-import com.example.healthbuddy.database.UserNutritionDatabase
 import com.example.healthbuddy.databinding.FragmentAddNutriBinding
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -34,7 +31,7 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private var foodTypeSelectionPosition: Int = 0
 
-    private lateinit var userNutritionDao: UserNutritionDao
+    private lateinit var nutriDataViewModel: NutriDataViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +40,10 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
         // Replace the layout inflating code with ViewBinding
         _binding = FragmentAddNutriBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        // Initialize ViewModel
+        nutriDataViewModel = ViewModelProvider(this).get(NutriDataViewModel::class.java)
+        binding.nutriDataViewModel = nutriDataViewModel
 
         // Set up spinner
         // Category
@@ -94,9 +95,7 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         // Set onClick Listener for button
         binding.saveButton.setOnClickListener{
-            viewLifecycleOwner.lifecycleScope.launch {
-                saveUserNutriData()
-            }
+            saveUserNutriData()
         }
 
         // Restore the selected position of foodTypeSpinner if it exists
@@ -179,14 +178,9 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
         return cal
     }
 
-    private suspend fun saveUserNutriData(){
+    private fun saveUserNutriData(){
         var calObtained: Double = 0.0
         var calObtainedHolder: String = ""
-
-        // Database
-        val db = UserNutritionDatabase.getInstance(requireContext())
-
-        userNutritionDao = db.userNutritionDao
 
         // Formula
         // Total Calories Obtained = Calories per gram * size * serving
@@ -195,8 +189,8 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
         calObtained *= binding.sizeSeekBar.progress.toString().toDouble()
         calObtained *= binding.servingSizeSpinner.selectedItem.toString().toDouble()
 
-//        calObtainedHolder = String.format("%.2f", calObtained)
-//        calObtained = calObtainedHolder.toDouble()
+        calObtainedHolder = String.format("%.2f", calObtained)
+        calObtained = calObtainedHolder.toDouble()
 
         val userNutritionData = UserNutritionData(
             food_category = binding.foodCategorySpinner.selectedItem.toString(),
@@ -207,7 +201,7 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
             intake_time = binding.timePickerButton.text.toString(),
             cal_obtained = calObtained)
 
-        db.userNutritionDao.insert(userNutritionData)
+        nutriDataViewModel.insertNutriData(userNutritionData)
 
         Toast.makeText(requireContext(), "Nutrition Data successfully saved.", Toast.LENGTH_SHORT).show()
     }
