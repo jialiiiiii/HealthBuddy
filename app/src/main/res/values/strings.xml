@@ -41,4 +41,175 @@
     <string name="default_web_client_id">12354325827-n9pu3frt9obkgv3hgbqbs74087vg2icm.apps.googleusercontent.com</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Exercise -->
+    <string name="exercise_category">Exercise category</string>
+    <string name="exercise_type">Exercise type</string>
+
+    <!--  Duration  -->
+    <string name="duration">Duration Value:</string>
+    <string name="duration_mins">mins</string>
+    <string name="duration_start">5 mins</string>
+    <string name="duration_end">60 mins</string>
+
+    <!--  Set  -->
+    <string name="repetition_value">Repetition Value:</string>
+    <string name="repetition_set">rep(s)</string>
+    <string name="repetition_start">1 rep</string>
+    <string name="repetition_end">50 reps</string>
+
+    <string name="set">Set</string>
+
+    <string-array name="exer_group">
+        <item>Cardiorespiratory exercise</item>
+        <item>Flexibility exercise</item>
+        <item>Resistance exercise</item>
+        <item>Neuromotor exercise</item>
+    </string-array>
+
+    <string-array name="cardio_selection">
+        <item>Running or Jogging</item>
+        <item>Cycling</item>
+        <item>Swimming</item>
+        <item>Jumping rope</item>
+        <item>High-Intensity interval training (HIIT)</item>
+        <item>Aerobics classes</item>
+        <item>Dancing (Zumba, Hip Hop)</item>
+        <item>Rowing</item>
+        <item>Kickboxing</item>
+    </string-array>
+
+    <string-array name="res_selection">
+        <item>Weightlifting (Bench press, Squats, Deadlifts)</item>
+        <item>Push-Ups</item>
+        <item>Pull-Ups or Chin-Ups</item>
+        <item>Dumbbell exercises (Bicep curls, Shoulder press)</item>
+        <item>Barbell exercises (Bent over rows, lunges)</item>
+        <item>Bodyweight exercises (Push-ups, squats, lunges)</item>
+        <item>Resistance band exercises</item>
+        <item>Kettlebell swings</item>
+        <item>TRX suspension training</item>
+    </string-array>
+
+    <string-array name="flex_selection">
+        <item>Static stretching</item>
+        <item>Yoga Poses (Downward Dog, Cobra, Child\'s Pose)</item>
+        <item>Pilates Movements</item>
+        <item>Dynamic Stretching (Leg Swings, Arm Circles)</item>
+        <item>Stretching with Foam Rollers</item>
+        <item>Hamstring Stretch</item>
+        <item>Quadriceps Stretch</item>
+    </string-array>
+
+    <string-array name="neuro_selection">
+        <item>Balance exercises (Single-Leg strands, Balance board)</item>
+        <item>Stability ball exercises</item>
+        <item>BOSU ball workouts</item>
+        <item>Agility drills</item>
+        <item>Coordination exercises (Agility ladder drills)</item>
+        <item>Proprioceptive training</item>
+        <item>Tai Chi</item>
+        <item>Qigong</item>
+    </string-array>
+
+    <string name="meal_suggestion">Meal Suggestion</string>
+
+    <string name="cal_burnt">Calories Burnt</string>
+
+    <!-- Nutrition -->
+    <string name="food_category">Food category</string>
+    <string name="food_type">Food type</string>
+    <string name="size_per_serving">Size per serving Value:</string>
+    <string name="size_grams">grams</string>
+    <string name="size_start">5 grams</string>
+    <string name="size_end">500 grams</string>
+    <string name="serving_size">Serving size</string>
+
+    <string-array name="food_group">
+        <item>Fruits</item>
+        <item>Vegetables</item>
+        <item>Grains</item>
+        <item>Protein foods</item>
+        <item>Dairy</item>
+    </string-array>
+
+    <string-array name="fruits_selection">
+        <item>Apple</item>
+        <item>Banana</item>
+        <item>Orange</item>
+        <item>Peach</item>
+        <item>Pear</item>
+        <item>Grapes</item>
+        <item>Watermelon</item>
+        <item>Strawberry</item>
+        <item>Pineapple</item>
+        <item>Mango</item>
+    </string-array>
+
+    <string-array name="vegetables_selection">
+        <item>Broccoli</item>
+        <item>Spinach</item>
+        <item>Cabbage</item>
+        <item>Potato</item>
+        <item>Tomato</item>
+        <item>Carrot</item>
+        <item>Mushrooms  </item>
+        <item>Cucumber</item>
+        <item>Bitter gourd</item>
+        <item>Pumpkin</item>
+    </string-array>
+
+    <string-array name="grains_selection">
+        <item>Bread</item>
+        <item>Oatmeal</item>
+        <item>Popcorn</item>
+        <item>Muffins</item>
+        <item>Pasta</item>
+        <item>Rice</item>
+    </string-array>
+
+    <string-array name="protein_foods_selection">
+        <item>Salmon</item>
+        <item>Tuna</item>
+        <item>Shrimp</item>
+        <item>Crab</item>
+        <item>Chicken</item>
+        <item>Pork</item>
+        <item>Egg</item>
+        <item>Nuts</item>
+        <item>Oysters</item>
+    </string-array>
+
+    <string-array name="dairy_selection">
+        <item>Milk</item>
+        <item>Yogurt</item>
+        <item>Cheese</item>
+        <item>Butter</item>
+        <item>Cream</item>
+        <item>Ice cream</item>
+        <item>Milkshake</item>
+    </string-array>
+
+    <string name="exec_suggestion">Exercise Suggestion</string>
+
+    <!-- All -->
+    <string name="date_and_time">Date and time</string>
+    <string name="select_date">Select date</string>
+    <string name="select_time">Select time</string>
+    <string name="button_cancel">CANCEL</string>
+    <string name="button_save">SAVE</string>
+    <string-array name="times_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string name="analysis">Analysis</string>
+    <string name="collection">Collection</string>
+
+    <string name="cal">Calories</string>
+    <string name="day">Day</string>
+
 </resources>
