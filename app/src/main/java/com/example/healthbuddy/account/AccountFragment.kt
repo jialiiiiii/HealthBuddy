@@ -1,27 +1,23 @@
 package com.example.healthbuddy.com.example.healthbuddy.account
 
 import android.graphics.Color
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.healthbuddy.R
-import com.example.healthbuddy.databinding.AccountFragmentBinding
+import com.example.healthbuddy.databinding.FragmentAccountBinding
 import com.google.android.material.tabs.TabLayout
 
 class AccountFragment : Fragment() {
 
     private lateinit var viewModel: AccountViewModel
-    private lateinit var binding: AccountFragmentBinding
+    private lateinit var binding: FragmentAccountBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +26,7 @@ class AccountFragment : Fragment() {
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.account_fragment,
+            R.layout.fragment_account,
             container,
             false
         )

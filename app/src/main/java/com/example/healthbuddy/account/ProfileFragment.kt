@@ -17,7 +17,7 @@ import com.example.healthbuddy.R
 import com.example.healthbuddy.database.AppDatabase
 import com.example.healthbuddy.database.User
 import com.example.healthbuddy.database.UserDao
-import com.example.healthbuddy.databinding.ProfileFragmentBinding
+import com.example.healthbuddy.databinding.FragmentProfileBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -30,7 +30,7 @@ import kotlinx.coroutines.launch
 class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private lateinit var viewModel: ProfileViewModel
-    private lateinit var binding: ProfileFragmentBinding
+    private lateinit var binding: FragmentProfileBinding
 
     private lateinit var userDao: UserDao
     private lateinit var sharedPreferences: SharedPreferences
@@ -42,7 +42,7 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate view and obtain an instance of the binding class
-        binding = ProfileFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         // Set up gender spinner
         val spinner : Spinner = binding.spinnerGender

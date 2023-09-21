@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.healthbuddy.R
 import com.example.healthbuddy.database.UserDao
-import com.example.healthbuddy.databinding.LandingLoginFragmentBinding
+import com.example.healthbuddy.databinding.FragmentLandingLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -31,7 +31,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 class LoginFragment : Fragment() {
 
-    private lateinit var binding: LandingLoginFragmentBinding
+    private lateinit var binding: FragmentLandingLoginBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -47,7 +47,7 @@ class LoginFragment : Fragment() {
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.landing_login_fragment,
+            R.layout.fragment_landing_login,
             container,
             false
         )

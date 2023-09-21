@@ -10,7 +10,7 @@
 
         <include
             android:id="@+id/layoutTop"
-            layout="@layout/layout_top_fragment"
+            layout="@layout/fragment_layout_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -41,7 +41,7 @@
 
         <include
             android:id="@+id/layoutBottom"
-            layout="@layout/layout_bottom_fragment"
+            layout="@layout/fragment_layout_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent" />

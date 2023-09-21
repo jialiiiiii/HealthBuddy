@@ -8,16 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
 import com.example.healthbuddy.R
-import com.example.healthbuddy.databinding.TermsAndConditionsFragmentBinding
+import com.example.healthbuddy.databinding.FragmentTermsAndConditionsBinding
 import java.io.IOException
 import java.io.InputStream
 
 class TermsAndConditionsFragment : Fragment() {
 
-    private lateinit var binding: TermsAndConditionsFragmentBinding
+    private lateinit var binding: FragmentTermsAndConditionsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +25,7 @@ class TermsAndConditionsFragment : Fragment() {
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.terms_and_conditions_fragment,
+            R.layout.fragment_terms_and_conditions,
             container,
             false
         )

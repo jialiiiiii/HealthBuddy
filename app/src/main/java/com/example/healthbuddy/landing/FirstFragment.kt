@@ -16,7 +16,7 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.landing_first_fragment, container, false)
+        val view = inflater.inflate(R.layout.fragment_landing_first, container, false)
 
         // Find the Button by its ID
         val button = view.findViewById<Button>(R.id.button)

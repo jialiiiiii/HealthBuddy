@@ -9,7 +9,7 @@
         android:id="@+id/firstFragment"
         android:name="com.example.healthbuddy.landing.FirstFragment"
         android:label="landing_first_fragment"
-        tools:layout="@layout/landing_first_fragment" >
+        tools:layout="@layout/fragment_landing_first" >
         <action
             android:id="@+id/action_first_to_second"
             app:destination="@id/secondFragment" />
@@ -18,7 +18,7 @@
         android:id="@+id/secondFragment"
         android:name="com.example.healthbuddy.landing.SecondFragment"
         android:label="landing_second_fragment"
-        tools:layout="@layout/landing_second_fragment" >
+        tools:layout="@layout/fragment_landing_second" >
         <action
             android:id="@+id/action_second_to_third"
             app:destination="@id/thirdFragment" />
@@ -27,7 +27,7 @@
         android:id="@+id/thirdFragment"
         android:name="com.example.healthbuddy.landing.ThirdFragment"
         android:label="landing_third_fragment"
-        tools:layout="@layout/landing_third_fragment" >
+        tools:layout="@layout/fragment_landing_third" >
         <action
             android:id="@+id/action_third_to_login"
             app:destination="@id/loginFragment" />
@@ -36,7 +36,7 @@
         android:id="@+id/loginFragment"
         android:name="com.example.healthbuddy.landing.LoginFragment"
         android:label="landing_login_fragment"
-        tools:layout="@layout/landing_login_fragment" >
+        tools:layout="@layout/fragment_landing_login" >
         <action
             android:id="@+id/action_login_to_terms"
             app:destination="@id/termsAndConditionsFragment" />

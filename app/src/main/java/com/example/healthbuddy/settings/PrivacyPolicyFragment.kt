@@ -8,16 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
 import com.example.healthbuddy.R
-import com.example.healthbuddy.databinding.PrivacyPolicyFragmentBinding
+import com.example.healthbuddy.databinding.FragmentPrivacyPolicyBinding
 import java.io.IOException
 import java.io.InputStream
 
 class PrivacyPolicyFragment : Fragment() {
 
-    private lateinit var binding: PrivacyPolicyFragmentBinding
+    private lateinit var binding: FragmentPrivacyPolicyBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +25,7 @@ class PrivacyPolicyFragment : Fragment() {
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.privacy_policy_fragment,
+            R.layout.fragment_privacy_policy,
             container,
             false
         )
