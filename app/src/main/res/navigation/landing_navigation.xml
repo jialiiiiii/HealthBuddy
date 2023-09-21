@@ -44,10 +44,8 @@
             android:id="@+id/action_login_to_privacy"
             app:destination="@id/privacyPolicyFragment" />
         <action
-            android:id="@+id/action_login_to_main"
-            app:destination="@id/mainActivity"
-            app:popUpTo="@id/mainActivity"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_login_to_profile"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/termsAndConditionsFragment"
@@ -62,4 +60,12 @@
         android:name="com.example.healthbuddy.com.example.healthbuddy.MainActivity"
         android:label="main_activity"
         tools:layout="@layout/main_activity" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.healthbuddy.account.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profile_to_main"
+            app:destination="@id/mainActivity" />
+    </fragment>
 </navigation>
