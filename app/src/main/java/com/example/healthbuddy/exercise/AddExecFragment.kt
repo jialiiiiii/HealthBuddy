@@ -6,9 +6,7 @@ import android.app.TimePickerDialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -16,13 +14,10 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.ViewModelProvider
 import com.example.healthbuddy.R
-import com.example.healthbuddy.database.UserExecDao
 import com.example.healthbuddy.database.UserExecData
-import com.example.healthbuddy.database.UserExecDatabase
 import com.example.healthbuddy.databinding.FragmentAddExecBinding
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -39,7 +34,7 @@ class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private var execTypeSelectionPosition: Int = 0
 
-    private lateinit var userExecDao: UserExecDao
+    private lateinit var execDataViewModel: ExecDataViewModel
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
@@ -49,6 +44,10 @@ class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
         // Replace the layout inflating code with ViewBinding
         _binding = FragmentAddExecBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        // Initialize ViewModel
+        execDataViewModel = ViewModelProvider(this).get(ExecDataViewModel::class.java)
+        binding.execDataViewModel = execDataViewModel
 
         // Spinner
         // Set up exercise category
@@ -95,9 +94,7 @@ class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         // Set onClick Listener for button
         binding.saveButton.setOnClickListener{
-            viewLifecycleOwner.lifecycleScope.launch {
-                saveUserExecData()
-            }
+            saveUserExecData()
         }
 
         // Restore the selected position of foodTypeSpinner if it exists
@@ -144,15 +141,10 @@ class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
         return met
     }
 
-    private suspend fun saveUserExecData(){
+    private fun saveUserExecData(){
         var weight: Double = 65.0
         var calBurnt: Double = 0.0
         var calBurntHolder: String = ""
-
-        // Database
-        val db = UserExecDatabase.getInstance(requireContext())
-
-        userExecDao = db.userExecDao()
 
         // Formula
         // Total Calories Burned (per minute) = (3.5 * MET * Weight in kilograms) / 200
@@ -185,7 +177,7 @@ class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
             exec_time = binding.timePickerButton.text.toString(),
             cal_burnt = calBurnt)
 
-        db.userExecDao().insertExecData(userExecData)
+        execDataViewModel.insertExecData(userExecData)
 
         Toast.makeText(requireContext(), "Exercise Data successfully saved.", Toast.LENGTH_SHORT).show()
     }

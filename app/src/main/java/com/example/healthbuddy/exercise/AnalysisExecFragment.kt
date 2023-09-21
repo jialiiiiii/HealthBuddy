@@ -82,6 +82,8 @@ class AnalysisExecFragment : Fragment() {
         binding.execAnalysisView.layoutManager = LinearLayoutManager(requireContext())
         binding.execAnalysisView.adapter = execAnalysisAdapter
 
+        // ViewModel
+
         return view
     }
 

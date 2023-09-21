@@ -12,7 +12,7 @@ interface UserExecDao {
     @Insert
     suspend fun insertExecData(userExecData: UserExecData)
 
-    @Query("SELECT * FROM user_exec_table")
+    @Query("SELECT * FROM user_exec_table ORDER BY id DESC")
     fun getAllExecData(): LiveData<List<UserExecData>>
 
     @Update
