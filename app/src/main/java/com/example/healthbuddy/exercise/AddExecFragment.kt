@@ -1,11 +1,14 @@
 package com.example.healthbuddy.exercise
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -24,6 +27,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
+
 class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
     // hold the View Binding instance for your fragment
     private var _binding: FragmentAddExecBinding? = null
@@ -37,6 +41,7 @@ class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private lateinit var userExecDao: UserExecDao
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

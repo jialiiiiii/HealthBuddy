@@ -6,37 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".exercise.ExecData">
 
-    <com.google.android.material.tabs.TabLayout
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/post_layout"
-        app:tabTextColor="@color/text"
-        app:tabSelectedTextColor="@color/selected_text"
-        app:tabIndicatorColor="@color/selected_text"
-        app:tabIndicatorFullWidth="true"
-        android:background="@color/background">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/analysis" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/exec_suggestion" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/collection" />
-
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/view_pager"
-        android:layout_below="@id/post_layout" />
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

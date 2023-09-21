@@ -25,8 +25,6 @@ class AnalysisExecFragment : Fragment() {
     private val execTypeList = ArrayList<String>()
     private lateinit var execAnalysisAdapter: ExecAnalysisAdapter
 
-    private lateinit var execDataItemViewModel: ExecDataItemViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -83,17 +81,6 @@ class AnalysisExecFragment : Fragment() {
         execAnalysisAdapter = ExecAnalysisAdapter()
         binding.execAnalysisView.layoutManager = LinearLayoutManager(requireContext())
         binding.execAnalysisView.adapter = execAnalysisAdapter
-
-        // ExecDataItemViewModel
-        // Initialize the ViewModel
-        execDataItemViewModel = ViewModelProvider(this).get(ExecDataItemViewModel::class.java)
-
-        // Observe the LiveData using viewLifecycleOwner
-//        execDataItemViewModel.userExecDataList.observe(viewLifecycleOwner) { userExecData ->
-//            userExecData?.let {
-//                execAnalysisAdapter.setData(it)
-//            }
-//        }
 
         return view
     }
