@@ -11,6 +11,7 @@
     <dimen name="width_height_icon_large">75dp</dimen>
     <dimen name="width_header">55dp</dimen>
     <dimen name="width_footer">80dp</dimen>
+    <dimen name="width_button_long">130dp</dimen>
 <!--    margin/padding-->
     <dimen name="margin_left_right_header">16dp</dimen>
     <dimen name="margin_left_right_footer">24dp</dimen>

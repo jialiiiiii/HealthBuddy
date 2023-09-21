@@ -11,6 +11,7 @@
     <string name="post">Post</string>
     <string name="community">Community</string>
     <string name="next">Next</string>
+    <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="gender">Gender</string>
     <string name="age">Age</string>
@@ -18,6 +19,10 @@
     <string name="height">Height</string>
     <string name="kg">KG</string>
     <string name="cm">CM</string>
+    <string name="button_sign_out">SIGN OUT</string>
+    <string name="button_register">REGISTER</string>
+    <string name="complete_your_profile">Complete Your Profile</string>
+    <string name="text_profile_completion">One more step to get signed up</string>
 
     <string-array name="spinner_options">
         <item>Nutrition</item>
@@ -39,6 +44,7 @@
     <string name="privacy_policy">Privacy Policy</string>
 
     <string name="default_web_client_id">12354325827-n9pu3frt9obkgv3hgbqbs74087vg2icm.apps.googleusercontent.com</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

@@ -2,6 +2,7 @@ package com.example.healthbuddy.account
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -55,6 +56,22 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = adapter
+        }
+
+        // From LoginFragment: retrieve data from arguments bundle
+        val args = arguments
+        if (args != null) {
+            val id = args.getString("id")
+            val name = args.getString("name")
+            val email = args.getString("email")
+
+            binding.titleRegister.visibility = View.VISIBLE
+            binding.signOut.visibility  =View.GONE
+            binding.save.text = getString(R.string.button_register)
+
+            binding.textEmail.text = email
+            binding.editName.setText(name)
+
         }
 
         // Set the view's root from the binding object

@@ -27,6 +27,7 @@
 
     <color name="primary_button">#57C331</color>
     <color name="secondary_button">#7F7F7F</color>
+    <color name="danger_button">#ED4D4D</color>
 
     <color name="transparent">#00FFFFFF</color>
 
