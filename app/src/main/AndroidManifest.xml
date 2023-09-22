@@ -11,9 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthBuddy" >
-        <activity
-            android:name=".exercise.ExecData"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".exercise.ExecData"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".nutrition.NutriData"
             android:exported="false" />
@@ -21,27 +21,27 @@
             android:name=".addUserData.AddUserData"
             android:exported="false" />
 
-<!--        <activity-->
-<!--            android:name=".addUserData.AddUserData"-->
-<!--            android:configChanges="keyboardHidden|orientation|screenSize"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
         <activity
-            android:name=".com.example.healthbuddy.MainActivity"
+            android:name=".exercise.ExecData"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+<!--        <activity-->
+<!--            android:name=".com.example.healthbuddy.MainActivity"-->
+<!--            android:configChanges="keyboardHidden|orientation|screenSize"-->
+<!--            android:exported="true" >-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
     </application>
 
 </manifest>

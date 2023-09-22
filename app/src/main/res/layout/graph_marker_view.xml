@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Customize the appearance and content of the marker here -->
+    <TextView
+        android:id="@+id/markerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="9sp"
+        android:textColor="@color/dark_green"
+        android:background="@color/spinner_background"
+        android:padding="@dimen/date_time_bottom_margin"/>
+</LinearLayout>

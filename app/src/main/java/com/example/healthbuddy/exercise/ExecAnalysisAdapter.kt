@@ -15,6 +15,7 @@ class ExecAnalysisAdapter: RecyclerView.Adapter<ExecAnalysisAdapter.MyViewHolder
             binding.dateTime.text = currentData.exec_date.toString() + ", " + currentData.exec_time.toString()
             binding.exerciseTypeSelected.text = currentData.exec_type.toString()
             binding.exerciseCategorySelected.text = currentData.exec_category.toString()
+            binding.caloriesBurnt.text = "- " + currentData.cal_burnt.toString() + " calories"
         }
     }
 
@@ -34,8 +35,8 @@ class ExecAnalysisAdapter: RecyclerView.Adapter<ExecAnalysisAdapter.MyViewHolder
     }
 
     // Method to update the data
-    fun setData(newData: List<UserExecData>) {
-        execData = newData
+    fun setData(newExecData: List<UserExecData>) {
+        this.execData = newExecData
         notifyDataSetChanged()
     }
 }

@@ -78,7 +78,7 @@
         <item>Cycling</item>
         <item>Swimming</item>
         <item>Jumping rope</item>
-        <item>High-Intensity interval training (HIIT)</item>
+        <item>High-Intensity interval training</item>
         <item>Aerobics classes</item>
         <item>Dancing (Zumba, Hip Hop)</item>
         <item>Rowing</item>
@@ -86,12 +86,12 @@
     </string-array>
 
     <string-array name="res_selection">
-        <item>Weightlifting (Bench press, Squats, Deadlifts)</item>
+        <item>Weightlifting</item>
         <item>Push-Ups</item>
         <item>Pull-Ups or Chin-Ups</item>
-        <item>Dumbbell exercises (Bicep curls, Shoulder press)</item>
-        <item>Barbell exercises (Bent over rows, lunges)</item>
-        <item>Bodyweight exercises (Push-ups, squats, lunges)</item>
+        <item>Dumbbell exercise</item>
+        <item>Barbell exercises</item>
+        <item>Bodyweight exercises</item>
         <item>Resistance band exercises</item>
         <item>Kettlebell swings</item>
         <item>TRX suspension training</item>
@@ -99,20 +99,20 @@
 
     <string-array name="flex_selection">
         <item>Static stretching</item>
-        <item>Yoga Poses (Downward Dog, Cobra, Child\'s Pose)</item>
+        <item>Yoga Poses</item>
         <item>Pilates Movements</item>
-        <item>Dynamic Stretching (Leg Swings, Arm Circles)</item>
+        <item>Dynamic Stretching</item>
         <item>Stretching with Foam Rollers</item>
         <item>Hamstring Stretch</item>
         <item>Quadriceps Stretch</item>
     </string-array>
 
     <string-array name="neuro_selection">
-        <item>Balance exercises (Single-Leg strands, Balance board)</item>
+        <item>Balance exercises</item>
         <item>Stability ball exercises</item>
         <item>BOSU ball workouts</item>
         <item>Agility drills</item>
-        <item>Coordination exercises (Agility ladder drills)</item>
+        <item>Coordination exercises</item>
         <item>Proprioceptive training</item>
         <item>Tai Chi</item>
         <item>Qigong</item>
