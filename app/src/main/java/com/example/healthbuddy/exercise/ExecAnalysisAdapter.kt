@@ -1,5 +1,6 @@
 package com.example.healthbuddy.exercise
 
+import ExecDataFragment
 import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +10,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healthbuddy.R
 import com.example.healthbuddy.database.UserExecData
-import com.example.healthbuddy.databinding.ExecAnalysisItemBinding
 class ExecAnalysisAdapter : RecyclerView.Adapter<ExecAnalysisAdapter.ExecDataViewHolder>() {
 
     private var execData = emptyList<UserExecData>()
     private var actionDelete: ((UserExecData) -> Unit)? = null
+    private var actionEdit: ((UserExecData) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExecDataViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.exec_analysis_item, parent, false)
@@ -27,6 +28,7 @@ class ExecAnalysisAdapter : RecyclerView.Adapter<ExecAnalysisAdapter.ExecDataVie
 
     override fun onBindViewHolder(holder: ExecDataViewHolder, position: Int) {
         val currentData = execData[position]
+
         holder.dateTime.text = currentData.exec_date.toString() + ", " + currentData.exec_time.toString()
         holder.exerciseTypeSelected.text = currentData.exec_type.toString()
         holder.exerciseCategorySelected.text = currentData.exec_category.toString()
@@ -34,6 +36,10 @@ class ExecAnalysisAdapter : RecyclerView.Adapter<ExecAnalysisAdapter.ExecDataVie
 
         holder.deleteBtn.setOnClickListener {
             actionDelete?.invoke(currentData)
+        }
+
+        holder.editBtn.setOnClickListener {
+            actionEdit?.invoke(currentData)
         }
     }
 
@@ -47,11 +53,18 @@ class ExecAnalysisAdapter : RecyclerView.Adapter<ExecAnalysisAdapter.ExecDataVie
         this.actionDelete = callback
     }
 
+    fun setOnActionDEditListener(callback: (UserExecData) -> Unit) {
+        this.actionEdit = callback
+    }
+
     class ExecDataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val dateTime: TextView = itemView.findViewById<TextView>(R.id.date_time)
         val exerciseTypeSelected: TextView = itemView.findViewById<TextView>(R.id.exercise_type_selected)
         val exerciseCategorySelected: TextView = itemView.findViewById<TextView>(R.id.exercise_category_selected)
         val caloriesBurnt: TextView = itemView.findViewById<TextView>(R.id.calories_burnt)
         val deleteBtn: ImageButton = itemView.findViewById<ImageButton>(R.id.delete_btn)
+        val editBtn: ImageButton = itemView.findViewById<ImageButton>(R.id.edit_btn)
     }
+
+
 }

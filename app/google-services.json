@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "12354325827",
+    "firebase_url": "https://healthbuddy-2002-default-rtdb.firebaseio.com",
     "project_id": "healthbuddy-2002",
     "storage_bucket": "healthbuddy-2002.appspot.com"
   },
@@ -14,11 +15,27 @@
       },
       "oauth_client": [
         {
+          "client_id": "12354325827-fur60io3jh597gak7hievfi4dkkuf19q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.healthbuddy",
+            "certificate_hash": "74ecaeb2bd312e14117d27b585b64f28b834ae1b"
+          }
+        },
+        {
           "client_id": "12354325827-n9pu3frt9obkgv3hgbqbs74087vg2icm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.healthbuddy",
             "certificate_hash": "5483d33f1c83d89516be50289967063ce9e39aa5"
+          }
+        },
+        {
+          "client_id": "12354325827-ptv1fmbinua7iuhi77elv0b8p7grfd0l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.healthbuddy",
+            "certificate_hash": "0116157e42558a5c099712c6d65bca3a0307c513"
           }
         },
         {

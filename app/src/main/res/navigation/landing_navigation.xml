@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/landing_navigation"
-    app:startDestination="@id/firstFragment">
+    app:startDestination="@id/execDataFragment">
 
     <fragment
         android:id="@+id/firstFragment"
@@ -67,5 +67,24 @@
         <action
             android:id="@+id/action_profile_to_main"
             app:destination="@id/mainActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/execDataFragment"
+        android:name="ExecDataFragment"
+        android:label="ExecDataFragment" >
+        <action
+            android:id="@+id/action_execDataFragment_to_updateExecFragment"
+            app:destination="@id/updateExecFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateExecFragment"
+        android:name="com.example.healthbuddy.exercise.UpdateExecFragment"
+        android:label="UpdateExecFragment" >
+        <action
+            android:id="@+id/action_updateExecFragment_to_execDataFragment"
+            app:destination="@id/execDataFragment" />
+        <argument
+            android:name="currentExecData"
+            app:argType="com.example.healthbuddy.database.UserExecData" />
     </fragment>
 </navigation>

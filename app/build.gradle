@@ -3,8 +3,9 @@ plugins {
     id 'com.google.gms.google-services'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+//    id 'androidx.navigation.safeargs.kotlin'
 }
-
 android {
     namespace 'com.example.healthbuddy'
     compileSdk 33
