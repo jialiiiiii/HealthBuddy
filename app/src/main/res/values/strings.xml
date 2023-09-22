@@ -22,7 +22,10 @@
     <string name="button_sign_out">SIGN OUT</string>
     <string name="button_register">REGISTER</string>
     <string name="complete_your_profile">Complete Your Profile</string>
-    <string name="text_profile_completion">One more step to get signed up</string>
+    <string name="appearance">Appearance</string>
+    <string name="about">About</string>
+    <string name="theme">Theme</string>
+    <string name="language">Language</string>
 
     <!-- Error Message -->
     <string name="name_null">Please enter your name.</string>
@@ -41,6 +44,15 @@
         <item>Male</item>
         <item>Female</item>
         <item>Rather not say</item>
+    </string-array>
+    <string-array name="theme_selection">
+        <item>Default</item>
+        <item>Dark Mode</item>
+    </string-array>
+    <string-array name="language_selection">
+        <item>English</item>
+        <item>Chinese</item>
+        <item>Malay</item>
     </string-array>
 
     <string name="text_land_1">HealthBuddy, Your Personal Health Companion!\n\nAn app designed especially to empower you to take control of your health and well-being.</string>

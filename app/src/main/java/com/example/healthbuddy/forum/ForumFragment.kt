@@ -16,6 +16,7 @@ import com.example.healthbuddy.R
 import com.example.healthbuddy.database.Post
 import com.example.healthbuddy.databinding.FragmentForumBinding
 import com.example.healthbuddy.post.PostAdapter
+import com.example.healthbuddy.post.RecyclerViewItemDecoration
 import com.example.healthbuddy.post.tempData
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -24,13 +25,12 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 
+
 class ForumFragment : Fragment() {
 
     private lateinit var binding: FragmentForumBinding
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var db: DatabaseReference
-    var sImage: String? = ""
-    var nodeId = ""
 
     private lateinit var postArrayList: ArrayList<Post>
     private lateinit var nodeList: ArrayList<tempData>
@@ -60,7 +60,7 @@ class ForumFragment : Fragment() {
 
         // Make cards clickable
         top.iconSettings.setOnClickListener {
-
+            findNavController().navigate(R.id.action_forum_to_settings)
         }
         bottom.cardNutrition.setOnClickListener {
 
@@ -86,9 +86,13 @@ class ForumFragment : Fragment() {
         editor.remove("loginMsg")
         editor.apply()
 
-        // Forum's code
         binding.postList.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+        // Add item decoration for spacing
+        val itemDecoration = RecyclerViewItemDecoration(15, 2)
+        binding.postList.addItemDecoration(itemDecoration)
+
         binding.postList.hasFixedSize()
         postArrayList = arrayListOf<Post>()
         nodeList = arrayListOf<tempData>()

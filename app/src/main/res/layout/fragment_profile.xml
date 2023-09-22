@@ -102,7 +102,6 @@
                 android:paddingBottom="5dp"
                 android:textColor="@color/dark_green"
                 android:textSize="@dimen/font_size_normal"
-                app:layout_constraintBottom_toTopOf="@id/label_gender"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/label_email" />
@@ -145,7 +144,6 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="24dp"
                     android:background="@drawable/bg_spinner"
-                    android:paddingLeft="8dp"
                     android:paddingRight="8dp"
                     android:spinnerMode="dropdown"
                     app:layout_constraintBottom_toBottomOf="parent"
