@@ -104,7 +104,7 @@ class CollectionFragment : Fragment() {
                     for (postsnapshot in snapshot.children) {
                         val post = postsnapshot.getValue(Post::class.java)
 
-                        if(post != null && post.postTag == "Exercise") {
+                        if(post != null && post.postTag == "Nutrition") {
                             postArrayList.add(post!!)
                             ky = postsnapshot.key.toString()
                             pots = post.postTitle.toString()
