@@ -29,6 +29,7 @@ class AddPostFragment : Fragment() {
     private lateinit var db: DatabaseReference
     var sImage: String? = ""
     private lateinit var sharedPreferences: SharedPreferences
+    var bookMark: String? = "No"
 
     private val ActivityResultLauncher = registerForActivityResult<Intent, ActivityResult>(
         ActivityResultContracts.StartActivityForResult()
@@ -106,7 +107,7 @@ class AddPostFragment : Fragment() {
 
         db = FirebaseDatabase.getInstance().getReference("Posts")
 
-        val post = Post(tag, title, description, sImage, userId)
+        val post = Post(tag, title, description, sImage, userId,bookMark)
         val databaseReference = FirebaseDatabase.getInstance().reference
         val id = databaseReference.push().key
 

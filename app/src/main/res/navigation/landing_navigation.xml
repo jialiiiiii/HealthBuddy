@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/landing_navigation"
-    app:startDestination="@id/firstFragment">
+    app:startDestination="@id/forumFragment2">
 
     <fragment
         android:id="@+id/firstFragment"
@@ -68,4 +68,40 @@
             android:id="@+id/action_profile_to_main"
             app:destination="@id/mainActivity" />
     </fragment>
+    <fragment
+        android:id="@+id/forumFragment2"
+        android:name="com.example.healthbuddy.com.example.healthbuddy.forum.ForumFragment"
+        android:label="ForumFragment" >
+        <action
+            android:id="@+id/action_forumFragment2_to_forumDetailsFragment"
+            app:destination="@id/forumDetailsFragment" />
+        <action
+            android:id="@+id/action_forumFragment2_to_editPostFragment2"
+            app:destination="@id/editPostFragment2" />
+        <action
+            android:id="@+id/action_forumFragment2_to_addPostFragment2"
+            app:destination="@id/addPostFragment2" />
+        <action
+            android:id="@+id/action_forumFragment2_to_collectionFragment"
+            app:destination="@id/collectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forumDetailsFragment"
+        android:name="com.example.healthbuddy.forum.ForumDetailsFragment"
+        android:label="fragment_forum_details"
+        tools:layout="@layout/fragment_forum_details" />
+    <fragment
+        android:id="@+id/editPostFragment2"
+        android:name="com.example.healthbuddy.post.EditPostFragment"
+        android:label="fragment_edit_post"
+        tools:layout="@layout/fragment_edit_post" />
+    <fragment
+        android:id="@+id/addPostFragment2"
+        android:name="com.example.healthbuddy.post.AddPostFragment"
+        android:label="fragment_add_post"
+        tools:layout="@layout/fragment_add_post" />
+    <fragment
+        android:id="@+id/collectionFragment"
+        android:name="com.example.healthbuddy.forum.CollectionFragment"
+        android:label="CollectionFragment" />
 </navigation>

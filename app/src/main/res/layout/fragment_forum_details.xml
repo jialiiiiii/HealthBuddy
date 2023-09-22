@@ -7,19 +7,33 @@
     android:layout_height="match_parent"
     tools:context=".forum.ForumDetailsFragment">
 
+    <include
+        android:id="@+id/layoutTop"
+        layout="@layout/fragment_layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <TextView
         android:id="@+id/postTitle"
-        android:layout_width="367dp"
-        android:layout_height="48dp"
+        android:layout_width="358dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="20dp"
         android:text="Title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutTop" />
 
     <ImageView
         android:id="@+id/postImg"
         android:layout_width="354dp"
         android:layout_height="274dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postTitle"
         tools:src="@tools:sample/avatars" />
@@ -28,8 +42,10 @@
         android:id="@+id/postDesc"
         android:layout_width="357dp"
         android:layout_height="162dp"
+        android:layout_marginTop="32dp"
         android:text="Description"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postImg" />
 
@@ -40,8 +56,23 @@
         android:text="Author"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/postDesc"
+        app:layout_constraintVertical_bias="0.68" />
+
+    <CheckBox
+        android:id="@+id/bookMark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:button="@drawable/selector_bookmark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/author"
+        app:layout_constraintHorizontal_bias="0.317"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postDesc"
+        app:layout_constraintVertical_bias="0.6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

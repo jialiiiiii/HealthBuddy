@@ -1,21 +1,21 @@
-package com.example.healthbuddy.com.example.healthbuddy.forum
+package com.example.healthbuddy.forum
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.healthbuddy.R
 import com.example.healthbuddy.database.Post
+import com.example.healthbuddy.databinding.FragmentCollectionBinding
 import com.example.healthbuddy.databinding.FragmentForumBinding
-import com.example.healthbuddy.forum.ForumDetailsFragment
 import com.example.healthbuddy.post.PostAdapter
 import com.example.healthbuddy.post.tempData
 import com.google.firebase.database.DataSnapshot
@@ -25,9 +25,9 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 
-class ForumFragment : Fragment() {
+class CollectionFragment : Fragment() {
 
-    private lateinit var binding: FragmentForumBinding
+    private lateinit var binding: FragmentCollectionBinding
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var db: DatabaseReference
     var sImage: String? = ""
@@ -36,6 +36,14 @@ class ForumFragment : Fragment() {
     private lateinit var postArrayList: ArrayList<Post>
     private lateinit var nodeList: ArrayList<tempData>
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,10 +51,9 @@ class ForumFragment : Fragment() {
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_forum,
+            R.layout.fragment_collection,
             container,
-            false
-        )
+            false)
 
         // Initialize SharedPreferences
         sharedPreferences =
@@ -58,23 +65,6 @@ class ForumFragment : Fragment() {
         // Change icon and text color
         bottom.iconForum.setImageResource(R.drawable.ic_forum_filled)
         bottom.textForum.setTextColor(ContextCompat.getColor(requireContext(), R.color.dark_green))
-
-        // Make cards clickable
-        top.iconSettings.setOnClickListener {
-
-        }
-        bottom.cardNutrition.setOnClickListener {
-
-        }
-        bottom.cardAdd.setOnClickListener {
-
-        }
-        bottom.cardExercise.setOnClickListener {
-
-        }
-        bottom.cardAccount.setOnClickListener {
-            findNavController().navigate(R.id.action_forum_to_account)
-        }
 
         // Display login message once
         val loginMsg = sharedPreferences.getString("loginMsg", "") ?: ""
@@ -95,13 +85,15 @@ class ForumFragment : Fragment() {
         nodeList = arrayListOf<tempData>()
         getItemData()
 
-        // Set the view's root from the binding object
+
+
         return binding.root
     }
 
     private fun getItemData() {
         db = FirebaseDatabase.getInstance().getReference("Posts")
-        var query: Query = db.orderByChild("postTitle")
+        val query: Query = db.orderByChild("bookMark").equalTo("Yes")
+
 
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -111,11 +103,16 @@ class ForumFragment : Fragment() {
 
                     for (postsnapshot in snapshot.children) {
                         val post = postsnapshot.getValue(Post::class.java)
-                        postArrayList.add(post!!)
-                        ky = postsnapshot.key.toString()
-                        pots = post.postTitle.toString()
-                        val tmppost = tempData(ky, pots)
-                        nodeList.add(tmppost)
+
+                        if(post != null && post.postTag == "Exercise") {
+                            postArrayList.add(post!!)
+                            ky = postsnapshot.key.toString()
+                            pots = post.postTitle.toString()
+                            val tmppost = tempData(ky, pots)
+                            nodeList.add(tmppost)
+                        }else{
+                            Toast.makeText(context,"Opps, seems like you have not collected any post yet...",Toast.LENGTH_SHORT).show()
+                        }
                     }
 
                     var adapter = PostAdapter(postArrayList)
@@ -124,11 +121,11 @@ class ForumFragment : Fragment() {
                         override fun onItemClick(position: Int) {
                             val ctpost = nodeList[position]
                             val nodePath = ctpost.id.toString()
-                            val fragment = ForumDetailsFragment()
+                            val fragment = CollectionFragment()
                             //val fragment = PostFragment()
                             val bundle=Bundle()
                             bundle.putString("post_id",nodePath.toString())
-                          //findNavController().navigate(R.id.action_forumFragment2_to_forumDetailsFragment,bundle)
+                            //findNavController().navigate(R.id.action_forumFragment2_to_forumDetailsFragment,bundle)
                             //findNavController().navigate(R.id.action_forumFragment2_to_editPostFragment2,bundle)
                             //findNavController().navigate(R.id.action_forumFragment2_to_addPostFragment2,bundle)
                             findNavController().navigate(R.id.action_forumFragment2_to_collectionFragment,bundle)

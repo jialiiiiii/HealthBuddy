@@ -5,5 +5,6 @@ data class Post(
     val postTitle:String?=null,
     val postDescription:String?=null,
     val postImage:String?=null,
-    val postUser:String?=null
+    val postUser:String?=null,
+    val bookMark:String?=null
 )
