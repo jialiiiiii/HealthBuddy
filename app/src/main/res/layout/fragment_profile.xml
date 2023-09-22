@@ -258,7 +258,6 @@
                 android:id="@+id/label_kg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:fontFamily="@font/dm_sans"
                 android:text="@string/kg"
                 android:textColor="@color/dark_green"
@@ -313,7 +312,6 @@
                 android:id="@+id/label_cm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:fontFamily="@font/dm_sans"
                 android:text="@string/cm"
                 android:textColor="@color/dark_green"
@@ -327,7 +325,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:id="@+id/save"
+            android:id="@+id/save_or_register"
             android:layout_width="@dimen/width_button_long"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
@@ -343,16 +341,19 @@
         <Button
             android:id="@+id/sign_out"
             android:layout_width="@dimen/width_button_long"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="32dp"
             android:backgroundTint="@color/danger_button"
             android:fontFamily="@font/dm_sans_medium"
             android:text="@string/button_sign_out"
             android:textColor="@color/white"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/save" />
+            app:layout_constraintTop_toBottomOf="@+id/save_or_register"
+            app:layout_constraintVertical_bias="0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -7,10 +7,12 @@ import androidx.room.PrimaryKey
 data class User(
     @PrimaryKey
     val id: String,
-    val name: String?,
-    val email: String?,
-    val gender: String? = "",
-    val age: Int? = 0,
-    val weight: Double? = 0.0,
-    val height: Double? = 0.0
-)
+    var name: String? = "",
+    val email: String? = "",
+    var gender: String? = "",
+    var age: Int? = 0,
+    var weight: Double? = 0.0,
+    var height: Double? = 0.0
+){
+    constructor() : this("")
+}

@@ -24,6 +24,15 @@
     <string name="complete_your_profile">Complete Your Profile</string>
     <string name="text_profile_completion">One more step to get signed up</string>
 
+    <!-- Error Message -->
+    <string name="name_null">Please enter your name.</string>
+    <string name="age_null">Please enter your age.</string>
+    <string name="weight_null">Please enter your weight.</string>
+    <string name="height_null">Please enter your height.</string>
+    <string name="age_invalid">Please ensure your age is between 10 - 100 years old.</string>
+    <string name="weight_invalid">Please ensure your weight is between 20 - 500 kg.</string>
+    <string name="height_invalid">Please ensure your height is between 50 - 250 cm.</string>
+
     <string-array name="spinner_options">
         <item>Nutrition</item>
         <item>Exercise</item>

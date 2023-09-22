@@ -1,6 +1,7 @@
 package com.example.healthbuddy.landing
 
 import android.app.Activity
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.SpannableString
@@ -15,8 +16,12 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.healthbuddy.R
+import com.example.healthbuddy.database.AppDatabase
+import com.example.healthbuddy.database.User
 import com.example.healthbuddy.database.UserDao
 import com.example.healthbuddy.databinding.FragmentLandingLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -25,16 +30,21 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLandingLoginBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
-
     private lateinit var userDao: UserDao
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var db: FirebaseDatabase
@@ -51,17 +61,6 @@ class LoginFragment : Fragment() {
             container,
             false
         )
-
-//        // Initialize room database
-//        val appDatabase = AppDatabase.getDatabase(requireContext())
-//        userDao = appDatabase.userDao()
-//
-//        // Initialize realtime database
-//        db = FirebaseDatabase.getInstance()
-//        reference = db.getReference("Users")
-//
-//        // Initialize SharedPreferences
-//        sharedPreferences = requireContext().getSharedPreferences("HealthBuddyPrefs", Context.MODE_PRIVATE)
 
         // Find the TextView that contains disclaimer
         val disclaimerTextView = binding.disclaimer
@@ -129,6 +128,7 @@ class LoginFragment : Fragment() {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
+
         googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
         // Set listener for login button
@@ -178,16 +178,9 @@ class LoginFragment : Fragment() {
         auth.signInWithCredential(credential).addOnCompleteListener {
             if(it.isSuccessful){
                 val authUser = auth.currentUser
-                val id = authUser?.uid ?: ""
-                val name = authUser?.displayName
-                val email = authUser?.email
-
-                val bundle = Bundle()
-                bundle.putString("id", id)
-                bundle.putString("name", name)
-                bundle.putString("email", email)
-
-                findNavController().navigate(R.id.action_login_to_profile, bundle)
+                if (authUser != null) {
+                    checkUserExist(authUser)
+                }
             }
             else{
                 // Hide the loading indicator in case of an error
@@ -199,4 +192,75 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun checkUserExist(authUser: FirebaseUser){
+        // Get data
+        val id = authUser?.uid ?: ""
+        val name = authUser?.displayName
+        val email = authUser?.email
+
+        // Initialize room database
+        val appDatabase = AppDatabase.getDatabase(requireContext())
+        userDao = appDatabase.userDao()
+
+        // Initialize realtime database
+        db = FirebaseDatabase.getInstance()
+        reference = db.getReference("Users")
+
+        // Initialize SharedPreferences
+        sharedPreferences = requireContext().getSharedPreferences("HealthBuddyPrefs", Context.MODE_PRIVATE)
+
+        // Reference to the Firebase Realtime Database node
+        val userRef = reference.child(id)
+
+        userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Check if the data already exists
+                if (dataSnapshot.exists()) {
+                    // Data exist, get user data from the DataSnapshot
+                    val userData = dataSnapshot.getValue(User::class.java)
+                    val userName = userData?.name
+                    val userEmail = userData?.email
+                    val userGender = userData?.gender
+                    val userAge = userData?.age
+                    val userWeight = userData?.weight
+                    val userHeight = userData?.height
+
+                    // Create user instance
+                    val user = User(id, userName, userEmail, userGender, userAge, userWeight, userHeight)
+
+                    // Insert data into room database using coroutine
+                    viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                        // Check if the user with the same ID exists
+                        val existingUser = userDao.getUserById(id)
+
+                        if (existingUser == null) {
+                            // User doesn't exist, insert it into the room database
+                            userDao.insertUser(user)
+                        }
+                    }
+
+                    val editor = sharedPreferences.edit()
+                    editor.putBoolean("loggedIn", true)
+                    editor.putString("loginMsg", "Welcome back!")
+                    editor.putString("userId", id)
+                    editor.apply()
+
+                    findNavController().navigate(R.id.action_login_to_main)
+                }
+                else{
+                    // Data does not exist, complete profile
+                    val bundle = Bundle()
+                    bundle.putString("id", id)
+                    bundle.putString("name", name)
+                    bundle.putString("email", email)
+
+                    findNavController().navigate(R.id.action_login_to_profile, bundle)
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Toast.makeText(context, databaseError.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 }
