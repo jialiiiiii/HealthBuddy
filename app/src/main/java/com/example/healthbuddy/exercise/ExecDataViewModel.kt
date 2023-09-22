@@ -34,4 +34,14 @@ class ExecDataViewModel(application: Application): AndroidViewModel(application)
         }
     }
 
+    fun deleteExecData(userExecData: UserExecData){
+        try {
+            viewModelScope.launch(Dispatchers.IO) {
+                execDataRepository.deleteExecData(userExecData)
+            }
+        } catch (e: Exception) {
+            // Handle the exception (e.g., log it or display an error message)
+        }
+    }
+
 }

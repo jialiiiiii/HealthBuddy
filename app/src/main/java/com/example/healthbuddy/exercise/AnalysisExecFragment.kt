@@ -1,21 +1,28 @@
 package com.example.healthbuddy.exercise
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthbuddy.R
+import com.example.healthbuddy.database.UserExecData
 import com.example.healthbuddy.databinding.FragmentAnalysisExecBinding
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class AnalysisExecFragment : Fragment() {
 
@@ -26,12 +33,12 @@ class AnalysisExecFragment : Fragment() {
     private val execCatList = ArrayList<String>()
     private val execTypeList = ArrayList<String>()
     private lateinit var execAnalysisAdapter: ExecAnalysisAdapter
-    private lateinit var execAnalysisGraphAdapter: ExecAnalysisGraphAdapter
 
     private lateinit var execDataViewModel: ExecDataViewModel
 
     private val entries = ArrayList<Entry>()
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,12 +46,39 @@ class AnalysisExecFragment : Fragment() {
         _binding = FragmentAnalysisExecBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        // Get current month
+        // Get the current date
+        val currentDate = Calendar.getInstance().time
+
+        // Format the date to get the current month in string format
+        val sdf = SimpleDateFormat("MMMM", Locale.getDefault())
+        val currentMonth = sdf.format(currentDate)
+
         // Initialize ViewModel
         execDataViewModel = ViewModelProvider(this).get(ExecDataViewModel::class.java)
         binding.execDataViewModel = execDataViewModel
 
         // Recycler View
         execAnalysisAdapter = ExecAnalysisAdapter()
+
+        // Set the actionDelete callback before setting the adapter
+        execAnalysisAdapter.setOnActionDeleteListener { userExecDataToDelete ->
+            val alertDialogBuilder = AlertDialog.Builder(requireContext())
+            alertDialogBuilder.setTitle("Delete Confirmation")
+            alertDialogBuilder.setMessage("Are you sure you want to delete this data?")
+            alertDialogBuilder.setPositiveButton("DELETE") { _, _ ->
+                // Assuming userExecDataToDelete is the item to be deleted
+                execDataViewModel.deleteExecData(userExecDataToDelete)
+                Toast.makeText(requireContext(), "Exercise Data successfully deleted.", Toast.LENGTH_SHORT).show()
+            }
+            alertDialogBuilder.setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss() // Dismiss the dialog
+            }
+            val alertDialog = alertDialogBuilder.create()
+            alertDialog.show()
+        }
+
+        // Set the adapter on your RecyclerView
         binding.execAnalysisView.layoutManager = LinearLayoutManager(requireContext())
         binding.execAnalysisView.adapter = execAnalysisAdapter
 
@@ -52,7 +86,13 @@ class AnalysisExecFragment : Fragment() {
         // Outside conditional check: Let the compiler know that binding.execDataViewModel wont be null
         binding.execDataViewModel?.let { execDataViewModel ->
             execDataViewModel.getAllExecData.observe(viewLifecycleOwner, Observer { userExecData ->
-                execAnalysisAdapter.setData(userExecData)
+                if (userExecData.isNotEmpty()) {
+                    execAnalysisAdapter.setData(userExecData)
+                    binding.noData.visibility = View.GONE
+                    binding.month.text = "($currentMonth)"
+                } else {
+                    binding.noData.visibility = View.VISIBLE
+                }
             })
 
             execDataViewModel.getTotalCaloriesBurnt.observe(viewLifecycleOwner, Observer { totalCaloriesBurntList ->
@@ -109,5 +149,4 @@ class AnalysisExecFragment : Fragment() {
         }
         return view
     }
-
 }
