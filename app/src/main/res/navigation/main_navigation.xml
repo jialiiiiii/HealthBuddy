@@ -13,6 +13,9 @@
             android:id="@+id/action_forum_to_account"
             app:destination="@id/accountFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_forum_to_settings"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -21,25 +24,51 @@
         <action
             android:id="@+id/action_account_to_forum"
             app:destination="@id/forumFragment"
-            app:popUpTo="@id/forumFragment" />
+            app:popUpTo="@id/forumFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_post_to_edit_post"
             app:destination="@id/editPostFragment" />
+        <action
+            android:id="@+id/action_profile_to_landing"
+            app:destination="@id/landing_navigation"
+            app:popUpTo="@id/landing_navigation"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_account_to_settings"
+            app:destination="@id/settingsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/addPostFragment"
-        android:name="com.example.healthbuddy.post.AddPostFragment"
-        android:label="fragment_add_post"
-        tools:layout="@layout/fragment_add_post" />
     <fragment
         android:id="@+id/editPostFragment"
         android:name="com.example.healthbuddy.post.EditPostFragment"
         android:label="fragment_edit_post"
         tools:layout="@layout/fragment_edit_post" />
+    <include app:graph="@navigation/landing_navigation" />
     <fragment
-        android:id="@+id/postFragment"
-        android:name="com.example.healthbuddy.post.PostFragment"
-        android:label="fragment_post"
-        tools:layout="@layout/fragment_post" />
-
+        android:id="@+id/settingsFragment"
+        android:name="com.example.healthbuddy.settings.SettingsFragment"
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settings_to_privacy"
+            app:destination="@id/privacyPolicyFragment2" />
+        <action
+            android:id="@+id/action_settings_to_terms"
+            app:destination="@id/termsAndConditionsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/privacyPolicyFragment2"
+        android:name="com.example.healthbuddy.settings.PrivacyPolicyFragment"
+        android:label="PrivacyPolicyFragment" >
+        <action
+            android:id="@+id/action_privacy_to_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/termsAndConditionsFragment2"
+        android:name="com.example.healthbuddy.com.example.healthbuddy.settings.TermsAndConditionsFragment"
+        android:label="TermsAndConditionsFragment" >
+        <action
+            android:id="@+id/action_terms_to_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
 </navigation>

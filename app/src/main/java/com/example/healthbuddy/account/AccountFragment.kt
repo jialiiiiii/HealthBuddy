@@ -16,7 +16,6 @@ import com.google.android.material.tabs.TabLayout
 
 class AccountFragment : Fragment() {
 
-    private lateinit var viewModel: AccountViewModel
     private lateinit var binding: FragmentAccountBinding
 
     override fun onCreateView(
@@ -41,7 +40,7 @@ class AccountFragment : Fragment() {
 
         // Make cards clickable
         top.iconSettings.setOnClickListener {
-
+            findNavController().navigate(R.id.action_account_to_settings)
         }
         bottom.cardForum.setOnClickListener {
             findNavController().navigate(R.id.action_account_to_forum)

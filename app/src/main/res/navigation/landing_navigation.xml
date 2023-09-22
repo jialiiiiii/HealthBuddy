@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/landing_navigation"
-    app:startDestination="@id/execDataFragment">
+    app:startDestination="@id/firstFragment">
 
     <fragment
         android:id="@+id/firstFragment"
@@ -46,6 +46,11 @@
         <action
             android:id="@+id/action_login_to_profile"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_login_to_main"
+            app:destination="@id/mainActivity"
+            app:popUpTo="@id/mainActivity"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/termsAndConditionsFragment"
@@ -55,36 +60,19 @@
         android:id="@+id/privacyPolicyFragment"
         android:name="com.example.healthbuddy.settings.PrivacyPolicyFragment"
         android:label="PrivacyPolicyFragment" />
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.healthbuddy.com.example.healthbuddy.MainActivity"
-        android:label="main_activity"
-        tools:layout="@layout/main_activity" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.healthbuddy.account.ProfileFragment"
         android:label="ProfileFragment" >
         <action
             android:id="@+id/action_profile_to_main"
-            app:destination="@id/mainActivity" />
+            app:destination="@id/mainActivity"
+            app:popUpTo="@id/mainActivity"
+            app:popUpToInclusive="true" />
     </fragment>
-    <fragment
-        android:id="@+id/execDataFragment"
-        android:name="ExecDataFragment"
-        android:label="ExecDataFragment" >
-        <action
-            android:id="@+id/action_execDataFragment_to_updateExecFragment"
-            app:destination="@id/updateExecFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/updateExecFragment"
-        android:name="com.example.healthbuddy.exercise.UpdateExecFragment"
-        android:label="UpdateExecFragment" >
-        <action
-            android:id="@+id/action_updateExecFragment_to_execDataFragment"
-            app:destination="@id/execDataFragment" />
-        <argument
-            android:name="currentExecData"
-            app:argType="com.example.healthbuddy.database.UserExecData" />
-    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.healthbuddy.com.example.healthbuddy.MainActivity"
+        android:label="main_activity"
+        tools:layout="@layout/main_activity" />
 </navigation>
