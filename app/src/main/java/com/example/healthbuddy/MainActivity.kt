@@ -1,6 +1,7 @@
 package com.example.healthbuddy.com.example.healthbuddy
 
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.healthbuddy.R
@@ -22,6 +23,12 @@ class MainActivity : AppCompatActivity() {
         } else {
             setContentView(R.layout.landing_activity)
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        // Reload or update the view
+        recreate()
     }
 
 }

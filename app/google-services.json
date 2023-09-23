@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "12354325827-ptv1fmbinua7iuhi77elv0b8p7grfd0l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.healthbuddy",
+            "certificate_hash": "0116157e42558a5c099712c6d65bca3a0307c513"
+          }
+        },
+        {
           "client_id": "12354325827-2b6ugb9vrtcupu8fgdum59bck1rh9n6p.apps.googleusercontent.com",
           "client_type": 3
         }

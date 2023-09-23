@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.healthbuddy.R
@@ -40,7 +41,7 @@ class AccountFragment : Fragment() {
 
         // Make cards clickable
         top.iconSettings.setOnClickListener {
-
+            findNavController().navigate(R.id.action_account_to_settings)
         }
         bottom.cardForum.setOnClickListener {
             findNavController().navigate(R.id.action_account_to_forum)

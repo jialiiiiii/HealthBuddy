@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.example.healthbuddy.R
 import com.example.healthbuddy.databinding.FragmentTermsAndConditionsBinding
 import java.io.IOException
@@ -29,6 +30,11 @@ class TermsAndConditionsFragment : Fragment() {
             container,
             false
         )
+
+        val top = binding.layoutTop
+        top.iconSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_terms_to_settings)
+        }
 
         binding.imageView.setOnClickListener {
             activity?.onBackPressed()

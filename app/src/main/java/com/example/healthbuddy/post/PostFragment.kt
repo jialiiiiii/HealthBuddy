@@ -40,9 +40,13 @@ class PostFragment : Fragment() {
         // Initialize shared preferences
         sharedPreferences = requireContext().getSharedPreferences("HealthBuddyPrefs", AppCompatActivity.MODE_PRIVATE)
 
-        // Forum's code
         binding.postList.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+        // Add item decoration for spacing
+        val itemDecoration = RecyclerViewItemDecoration(15, 2)
+        binding.postList.addItemDecoration(itemDecoration)
+
         binding.postList.hasFixedSize()
         postArrayList = arrayListOf<Post>()
         nodeList = arrayListOf<tempData>()

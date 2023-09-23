@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthbuddy.R
 import com.example.healthbuddy.database.UserExecData
 import com.example.healthbuddy.databinding.FragmentAnalysisExecBinding
+import com.example.healthbuddy.exercise.UpdateExecFragment.Companion.ARG_EXEC_DATA
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -61,7 +62,19 @@ class AnalysisExecFragment : Fragment() {
         // Recycler View
         execAnalysisAdapter = ExecAnalysisAdapter()
 
-        // Set the actionDelete callback before setting the adapter
+        // Edit
+        execAnalysisAdapter.setOnActionDEditListener { userExecData ->
+            val bundle = Bundle()
+            bundle.putParcelable(ARG_EXEC_DATA, userExecData)
+
+            val updateExecFragment = UpdateExecFragment()
+            updateExecFragment.arguments = bundle
+
+            // Show the dialog fragment
+            updateExecFragment.show(requireActivity().supportFragmentManager, "UpdateExecDialogFragment")
+        }
+
+        // Delete
         execAnalysisAdapter.setOnActionDeleteListener { userExecDataToDelete ->
             val alertDialogBuilder = AlertDialog.Builder(requireContext())
             alertDialogBuilder.setTitle("Delete Confirmation")

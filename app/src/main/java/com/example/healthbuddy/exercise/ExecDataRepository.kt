@@ -22,6 +22,10 @@ class ExecDataRepository(private val userExecDao: UserExecDao) {
         userExecDao.insertExecData(userExecData)
     }
 
+    suspend fun updateExecData(userExecData: UserExecData){
+        userExecDao.updateExecData(userExecData)
+    }
+
     suspend fun deleteExecData(userExecData: UserExecData){
         userExecDao.deleteExecData(userExecData)
     }
