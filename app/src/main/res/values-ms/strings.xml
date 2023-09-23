@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="forum">Forum</string>
+    <string name="nutrition">Pemakanan</string>
+    <string name="exercise">Senaman</string>
+    <string name="account">Akaun</string>
+    <string name="settings">Tetapan</string>
+    <string name="profile">Profil</string>
+    <string name="post">Siaran</string>
+    <string name="community">Komuniti</string>
+    <string name="next">Seterusnya</string>
+    <string name="name">Nama</string>
+    <string name="email">E-mel</string>
+    <string name="gender">Jantina</string>
+    <string name="age">Umur</string>
+    <string name="weight">Berat</string>
+    <string name="height">Tinggi</string>
+    <string name="kg">KG</string>
+    <string name="cm">CM</string>
+    <string name="button_sign_out">LOG KELUAR</string>
+    <string name="button_register">DAFTAR</string>
+    <string name="complete_your_profile">Lengkapkan Profil Anda</string>
+    <string name="appearance">Kemunculan</string>
+    <string name="about">Tentang</string>
+    <string name="theme">Tema</string>
+    <string name="language">Bahasa</string>
+
+    <!-- Error Message -->
+    <string name="name_null">Sila masukkan nama anda.</string>
+    <string name="age_null">Sila masukkan umur anda.</string>
+    <string name="weight_null">Sila masukkan berat anda.</string>
+    <string name="height_null">Sila masukkan ketinggian anda.</string>
+    <string name="age_invalid">Sila pastikan umur anda antara 10 - 100 tahun.</string>
+    <string name="weight_invalid">Sila pastikan berat anda antara 20 - 500 kg.</string>
+    <string name="height_invalid">Sila pastikan ketinggian anda antara 50 - 250 cm.</string>
+
+    <string-array name="spinner_options">
+        <item>Pemakanan</item>
+        <item>Senaman</item>
+    </string-array>
+    <string-array name="gender_selection">
+        <item>Lelaki</item>
+        <item>Perempuan</item>
+        <item>Tidak mengatakan</item>
+    </string-array>
+    <string-array name="theme_selection">
+        <item>Lalai</item>
+        <item>Mod Gelap</item>
+    </string-array>
+    <string-array name="language_selection">
+        <item>Inggeris</item>
+        <item>Cina</item>
+        <item>Melayu</item>
+    </string-array>
+
+    <string name="text_land_1">HealthBuddy, Rakan Kesihatan Peribadi Anda!\n\nAplikasi yang direka khas untuk memperkasakan anda mengawal kesihatan dan kesejahteraan anda.</string>
+    <string name="text_land_2">Kami menawarkan diari makanan dan maklumat pemakanan yang komprehensif, membantu anda membuat pilihan makanan yang lebih sihat dan mencapai objektif diet anda!</string>
+    <string name="text_land_3">Akses pelbagai meditasi berpandu, senaman melegakan tekanan dan artikel kesihatan untuk meningkatkan kesejahteraan mental anda dan menggalakkan gaya hidup yang seimbang!</string>
+    <string name="text_land_4">Berhubung dengan individu yang berfikiran sama dalam komuniti HealthBuddy, berkongsi pengalaman, petua dan galakan dalam perjalanan kesihatan anda!</string>
+    <string name="continue_with_google">Teruskan dengan Google</string>
+    <string name="disclaimer">Dengan mengetik Teruskan dengan Google, anda bersetuju menerima Terma dan Syarat serta Dasar Privasi HealthBuddy.</string>
+    <string name="terms_and_conditions">Terma dan Syarat</string>
+    <string name="privacy_policy">Dasar Privasi</string>
+
+    <!-- Exercise -->
+    <string name="exercise_category">Kategori senaman</string>
+    <string name="exercise_type">Jenis senaman</string>
+
+    <!--  Duration  -->
+    <string name="duration">Nilai Tempoh:</string>
+    <string name="duration_mins">minit</string>
+    <string name="duration_start">5 minit</string>
+    <string name="duration_end">60 minit</string>
+
+    <!--  Set  -->
+    <string name="repetition_value">Nilai Ulangan:</string>
+    <string name="repetition_set">ulangan</string>
+    <string name="repetition_start">1 ulangan</string>
+    <string name="repetition_end">50 ulangan</string>
+
+    <string name="set">Set</string>
+
+    <string-array name="exer_group">
+        <item>Senaman kardiorespiratori</item>
+        <item>Senaman fleksibiliti</item>
+        <item>Senaman rintangan</item>
+        <item>Senaman neuromotor</item>
+    </string-array>
+
+    <string-array name="cardio_selection">
+        <item>Berlari atau Berjoging</item>
+        <item>Berbasikal</item>
+        <item>Berenang</item>
+        <item>Lompat tali</item>
+        <item>Senaman selang intensiti tinggi</item>
+        <item>Kelas aerobik</item>
+        <item>Menari (Zumba, Hip Hop)</item>
+        <item>Mendayung</item>
+        <item>Tinju tendang</item>
+    </string-array>
+
+    <string-array name="res_selection">
+        <item>Angkat berat</item>
+        <item>Tekan Tubi</item>
+        <item>Pull-Up atau Chin-Up</item>
+        <item>Senaman dumbbell</item>
+        <item>Senaman barbel</item>
+        <item>Senaman berat badan</item>
+        <item>Senaman band rintangan</item>
+        <item>Kettlebell berayun</item>
+        <item>Senaman penggantungan TRX</item>
+    </string-array>
+
+    <string-array name="flex_selection">
+        <item>Regangan statik</item>
+        <item>Pose Yoga</item>
+        <item>Pergerakan Pilates</item>
+        <item>Regangan Dinamik</item>
+        <item>Regangan dengan Penggelek Buih</item>
+        <item>Regangan Hamstring</item>
+        <item>Regangan Quadriceps</item>
+    </string-array>
+
+    <string-array name="neuro_selection">
+        <item>Senaman keseimbangan</item>
+        <item>Senaman bola kestabilan</item>
+        <item>Senaman bola BOSU</item>
+        <item>Senaman ketangkasan</item>
+        <item>Senaman penyelarasan</item>
+        <item>Senaman proprioseptif</item>
+        <item>Tai Chi</item>
+        <item>Qigong</item>
+    </string-array>
+
+    <string name="exec_suggestion">Cadangan Senaman</string>
+
+    <string name="cal_burnt">Kalori Dibakar</string>
+
+    <!-- Nutrition -->
+    <string name="food_category">Kategori makanan</string>
+    <string name="food_type">Jenis makanan</string>
+    <string name="size_per_serving">Saiz setiap hidangan Nilai:</string>
+    <string name="size_grams">gram</string>
+    <string name="size_start">5 gram</string>
+    <string name="size_end">500 gram</string>
+    <string name="serving_size">Saiz hidangan</string>
+
+    <string-array name="food_group">
+        <item>Buah-buahan</item>
+        <item>Sayur-sayuran</item>
+        <item>Bijirin</item>
+        <item>Makanan berprotein</item>
+        <item>Tenusu</item>
+    </string-array>
+
+    <string-array name="fruits_selection">
+        <item>Epal</item>
+        <item>Pisang</item>
+        <item>Oren</item>
+        <item>Pic</item>
+        <item>Pir</item>
+        <item>Anggur</item>
+        <item>Tembikai</item>
+        <item>Strawberi</item>
+        <item>Nenas</item>
+        <item>Mangga</item>
+    </string-array>
+
+    <string-array name="vegetables_selection">
+        <item>Brokoli</item>
+        <item>Bayam</item>
+        <item>Kobis</item>
+        <item>Kentang</item>
+        <item>Tomato</item>
+        <item>Lobak merah</item>
+        <item>Cendawan</item>
+        <item>Timun</item>
+        <item>Peria</item>
+        <item>Labu</item>
+    </string-array>
+
+    <string-array name="grains_selection">
+        <item>Roti</item>
+        <item>Mil oat</item>
+        <item>Bertih jagung</item>
+        <item>Mufin</item>
+        <item>Pasta</item>
+        <item>Nasi</item>
+    </string-array>
+
+    <string-array name="protein_foods_selection">
+        <item>Salmon</item>
+        <item>Tuna</item>
+        <item>Udang</item>
+        <item>Ketam</item>
+        <item>Ayam</item>
+        <item>Babi</item>
+        <item>Telur</item>
+        <item>Kacang</item>
+        <item>Tiram</item>
+    </string-array>
+
+    <string-array name="dairy_selection">
+        <item>Susu</item>
+        <item>Yogurt</item>
+        <item>Keju</item>
+        <item>Mentega</item>
+        <item>Krim</item>
+        <item>Ais krim</item>
+        <item>Susu kocak</item>
+    </string-array>
+
+    <string name="meal_suggestion">Cadangan Makanan</string>
+
+    <string name="cal_gained">Kalori Diperolehi</string>
+
+    <!-- All -->
+    <string name="date_and_time">Tarikh dan masa</string>
+    <string name="select_date">Pilih tarikh</string>
+    <string name="select_time">Pilih masa</string>
+    <string name="button_cancel">BATALKAN</string>
+    <string name="button_save">SIMPAN</string>
+
+    <string name="analysis">Analisis</string>
+    <string name="collection">Koleksi</string>
+
+    <string name="cal">Kalori</string>
+    <string name="day">Hari</string>
+    <string name="no_data">Tiada data tersedia.</string>
+</resources>

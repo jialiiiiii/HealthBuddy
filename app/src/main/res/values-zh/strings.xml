@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="forum">论坛</string>
+    <string name="nutrition">营养</string>
+    <string name="exercise">运动</string>
+    <string name="account">帐户</string>
+    <string name="settings">设置</string>
+    <string name="profile">简介</string>
+    <string name="post">帖子</string>
+    <string name="community">社区</string>
+    <string name="next">下一个</string>
+    <string name="name">姓名</string>
+    <string name="email">电子邮件</string>
+    <string name="gender">性别</string>
+    <string name="age">年龄</string>
+    <string name="weight">体重</string>
+    <string name="height">身高</string>
+    <string name="kg">公斤</string>
+    <string name="cm">厘米</string>
+    <string name="button_sign_out">登出</string>
+    <string name="button_register">注册</string>
+    <string name="complete_your_profile">填写您的个​​人资料</string>
+    <string name="appearance">显现</string>
+    <string name="about">关于</string>
+    <string name="theme">主题</string>
+    <string name="language">语言</string>
+
+    <!-- Error Message -->
+    <string name="name_null">请输入你的名字。</string>
+    <string name="age_null">请输入你的年龄。</string>
+    <string name="weight_null">请输入你的体重。</string>
+    <string name="height_null">请输入你的身高。</string>
+    <string name="age_invalid">请确保你的年龄在 10 - 100 岁之间。</string>
+    <string name="weight_invalid">请确保你的体重在 20 - 500 公斤之间。</string>
+    <string name="height_invalid">请确保你的身高在 50 - 250 厘米之间。</string>
+
+    <string-array name="spinner_options">
+        <item>营养</item>
+        <item>运动</item>
+    </string-array>
+    <string-array name="gender_selection">
+        <item>男</item>
+        <item>女</item>
+        <item>不说</item>
+    </string-array>
+    <string-array name="theme_selection">
+        <item>默认</item>
+        <item>深色模式</item>
+    </string-array>
+    <string-array name="language_selection">
+        <item>英文</item>
+        <item>中文</item>
+        <item>马来文</item>
+    </string-array>
+
+    <string name="text_land_1">HealthBuddy，您的个人健康伴侣！\n\n一款专为帮助您掌控自己的健康和福祉而设计的应用程序。</string>
+    <string name="text_land_2">我们提供全面的食物日记和营养信息，帮助您做出更健康的食物选择并实现您的饮食目标！</string>
+    <string name="text_land_3">访问一系列引导冥想、减压练习和健康文章，以改善您的心理健康并促进平衡的生活方式！</string>
+    <string name="text_land_4">在 HealthBuddy 社区中与志同道合的人联系，分享经验、技巧和鼓励您的健康之旅！</string>
+    <string name="continue_with_google">使用Google继续</string>
+    <string name="disclaimer">点击“使用Google继续”即表示你同意 HealthBuddy 的条款和条件以及隐私政策。</string>
+    <string name="terms_and_conditions">条款和条件</string>
+    <string name="privacy_policy">隐私政策</string>
+
+    <!-- Exercise -->
+    <string name="exercise_category">运动类别</string>
+    <string name="exercise_type">运动类型</string>
+
+    <!--  Duration  -->
+    <string name="duration">时长：</string>
+    <string name="duration_mins">分钟</string>
+    <string name="duration_start">5 分钟</string>
+    <string name="duration_end">60 分钟</string>
+
+    <!--  Set  -->
+    <string name="repetition_value">次数：</string>
+    <string name="repetition_set">次数</string>
+    <string name="repetition_start">1 次</string>
+    <string name="repetition_end">50 次</string>
+
+    <string name="set">组</string>
+
+    <string-array name="exer_group">
+        <item>心肺锻炼</item>
+        <item>灵活性锻炼</item>
+        <item>阻力锻炼</item>
+        <item>神经运动锻炼</item>
+    </string-array>
+
+    <string-array name="cardio_selection">
+        <item>跑步或慢跑</item>
+        <item>骑行</item>
+        <item>游泳</item>
+        <item>跳绳</item>
+        <item>高强度间歇训练</item>
+        <item>有氧运动课程</item>
+        <item>舞蹈（尊巴舞、嘻哈舞）</item>
+        <item>划船</item>
+        <item>拳击</item>
+    </string-array>
+
+    <string-array name="res_selection">
+        <item>举重</item>
+        <item>俯卧撑</item>
+        <item>引体向上</item>
+        <item>哑铃运动</item>
+        <item>杠铃运动</item>
+        <item>自重运动</item>
+        <item>阻力带运动</item>
+        <item>壶铃摆动</item>
+        <item>TRX悬吊训练</item>
+    </string-array>
+
+    <string-array name="flex_selection">
+        <item>静态拉伸</item>
+        <item>瑜伽姿势</item>
+        <item>普拉提运动</item>
+        <item>动态拉伸</item>
+        <item>泡沫轴拉伸</item>
+        <item>腿筋拉伸</item>
+        <item>股四头肌伸展</item>
+    </string-array>
+
+    <string-array name="neuro_selection">
+        <item>平衡运动</item>
+        <item>稳定球运动</item>
+        <item>博苏球运动</item>
+        <item>敏捷性训练</item>
+        <item>协调性运动</item>
+        <item>本体感受运动</item>
+        <item>太极</item>
+        <item>气功</item>
+    </string-array>
+
+    <string name="exec_suggestion">运动方案</string>
+
+    <string name="cal_burnt">卡路里燃烧</string>
+
+    <!-- Nutrition -->
+    <string name="food_category">食品类别</string>
+    <string name="food_type">食品类型</string>
+    <string name="size_per_serving">每份的大小：</string>
+    <string name="size_grams">克</string>
+    <string name="size_start">5 克</string>
+    <string name="size_end">500 克</string>
+    <string name="serving_size">份量</string>
+
+    <string-array name="food_group">
+        <item>水果</item>
+        <item>蔬菜</item>
+        <item>谷物</item>
+        <item>蛋白质食品</item>
+        <item>奶制品</item>
+    </string-array>
+
+    <string-array name="fruits_selection">
+        <item>苹果</item>
+        <item>香蕉</item>
+        <item>橙子</item>
+        <item>桃</item>
+        <item>梨</item>
+        <item>葡萄</item>
+        <item>西瓜</item>
+        <item>草莓</item>
+        <item>黄梨</item>
+        <item>芒果</item>
+    </string-array>
+
+    <string-array name="vegetables_selection">
+        <item>西兰花</item>
+        <item>菠菜</item>
+        <item>卷心菜</item>
+        <item>马铃薯</item>
+        <item>番茄</item>
+        <item>胡萝卜</item>
+        <item>蘑菇</item>
+        <item>黄瓜</item>
+        <item>苦瓜</item>
+        <item>南瓜</item>
+    </string-array>
+
+    <string-array name="grains_selection">
+        <item>面包</item>
+        <item>麦片</item>
+        <item>爆米花</item>
+        <item>玛芬</item>
+        <item>意大利面</item>
+        <item>饭</item>
+    </string-array>
+
+    <string-array name="protein_foods_selection">
+        <item>三文鱼</item>
+        <item>金枪鱼</item>
+        <item>虾</item>
+        <item>螃蟹</item>
+        <item>鸡肉</item>
+        <item>猪肉</item>
+        <item>鸡蛋</item>
+        <item>坚果</item>
+        <item>生蚝</item>
+    </string-array>
+
+    <string-array name="dairy_selection">
+        <item>牛奶</item>
+        <item>酸奶</item>
+        <item>奶酪</item>
+        <item>黄油</item>
+        <item>奶油</item>
+        <item>雪糕</item>
+        <item>奶昔</item>
+    </string-array>
+
+    <string name="meal_suggestion">膳食方案</string>
+
+    <string name="cal_gained">卡路里摄取</string>
+
+    <!-- All -->
+    <string name="date_and_time">日期和时间</string>
+    <string name="select_date">选择日期</string>
+    <string name="select_time">选择时间</string>
+    <string name="button_cancel">取消</string>
+    <string name="button_save">保存</string>
+
+    <string name="analysis">分析</string>
+    <string name="collection">收藏</string>
+
+    <string name="cal">卡路里</string>
+    <string name="day">天</string>
+    <string name="no_data">无可用数据。</string>
+</resources>

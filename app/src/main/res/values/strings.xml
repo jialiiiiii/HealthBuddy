@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">HealthBuddy</string>
-    <string name="trademark">&#8482;</string>
+    <string name="app_name" translatable="false">HealthBuddy</string>
+    <string name="trademark" translatable="false">&#8482;</string>
     <string name="forum">Forum</string>
     <string name="nutrition">Nutrition</string>
     <string name="exercise">Exercise</string>
@@ -64,10 +64,10 @@
     <string name="terms_and_conditions">Terms and Conditions</string>
     <string name="privacy_policy">Privacy Policy</string>
 
-    <string name="default_web_client_id">12354325827-n9pu3frt9obkgv3hgbqbs74087vg2icm.apps.googleusercontent.com</string>
+    <string name="default_web_client_id" translatable="false">12354325827-n9pu3frt9obkgv3hgbqbs74087vg2icm.apps.googleusercontent.com</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
     <!-- Exercise -->
     <string name="exercise_category">Exercise category</string>
