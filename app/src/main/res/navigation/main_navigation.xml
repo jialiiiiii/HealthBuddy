@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_forum_to_settings"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_forum_to_forum_details"
+            app:destination="@id/forumDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -72,4 +75,9 @@
             android:id="@+id/action_terms_to_settings"
             app:destination="@id/settingsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/forumDetailsFragment"
+        android:name="com.example.healthbuddy.forum.ForumDetailsFragment"
+        android:label="fragment_forum_details"
+        tools:layout="@layout/fragment_forum_details" />
 </navigation>

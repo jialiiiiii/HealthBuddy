@@ -125,7 +125,7 @@ class CollectionFragment : Fragment() {
                             //val fragment = PostFragment()
                             val bundle=Bundle()
                             bundle.putString("post_id",nodePath.toString())
-                            findNavController().navigate(R.id.action_forumFragment2_to_forumDetailsFragment,bundle)
+//                            findNavController().navigate(R.id.action_forumFragment2_to_forumDetailsFragment,bundle)
                             //findNavController().navigate(R.id.action_forumFragment2_to_editPostFragment2,bundle)
                             //findNavController().navigate(R.id.action_forumFragment2_to_addPostFragment2,bundle)
                             //findNavController().navigate(R.id.action_forumFragment2_to_collectionFragment,bundle)

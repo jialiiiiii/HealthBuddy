@@ -107,7 +107,7 @@ class AddPostFragment : Fragment() {
 
         db = FirebaseDatabase.getInstance().getReference("Posts")
 
-        val post = Post(tag, title, description, sImage, userId,bookMark)
+        val post = Post(tag, title, description, sImage, userId)
         val databaseReference = FirebaseDatabase.getInstance().reference
         val id = databaseReference.push().key
 
