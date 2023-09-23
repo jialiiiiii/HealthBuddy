@@ -104,7 +104,7 @@ class CollectionFragment : Fragment() {
                     for (postsnapshot in snapshot.children) {
                         val post = postsnapshot.getValue(Post::class.java)
 
-                        if(post != null && post.postTag == "Exercise") {
+                        if(post != null && post.postTag == "Nutrition") {
                             postArrayList.add(post!!)
                             ky = postsnapshot.key.toString()
                             pots = post.postTitle.toString()
@@ -125,10 +125,10 @@ class CollectionFragment : Fragment() {
                             //val fragment = PostFragment()
                             val bundle=Bundle()
                             bundle.putString("post_id",nodePath.toString())
-                            //findNavController().navigate(R.id.action_forumFragment2_to_forumDetailsFragment,bundle)
+                            findNavController().navigate(R.id.action_forumFragment2_to_forumDetailsFragment,bundle)
                             //findNavController().navigate(R.id.action_forumFragment2_to_editPostFragment2,bundle)
                             //findNavController().navigate(R.id.action_forumFragment2_to_addPostFragment2,bundle)
-                            findNavController().navigate(R.id.action_forumFragment2_to_collectionFragment,bundle)
+                            //findNavController().navigate(R.id.action_forumFragment2_to_collectionFragment,bundle)
                         }
                     })
                 }

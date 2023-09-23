@@ -17,6 +17,7 @@ import com.example.healthbuddy.database.Post
 import com.example.healthbuddy.databinding.FragmentForumBinding
 import com.example.healthbuddy.forum.ForumDetailsFragment
 import com.example.healthbuddy.post.PostAdapter
+import com.example.healthbuddy.post.RecyclerViewItemDecoration
 import com.example.healthbuddy.post.tempData
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -89,6 +90,9 @@ class ForumFragment : Fragment() {
 
         // Forum's code
         binding.postList.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        // Add item decoration for spacing
+        val itemDecoration = RecyclerViewItemDecoration(15, 2)
+        binding.postList.addItemDecoration(itemDecoration)
 
         binding.postList.hasFixedSize()
         postArrayList = arrayListOf<Post>()
@@ -128,10 +132,10 @@ class ForumFragment : Fragment() {
                             //val fragment = PostFragment()
                             val bundle=Bundle()
                             bundle.putString("post_id",nodePath.toString())
-                          findNavController().navigate(R.id.action_forumFragment2_to_forumDetailsFragment,bundle)
+                          //findNavController().navigate(R.id.action_forumFragment2_to_forumDetailsFragment,bundle)
                             //findNavController().navigate(R.id.action_forumFragment2_to_editPostFragment2,bundle)
                             //findNavController().navigate(R.id.action_forumFragment2_to_addPostFragment2,bundle)
-                            //findNavController().navigate(R.id.action_forumFragment2_to_collectionFragment,bundle)
+                            findNavController().navigate(R.id.action_forumFragment2_to_collectionFragment,bundle)
                         }
                     })
                 }
