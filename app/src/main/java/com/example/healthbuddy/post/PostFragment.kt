@@ -43,6 +43,7 @@ class PostFragment : Fragment() {
         binding.postList.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
+
         // Add item decoration for spacing
         val itemDecoration = RecyclerViewItemDecoration(15, 2)
         binding.postList.addItemDecoration(itemDecoration)

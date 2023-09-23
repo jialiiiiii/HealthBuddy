@@ -10,10 +10,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
+import com.example.healthbuddy.R
+import com.example.healthbuddy.database.Post
+import com.example.healthbuddy.databinding.FragmentForumBinding
 import com.example.healthbuddy.databinding.FragmentForumDetailsBinding
 import com.example.healthbuddy.post.DtClass
 import com.google.firebase.database.DatabaseReference
@@ -28,10 +34,12 @@ class ForumDetailsFragment : Fragment() {
     var nodeId = ""
     private lateinit var sharedPreferences: SharedPreferences
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         binding = FragmentForumDetailsBinding.inflate(inflater, container, false)
 
@@ -41,9 +49,32 @@ class ForumDetailsFragment : Fragment() {
         // Retrieve the post_id from arguments
         nodeId = arguments?.getString("post_id") ?: ""
 
+
         if (nodeId!=""){
             displayData()
         }
+
+        val bookMark = binding.bookMark
+        bookMark.setOnCheckedChangeListener{checkBox,isChecked ->
+        if(isChecked){
+            db = FirebaseDatabase.getInstance().getReference("Posts")
+            val postUpdates = HashMap<String, Any>()
+            postUpdates["bookMark"] = "Yes"
+            db.child(nodeId).updateChildren(postUpdates)
+            Toast.makeText(context,"You added to your collection!",Toast.LENGTH_SHORT).show()
+        }else{
+            db = FirebaseDatabase.getInstance().getReference("Posts")
+            val postUpdates = HashMap<String, Any>()
+            postUpdates["bookMark"] = "No"
+            db.child(nodeId).updateChildren(postUpdates)
+            Toast.makeText(context,"You removed from your collection!",Toast.LENGTH_SHORT).show()
+        }
+        }
+
+        binding.backButton.setOnClickListener(){
+            findNavController().navigateUp()
+        }
+
 
         return binding.root
     }
