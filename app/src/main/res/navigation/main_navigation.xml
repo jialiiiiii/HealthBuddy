@@ -12,7 +12,8 @@
         <action
             android:id="@+id/action_forum_to_account"
             app:destination="@id/accountFragment"
-            app:popUpToInclusive="false" />
+            app:popUpTo="@id/accountFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_forum_to_settings"
             app:destination="@id/settingsFragment" />
