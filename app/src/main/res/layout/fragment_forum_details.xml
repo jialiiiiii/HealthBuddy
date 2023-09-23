@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_green"
     tools:context=".forum.ForumDetailsFragment">
 
     <include
@@ -17,13 +18,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="28dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="78dp"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintEnd_toStartOf="@+id/postTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/layoutTop" />
+
     <TextView
         android:id="@+id/postTitle"
-        android:layout_width="358dp"
-        android:layout_height="37dp"
+        android:layout_width="355dp"
+        android:layout_height="38dp"
         android:layout_marginTop="20dp"
         android:text="Title"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.584"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutTop" />
 
@@ -40,39 +52,49 @@
 
     <TextView
         android:id="@+id/postDesc"
-        android:layout_width="357dp"
-        android:layout_height="162dp"
+        android:layout_width="358dp"
+        android:layout_height="286dp"
         android:layout_marginTop="32dp"
         android:text="Description"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintHorizontal_bias="0.643"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postImg" />
+
+    <View
+        android:id="@+id/line_footer"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:layout_marginBottom="@dimen/width_footer"
+        android:background="@color/lighter_green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <TextView
         android:id="@+id/author"
         android:layout_width="147dp"
         android:layout_height="29dp"
-        android:text="Author"
+        android:text="Author: "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintHorizontal_bias="0.803"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postDesc"
-        app:layout_constraintVertical_bias="0.68" />
+        app:layout_constraintTop_toTopOf="@+id/line_footer"
+        app:layout_constraintVertical_bias="0.537" />
 
     <CheckBox
         android:id="@+id/bookMark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
         android:button="@drawable/selector_bookmark"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/author"
-        app:layout_constraintHorizontal_bias="0.317"
+        app:layout_constraintHorizontal_bias="0.306"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postDesc"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintTop_toBottomOf="@+id/line_footer" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

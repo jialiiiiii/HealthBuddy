@@ -16,7 +16,6 @@ import com.google.android.material.tabs.TabLayout
 
 class AccountFragment : Fragment() {
 
-    private lateinit var viewModel: AccountViewModel
     private lateinit var binding: FragmentAccountBinding
 
     override fun onCreateView(

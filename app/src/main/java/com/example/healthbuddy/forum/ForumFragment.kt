@@ -88,8 +88,8 @@ class ForumFragment : Fragment() {
         editor.apply()
 
         // Forum's code
-        binding.postList.layoutManager =
-            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        binding.postList.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
         binding.postList.hasFixedSize()
         postArrayList = arrayListOf<Post>()
         nodeList = arrayListOf<tempData>()
@@ -128,10 +128,10 @@ class ForumFragment : Fragment() {
                             //val fragment = PostFragment()
                             val bundle=Bundle()
                             bundle.putString("post_id",nodePath.toString())
-                          //findNavController().navigate(R.id.action_forumFragment2_to_forumDetailsFragment,bundle)
+                          findNavController().navigate(R.id.action_forumFragment2_to_forumDetailsFragment,bundle)
                             //findNavController().navigate(R.id.action_forumFragment2_to_editPostFragment2,bundle)
                             //findNavController().navigate(R.id.action_forumFragment2_to_addPostFragment2,bundle)
-                            findNavController().navigate(R.id.action_forumFragment2_to_collectionFragment,bundle)
+                            //findNavController().navigate(R.id.action_forumFragment2_to_collectionFragment,bundle)
                         }
                     })
                 }

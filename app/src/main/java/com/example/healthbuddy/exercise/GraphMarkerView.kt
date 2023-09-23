@@ -13,7 +13,7 @@ class GraphMarkerView(context: Context, layoutResource: Int) : MarkerView(contex
     override fun refreshContent(e: Entry?, highlight: Highlight?) {
         if (e != null) {
             // Access the data associated with the clicked data point
-            val xValue = e.x.toInt() + 1 // Assuming x represents the day
+            val xValue = e.x.toInt()
 
             // Customize the marker text based on the data
             val markerText = "Day: $xValue\nCal burnt: ${e.y}"

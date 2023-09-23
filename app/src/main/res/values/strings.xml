@@ -24,6 +24,15 @@
     <string name="complete_your_profile">Complete Your Profile</string>
     <string name="text_profile_completion">One more step to get signed up</string>
 
+    <!-- Error Message -->
+    <string name="name_null">Please enter your name.</string>
+    <string name="age_null">Please enter your age.</string>
+    <string name="weight_null">Please enter your weight.</string>
+    <string name="height_null">Please enter your height.</string>
+    <string name="age_invalid">Please ensure your age is between 10 - 100 years old.</string>
+    <string name="weight_invalid">Please ensure your weight is between 20 - 500 kg.</string>
+    <string name="height_invalid">Please ensure your height is between 50 - 250 cm.</string>
+
     <string-array name="spinner_options">
         <item>Nutrition</item>
         <item>Exercise</item>
@@ -118,7 +127,7 @@
         <item>Qigong</item>
     </string-array>
 
-    <string name="meal_suggestion">Meal Suggestion</string>
+    <string name="exec_suggestion">Exercise Suggestion</string>
 
     <string name="cal_burnt">Calories Burnt</string>
 
@@ -196,7 +205,9 @@
         <item>Milkshake</item>
     </string-array>
 
-    <string name="exec_suggestion">Exercise Suggestion</string>
+    <string name="meal_suggestion">Meal Suggestion</string>
+
+    <string name="cal_gained">Calories Gained</string>
 
     <!-- All -->
     <string name="date_and_time">Date and time</string>
@@ -217,5 +228,6 @@
 
     <string name="cal">Calories</string>
     <string name="day">Day</string>
+    <string name="no_data">No data available.</string>
 
 </resources>

@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface UserDao {
@@ -15,4 +16,7 @@ interface UserDao {
 
     @Query("SELECT * FROM users WHERE id = :userId")
     fun getUserById(userId: String): User?
+
+    @Update
+    fun updateUser(user: User)
 }

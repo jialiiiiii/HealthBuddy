@@ -16,6 +16,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.example.healthbuddy.R
 import com.example.healthbuddy.database.Post
 import com.example.healthbuddy.databinding.FragmentForumBinding
@@ -66,8 +67,12 @@ class ForumDetailsFragment : Fragment() {
             val postUpdates = HashMap<String, Any>()
             postUpdates["bookMark"] = "No"
             db.child(nodeId).updateChildren(postUpdates)
-            Toast.makeText(context,"You removed to your collection!",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,"You removed from your collection!",Toast.LENGTH_SHORT).show()
         }
+        }
+
+        binding.backButton.setOnClickListener(){
+            findNavController().navigateUp()
         }
 
 
