@@ -14,9 +14,9 @@
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="355dp"
-            android:layout_height="286dp"
-            android:layout_marginTop="60dp"
+            android:layout_width="285dp"
+            android:layout_height="216dp"
+            android:layout_marginTop="40dp"
             android:src="@drawable/img_land_3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
             android:fontFamily="@font/dm_sans_medium"
             android:text="@string/exercise"
             android:textColor="@color/dark_green"
-            android:textSize="22sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,28 +38,30 @@
 
         <TextView
             android:id="@+id/msg"
-            android:layout_width="365dp"
-            android:layout_height="150dp"
+            android:layout_width="465dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/dm_sans"
             android:gravity="center_horizontal"
             android:text="@string/text_land_3"
             android:textColor="@color/dark_green"
-            android:textSize="@dimen/font_size_normal"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_1" />
 
         <Button
             android:id="@+id/button"
-            android:layout_width="365dp"
+            android:layout_width="265dp"
             android:layout_height="55dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:backgroundTint="@color/button_green"
             android:fontFamily="@font/dm_sans_medium"
             android:text="@string/next"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/msg"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

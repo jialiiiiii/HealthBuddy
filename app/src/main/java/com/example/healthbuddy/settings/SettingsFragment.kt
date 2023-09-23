@@ -73,6 +73,13 @@ class SettingsFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        if (p0 == binding.spinnerTheme) {
+            val selectedTheme = p0?.getItemAtPosition(p2).toString()
+
+        } else if (p0 == binding.spinnerLanguage) {
+            val selectedLanguage = p0?.getItemAtPosition(p2).toString()
+
+        }
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
