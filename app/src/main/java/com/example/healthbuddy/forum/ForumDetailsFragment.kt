@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +32,7 @@ class ForumDetailsFragment : Fragment() {
     private lateinit var db: DatabaseReference
     var sImage: String? = ""
     var nodeId = ""
+    var userId = ""
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
@@ -50,24 +52,26 @@ class ForumDetailsFragment : Fragment() {
         // Retrieve the post_id from arguments
         nodeId = arguments?.getString("post_id") ?: ""
 
+        // Get user id
+        userId = sharedPreferences.getString("userId", "") ?: ""
 
         if (nodeId != "") {
             displayData()
         }
 
-        // Get user id
-        val userId = sharedPreferences.getString("userId", "") ?: ""
-
         // Handle bookmark action
         val bookMark = binding.bookMark
         bookMark.setOnCheckedChangeListener { checkBox, isChecked ->
             if (isChecked) {
-                setBookmark(userId, nodeId, true)
-                Toast.makeText(context, "You added to your collection!", Toast.LENGTH_SHORT).show()
+                if (setBookmark(true)) {
+                    Toast.makeText(context, "You added to your collection!", Toast.LENGTH_SHORT)
+                        .show()
+                }
             } else {
-                setBookmark(userId, nodeId, false)
-                Toast.makeText(context, "You removed from your collection!", Toast.LENGTH_SHORT)
-                    .show()
+                if (setBookmark(false)) {
+                    Toast.makeText(context, "You removed from your collection!", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
         }
 
@@ -79,7 +83,8 @@ class ForumDetailsFragment : Fragment() {
         return binding.root
     }
 
-    private fun setBookmark(userId: String, postId: String, bookmark: Boolean) {
+    private fun setBookmark(bookmark: Boolean): Boolean {
+        var result = false
         db = FirebaseDatabase.getInstance().getReference("Collections")
 
         // Retrieve data
@@ -91,11 +96,19 @@ class ForumDetailsFragment : Fragment() {
                     val postIds = existing.postId
 
                     if (bookmark) {
-                        // If bookmark is true, add postId to the ArrayList
-                        postIds.add(postId)
+                        // If bookmark is true
+                        // If postId is not in the ArrayList, add postId
+                        if (!postIds.contains(nodeId)) {
+                            postIds.add(nodeId)
+                            result = true
+                        }
                     } else {
-                        // If bookmark is false, remove postId from the ArrayList
-                        postIds.remove(postId)
+                        // If bookmark is false
+                        // If postId is in the ArrayList, remove postId
+                        if (postIds.contains(nodeId)) {
+                            postIds.remove(nodeId)
+                            result = true
+                        }
                     }
 
                     existing.postId = postIds
@@ -107,7 +120,8 @@ class ForumDetailsFragment : Fragment() {
 
                     if (bookmark) {
                         // If bookmark is true, add postId to the new ArrayList
-                        new.postId?.add(postId)
+                        new.postId?.add(nodeId)
+                        result = true
                     }
 
                     db.child(userId).setValue(new)
@@ -118,6 +132,8 @@ class ForumDetailsFragment : Fragment() {
                 // Handle errors if needed
             }
         })
+
+        return result
     }
 
     private val ActivityResultLauncher = registerForActivityResult<Intent, ActivityResult>(
@@ -143,10 +159,19 @@ class ForumDetailsFragment : Fragment() {
     }
 
     private fun displayData() {
+        // Check bookmark status
+        db = FirebaseDatabase.getInstance().getReference("Collections")
+        db.child(userId).get().addOnSuccessListener { dataSnapshot ->
+            if (dataSnapshot.exists()) {
+                val collection = dataSnapshot.getValue(Collection::class.java)
+                val postIds = collection?.postId
+                binding.bookMark.isChecked = postIds != null && postIds.contains(nodeId)
+            }
+        }
+
         db = FirebaseDatabase.getInstance().getReference("Posts")
         db.child(nodeId).get().addOnSuccessListener {
             if (it.exists()) {
-                val dtClass = DtClass()
                 binding.postTitle.text = it.child("postTitle").value.toString()
                 binding.postDesc.text = it.child("postDescription").value.toString()
                 sImage = it.child("postImage").value.toString()
