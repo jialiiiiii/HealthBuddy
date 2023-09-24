@@ -241,7 +241,7 @@ class LoginFragment : Fragment() {
 
                     val editor = sharedPreferences.edit()
                     editor.putBoolean("loggedIn", true)
-                    editor.putString("loginMsg", R.string.welcome_back_msg.toString())
+                    editor.putString("loginMsg", resources.getString(R.string.welcome_back_msg))
                     editor.putString("userId", id)
                     editor.apply()
 
