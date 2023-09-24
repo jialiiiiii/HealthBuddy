@@ -32,7 +32,7 @@ class ExecAnalysisAdapter : RecyclerView.Adapter<ExecAnalysisAdapter.ExecDataVie
         holder.dateTime.text = currentData.exec_date.toString() + ", " + currentData.exec_time.toString()
         holder.exerciseTypeSelected.text = currentData.exec_type.toString()
         holder.exerciseCategorySelected.text = currentData.exec_category.toString()
-        holder.caloriesBurnt.text = "- " + currentData.cal_burnt.toString() + " calories"
+        holder.caloriesBurnt.text = "- " + currentData.cal_burnt.toString() + R.string.cal
 
         holder.deleteBtn.setOnClickListener {
             actionDelete?.invoke(currentData)
@@ -65,6 +65,4 @@ class ExecAnalysisAdapter : RecyclerView.Adapter<ExecAnalysisAdapter.ExecDataVie
         val deleteBtn: ImageButton = itemView.findViewById<ImageButton>(R.id.delete_btn)
         val editBtn: ImageButton = itemView.findViewById<ImageButton>(R.id.edit_btn)
     }
-
-
 }
