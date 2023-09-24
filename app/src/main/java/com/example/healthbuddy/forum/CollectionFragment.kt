@@ -3,6 +3,7 @@ package com.example.healthbuddy.forum
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.example.healthbuddy.database.Post
 import com.example.healthbuddy.databinding.FragmentCollectionBinding
 import com.example.healthbuddy.databinding.FragmentForumBinding
 import com.example.healthbuddy.post.PostAdapter
+import com.example.healthbuddy.post.RecyclerViewItemDecoration
 import com.example.healthbuddy.post.tempData
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -24,6 +26,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
+import com.example.healthbuddy.database.Collection
 
 class CollectionFragment : Fragment() {
 
@@ -36,13 +39,6 @@ class CollectionFragment : Fragment() {
     private lateinit var postArrayList: ArrayList<Post>
     private lateinit var nodeList: ArrayList<tempData>
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,58 +74,94 @@ class CollectionFragment : Fragment() {
         editor.apply()
 
         // Forum's code
-        binding.postList.layoutManager =
-            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        binding.postList.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+        // Add item decoration for spacing
+        val itemDecoration = RecyclerViewItemDecoration(15, 2)
+        binding.postList.addItemDecoration(itemDecoration)
         binding.postList.hasFixedSize()
         postArrayList = arrayListOf<Post>()
         nodeList = arrayListOf<tempData>()
         getItemData()
 
-
+        // Initialize the RecyclerView adapter
+        var adapter = PostAdapter(postArrayList)
+        binding.postList.adapter = adapter
 
         return binding.root
     }
 
     private fun getItemData() {
-        db = FirebaseDatabase.getInstance().getReference("Posts")
-        val query: Query = db.orderByChild("bookMark").equalTo("Yes")
+
+        val uid = "5rQ0XILjLtT7B8VEsTVA3ScdLx82"
+        val db: DatabaseReference = FirebaseDatabase.getInstance().getReference("Collections")
+        var postIds: ArrayList<String>
+
+        // get post ids
+        db.child(uid).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var result = dataSnapshot.getValue(Collection::class.java)
 
 
-        query.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    var ky: String = ""
-                    var pots: String = ""
+                if (result?.postId != null &&result !=null) {
+                    postIds = result.postId
 
-                    for (postsnapshot in snapshot.children) {
-                        val post = postsnapshot.getValue(Post::class.java)
 
-                        if(post != null && post.postTag == "Nutrition") {
-                            postArrayList.add(post!!)
-                            ky = postsnapshot.key.toString()
-                            pots = post.postTitle.toString()
-                            val tmppost = tempData(ky, pots)
-                            nodeList.add(tmppost)
-                        }else{
-                            Toast.makeText(context,"Opps, seems like you have not collected any post yet...",Toast.LENGTH_SHORT).show()
+
+                    // get posts
+                    val query = FirebaseDatabase.getInstance().getReference("Posts")
+                        .orderByKey()
+                        .startAt(postIds.first()) // Start query at the first postId
+                        .endAt(postIds.last())   // End query at the last postId
+
+                    query.addValueEventListener(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            Log.i("Testing456","query: $snapshot")
+
+                            if (snapshot.exists()) {
+
+                                postArrayList.clear() // Clear the previous data
+                                var ky: String = ""
+                                var pots: String = ""
+
+                                for (postsnapshot in snapshot.children) {
+                                    val post = postsnapshot.getValue(Post::class.java)
+                                    if (post != null && post.postTag == "Exercise") {
+                                        postArrayList.add(post)
+                                        ky = postsnapshot.key.toString()
+                                        pots = post.postTitle.toString()
+                                        val tmppost = tempData(ky, pots)
+                                        nodeList.add(tmppost)
+                                    }
+                                }
+
+
+                                val adapter = PostAdapter(postArrayList)
+                                binding.postList.adapter = adapter
+                                adapter.setOnItemClickListener(object : PostAdapter.OnItemClickListener {
+                                    override fun onItemClick(position: Int) {
+                                        val ctpost = nodeList[position]
+                                        val nodePath = ctpost.id.toString()
+
+                                        val bundle = Bundle()
+                                        bundle.putString("post_id", nodePath)
+                                        findNavController().navigate(
+                                            R.id.action_forum_to_forum_details,
+                                            bundle) }
+                                })
+
+
+                            } else {
+                                // Handle case where no Exercise posts are found
+                                Log.i("Testing123", "No Exercise posts found")
+
+                            }
                         }
-                    }
 
-                    var adapter = PostAdapter(postArrayList)
-                    binding.postList.adapter = adapter
-                    adapter.setOnItemClickListener(object : PostAdapter.OnItemClickListener {
-                        override fun onItemClick(position: Int) {
-                            val ctpost = nodeList[position]
-                            val nodePath = ctpost.id.toString()
-                            val fragment = CollectionFragment()
-                            //val fragment = PostFragment()
-                            val bundle=Bundle()
-                            bundle.putString("post_id",nodePath.toString())
-//                            findNavController().navigate(R.id.action_forumFragment2_to_forumDetailsFragment,bundle)
-                            //findNavController().navigate(R.id.action_forumFragment2_to_editPostFragment2,bundle)
-                            //findNavController().navigate(R.id.action_forumFragment2_to_addPostFragment2,bundle)
-                            //findNavController().navigate(R.id.action_forumFragment2_to_collectionFragment,bundle)
+                        override fun onCancelled(error: DatabaseError) {
+
                         }
+
                     })
                 }
             }
@@ -138,6 +170,83 @@ class CollectionFragment : Fragment() {
 
             }
 
+
         })
     }
+
+
+
+
+//    private fun getItemData() {
+//        db = FirebaseDatabase.getInstance().getReference("Collections")
+//        val userId = sharedPreferences.getString("userId", "") ?: ""
+//
+//
+//        db.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                if (dataSnapshot.exists()) {
+//                    val collection = dataSnapshot.getValue(Collection::class.java)
+//                    val postIds: ArrayList<String>? = collection?.postId
+//
+//
+//                    // Check if the user has any posts in their collection
+//                    if (postIds != null && postIds.isNotEmpty()) {
+//                        // Create a query to fetch posts with the specified postIds and postType "Nutrition"
+//                        val query: Query = FirebaseDatabase.getInstance().getReference("Posts")
+//                            .orderByKey()
+//                            .startAt(postIds.first()) // Start query at the first postId
+//                            .endAt(postIds.last())   // End query at the last postId
+//                            .orderByChild("postTag")
+//                            .equalTo("Nutrition")
+//
+//                        query.addValueEventListener(object : ValueEventListener {
+//                            override fun onDataChange(snapshot: DataSnapshot) {
+//                                if (snapshot.exists()) {
+//                                    postArrayList.clear() // Clear the previous data
+//
+//                                    for (postsnapshot in snapshot.children) {
+//                                        val post = postsnapshot.getValue(Post::class.java)
+//
+//                                        if (post != null) {
+//                                            postArrayList.add(post)
+//                                        }
+//                                    }
+//
+//                                    val adapter = PostAdapter(postArrayList)
+//                                    binding.postList.adapter = adapter
+//                                    adapter.setOnItemClickListener(object : PostAdapter.OnItemClickListener {
+//                                        override fun onItemClick(position: Int) {
+//                                            val ctpost = nodeList[position]
+//                                            val nodePath = ctpost.id.toString()
+//
+//                                            val bundle = Bundle()
+//                                            bundle.putString("post_id",nodePath)
+//                                            findNavController().navigate(R.id.action_forum_to_forum_details, bundle)re
+//                                        }
+//                                    })
+//                                } else {
+//                                    // Handle case where no Nutrition posts are found
+//                                    Toast.makeText(context, "No Nutrition posts found.", Toast.LENGTH_SHORT).show()
+//                                }
+//                            }
+//
+//                            override fun onCancelled(error: DatabaseError) {
+//                                // Handle database error
+//                            }
+//                        })
+//                    } else {
+//                        // Handle case where the user has no posts in their collection
+//                        Toast.makeText(context, "You have not collected any posts yet...", Toast.LENGTH_SHORT).show()
+//                    }
+//                } else {
+//                    // Handle case where the collection for the user does not exist
+//                    Toast.makeText(context, "Collection does not exist for this user.", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                // Handle database error
+//            }
+//        })
+//    }
 }

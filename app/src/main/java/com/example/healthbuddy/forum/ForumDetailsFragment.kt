@@ -63,15 +63,18 @@ class ForumDetailsFragment : Fragment() {
         val bookMark = binding.bookMark
         bookMark.setOnCheckedChangeListener { checkBox, isChecked ->
             if (isChecked) {
-                if (setBookmark(true)) {
+               // if (setBookmark(true)) {
+                    //Log.i("Ten Jia Kii", "Hello")
                     Toast.makeText(context, "You added to your collection!", Toast.LENGTH_SHORT)
                         .show()
-                }
+                setBookmark(true)
+                //}
             } else {
-                if (setBookmark(false)) {
+                //if (setBookmark(false)) {
                     Toast.makeText(context, "You removed from your collection!", Toast.LENGTH_SHORT)
                         .show()
-                }
+                setBookmark(false)
+                //}
             }
         }
 
