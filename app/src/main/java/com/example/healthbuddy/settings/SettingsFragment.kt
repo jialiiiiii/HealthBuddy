@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat.recreate
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
@@ -55,6 +56,9 @@ class SettingsFragment : Fragment(), AdapterView.OnItemSelectedListener {
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerTheme.adapter = adapter
+
+            val position = sharedPreferences.getInt("theme", 0)
+            spinnerTheme.setSelection(position)
         }
 
         // Set up language spinner
@@ -88,7 +92,24 @@ class SettingsFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
         if (p0 == binding.spinnerTheme) {
-            val selectedTheme = p0?.getItemAtPosition(p2).toString()
+            // Set theme
+            val savedTheme = sharedPreferences.getInt("theme", 0)
+            val selectedTheme = p2
+
+            if (savedTheme != p2) {
+                sharedPreferences.edit().putInt("theme", selectedTheme).apply()
+
+                val nightMode = when (selectedTheme) {
+                    0 -> AppCompatDelegate.MODE_NIGHT_NO
+                    1 -> AppCompatDelegate.MODE_NIGHT_YES
+                    else -> AppCompatDelegate.MODE_NIGHT_NO
+                }
+
+                AppCompatDelegate.setDefaultNightMode(nightMode)
+
+                // Refresh the UI
+                activity?.recreate()
+            }
 
         } else if (p0 == binding.spinnerLanguage) {
             // Set language
