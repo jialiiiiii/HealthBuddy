@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/exercise_category_box"
+        android:id="@+id/nutrition_category_box"
         app:cardBackgroundColor="@color/box"
         android:layout_marginLeft="@dimen/box_margin_left_right"
         android:layout_marginRight="@dimen/box_margin_left_right"
@@ -19,7 +19,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/exec_img"
+                android:id="@+id/nutri_img"
                 android:layout_width="@dimen/img_width"
                 android:layout_height="@dimen/img_height"
                 android:layout_marginTop="@dimen/inside_box_margin_top"
@@ -29,35 +29,35 @@
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <TextView
-                android:id="@+id/exec_title"
+                android:id="@+id/nutri_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/inside_box_margin_top"
                 android:text="TextView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/exec_img"
+                app:layout_constraintTop_toBottomOf="@+id/nutri_img"
                 android:layout_marginLeft="@dimen/inside_box_margin_left_right"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/exec_desc"
+                android:id="@+id/nutri_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/inside_box_margin_top"
                 android:text="TextView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/exec_title"
+                app:layout_constraintTop_toBottomOf="@+id/nutri_title"
                 android:paddingRight="@dimen/inside_box_margin_top"
                 android:layout_marginLeft="@dimen/inside_box_margin_left_right"/>
 
             <ImageButton
-                android:id="@+id/exec_star"
+                android:id="@+id/nutri_star"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/inside_box_margin_top"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/exec_desc"
+                app:layout_constraintTop_toBottomOf="@+id/nutri_desc"
                 android:paddingBottom="@dimen/inside_box_margin_top"
                 app:srcCompat="@android:drawable/btn_star"
                 android:background="@color/transparent"/>

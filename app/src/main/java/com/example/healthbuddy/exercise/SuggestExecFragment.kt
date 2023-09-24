@@ -1,60 +1,93 @@
 package com.example.healthbuddy.exercise
 
+import SuggestExecAdapter
+import android.content.SharedPreferences
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.healthbuddy.R
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SuggestExecFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.healthbuddy.database.Post
+import com.example.healthbuddy.database.Suggestion
+import com.example.healthbuddy.databinding.FragmentExecSuggestionBinding
+import com.example.healthbuddy.post.RecyclerViewItemDecoration
+import com.example.healthbuddy.post.tempData
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 class SuggestExecFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentExecSuggestionBinding
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var postArrayList: ArrayList<Post>
+    private lateinit var nodeList: ArrayList<tempData>
+    private lateinit var execSuggestAdapter: SuggestExecAdapter // Add this adapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_exec_suggestion, container, false)
+        // Inflate view and obtain an instance of the binding class
+        binding = FragmentExecSuggestionBinding.inflate(inflater, container, false)
+
+        // Initialize the adapter with an empty list
+        execSuggestAdapter = SuggestExecAdapter(requireContext(), mutableListOf())
+
+        // Set the adapter on your RecyclerView
+        binding.exerSuggestionView.layoutManager = LinearLayoutManager(requireContext())
+        binding.exerSuggestionView.adapter = execSuggestAdapter
+
+        // Initialize shared preferences
+        sharedPreferences = requireContext().getSharedPreferences("HealthBuddyPrefs", AppCompatActivity.MODE_PRIVATE)
+
+        // Add item decoration for spacing
+        val itemDecoration = RecyclerViewItemDecoration(15, 2)
+        binding.exerSuggestionView.addItemDecoration(itemDecoration)
+
+        binding.exerSuggestionView.hasFixedSize()
+        postArrayList = arrayListOf<Post>()
+        nodeList = arrayListOf<tempData>()
+
+        // Retrieve and update data for the RecyclerView
+        retrieveData()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SuggestExecFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SuggestExecFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun retrieveData() {
+        val db = FirebaseDatabase.getInstance().getReference("Exercises")
+
+        db.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val exerciseList = mutableListOf<Suggestion>()
+
+                for (postSnapshot in dataSnapshot.children) {
+                    val postId = postSnapshot.key.toString()
+                    val postTitle = postSnapshot.child("postTitle").value.toString()
+                    val postDescription = postSnapshot.child("postDescription").value.toString()
+                    val postImageBase64 = postSnapshot.child("postImage").value.toString()
+
+                    // Convert the base64 image to a Bitmap
+                    val bytes = Base64.decode(postImageBase64, Base64.DEFAULT)
+                    val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+
+                    // Create a Suggestion object
+                    val suggestion = Suggestion(postId, postTitle, postDescription, bitmap)
+                    exerciseList.add(suggestion)
                 }
+
+                // Update the adapter with the retrieved data
+                execSuggestAdapter.updateData(exerciseList)
             }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle error
+            }
+        })
     }
 }

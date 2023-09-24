@@ -1,60 +1,94 @@
 package com.example.healthbuddy.nutrition
 
+import SuggestExecAdapter
+import android.content.SharedPreferences
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.healthbuddy.R
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SuggestMealFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.healthbuddy.database.Post
+import com.example.healthbuddy.database.Suggestion
+import com.example.healthbuddy.databinding.FragmentExecSuggestionBinding
+import com.example.healthbuddy.databinding.FragmentMealSuggestionBinding
+import com.example.healthbuddy.nutrition.SuggestMealAdapter
+import com.example.healthbuddy.post.RecyclerViewItemDecoration
+import com.example.healthbuddy.post.tempData
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 class SuggestMealFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentMealSuggestionBinding
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var postArrayList: ArrayList<Post>
+    private lateinit var nodeList: ArrayList<tempData>
+    private lateinit var mealSuggestionAdapter: SuggestMealAdapter // Add this adapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_meal_suggestion, container, false)
+        // Inflate view and obtain an instance of the binding class
+        binding = FragmentMealSuggestionBinding.inflate(inflater, container, false)
+
+        // Initialize the adapter with an empty list
+        mealSuggestionAdapter = SuggestMealAdapter(requireContext(), mutableListOf())
+
+        // Set the adapter on your RecyclerView
+        binding.nutriSuggestionView.layoutManager = LinearLayoutManager(requireContext())
+        binding.nutriSuggestionView.adapter = mealSuggestionAdapter
+
+        // Initialize shared preferences
+        sharedPreferences = requireContext().getSharedPreferences("HealthBuddyPrefs", AppCompatActivity.MODE_PRIVATE)
+
+        // Add item decoration for spacing
+        val itemDecoration = RecyclerViewItemDecoration(15, 2)
+        binding.nutriSuggestionView.addItemDecoration(itemDecoration)
+
+        binding.nutriSuggestionView.hasFixedSize()
+        postArrayList = arrayListOf<Post>()
+        nodeList = arrayListOf<tempData>()
+
+        // Retrieve and update data for the RecyclerView
+        retrieveData()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SuggestMealFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SuggestMealFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun retrieveData() {
+        val db = FirebaseDatabase.getInstance().getReference("Nutritions")
+
+        db.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val exerciseList = mutableListOf<Suggestion>()
+
+                for (postSnapshot in dataSnapshot.children) {
+                    val postId = postSnapshot.key.toString()
+                    val postTitle = postSnapshot.child("postTitle").value.toString()
+                    val postDescription = postSnapshot.child("postDescription").value.toString()
+                    val postImageBase64 = postSnapshot.child("postImage").value.toString()
+
+                    // Convert the base64 image to a Bitmap
+                    val bytes = Base64.decode(postImageBase64, Base64.DEFAULT)
+                    val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+
+                    // Create a Suggestion object
+                    val suggestion = Suggestion(postId, postTitle, postDescription, bitmap)
+                    exerciseList.add(suggestion)
                 }
+
+                // Update the adapter with the retrieved data
+                mealSuggestionAdapter.updateData(exerciseList)
             }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle error
+            }
+        })
     }
 }

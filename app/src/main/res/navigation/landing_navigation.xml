@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/landing_navigation"
-    app:startDestination="@id/execDataFragment">
+    app:startDestination="@id/nutriDataFragment">
 
     <fragment
         android:id="@+id/firstFragment"
@@ -87,4 +87,9 @@
         android:id="@+id/nutriDataFragment"
         android:name="com.example.healthbuddy.nutrition.NutriDataFragment"
         android:label="NutriDataFragment" />
+    <fragment
+        android:id="@+id/addDefaultExec"
+        android:name="com.example.healthbuddy.admin.AddDefaultExec"
+        android:label="fragment_add_default_exec"
+        tools:layout="@layout/fragment_add_default_exec" />
 </navigation>

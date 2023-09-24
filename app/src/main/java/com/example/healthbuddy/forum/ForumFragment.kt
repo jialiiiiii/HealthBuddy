@@ -140,7 +140,7 @@ class ForumFragment : Fragment() {
                             //findNavController().navigate(R.id.action_forumFragment2_to_forumDetailsFragment2,bundle)
 //                            findNavController().navigate(R.id.action_forumFragment2_to_editPostFragment2,bundle)
 //                            findNavController().navigate(R.id.action_forumFragment2_to_addPostFragment2,bundle)
-                            findNavController().navigate(R.id.action_forumFragment2_to_collectionFragment,bundle)
+//                            findNavController().navigate(R.id.action_forumFragment2_to_collectionFragment,bundle)
                         }
                     })
                 }
