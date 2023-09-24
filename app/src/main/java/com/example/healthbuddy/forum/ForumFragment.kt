@@ -3,6 +3,7 @@ package com.example.healthbuddy.com.example.healthbuddy.forum
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -110,6 +111,7 @@ class ForumFragment : Fragment() {
 
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+               // Log.i("Hiiiii22","snapshot:$snapshot")
                 if (snapshot.exists()) {
                     var ky: String = ""
                     var pots: String = ""
@@ -132,13 +134,13 @@ class ForumFragment : Fragment() {
 
                             val bundle = Bundle()
                             bundle.putString("post_id",nodePath)
-                            findNavController().navigate(R.id.action_forum_to_forum_details, bundle)
+                            //findNavController().navigate(R.id.action_forum_to_forum_details, bundle)
 
                             // Testing
-//                            findNavController().navigate(R.id.action_forumFragment2_to_forumDetailsFragment,bundle)
+                            //findNavController().navigate(R.id.action_forumFragment2_to_forumDetailsFragment2,bundle)
 //                            findNavController().navigate(R.id.action_forumFragment2_to_editPostFragment2,bundle)
 //                            findNavController().navigate(R.id.action_forumFragment2_to_addPostFragment2,bundle)
-//                            findNavController().navigate(R.id.action_forumFragment2_to_collectionFragment,bundle)
+                            findNavController().navigate(R.id.action_forumFragment2_to_collectionFragment,bundle)
                         }
                     })
                 }
