@@ -1,18 +1,21 @@
 package com.example.healthbuddy.nutrition
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.healthbuddy.R
 import com.example.healthbuddy.database.UserNutritionData
@@ -21,9 +24,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-
-// , AdapterView.OnItemSelectedListener
-class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
+class UpdateNutriFragment : DialogFragment(), AdapterView.OnItemSelectedListener {
     // hold the View Binding instance for your fragment
     private var _binding: FragmentAddNutriBinding? = null
     // custom getter to access the View Binding instance
@@ -33,6 +34,13 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private lateinit var nutriDataViewModel: NutriDataViewModel
 
+    private var id: Int = 0
+
+    companion object {
+        const val ARG_NUTRI_DATA = "nutriData"
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +48,18 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
         // Replace the layout inflating code with ViewBinding
         _binding = FragmentAddNutriBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        // Set the dialog as a full-screen dialog
+        dialog?.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
+
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // Initialize ViewModel
         nutriDataViewModel = ViewModelProvider(this).get(NutriDataViewModel::class.java)
@@ -52,8 +72,15 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
         ArrayAdapter.createFromResource(requireContext(), R.array.food_group, android.R.layout.simple_spinner_item).also{
                 adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
             binding.foodCategorySpinner.adapter = adapter
+
+            val args = arguments
+            if (args != null) {
+                val nutriData = args.getParcelable<UserNutritionData>(UpdateNutriFragment.ARG_NUTRI_DATA)
+                binding.foodCategorySpinner.setSelection(getNutriCatPosition(nutriData?.food_category.toString()))
+                binding.sizeSeekBar.progress = nutriData?.food_serving_size.toString().toInt()
+                id = nutriData?.id.toString().toInt()
+            }
         }
 
         // Duration seek bar
@@ -77,25 +104,44 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.servingSizeSpinner.adapter = adapter
+            val args = arguments
+            if (args != null) {
+                val nutriData = args.getParcelable<UserNutritionData>(UpdateNutriFragment.ARG_NUTRI_DATA)
+                binding.servingSizeSpinner.setSelection(nutriData?.food_serving_size.toString().toInt() - 1)
+            }
         }
 
-        // Initialize Calendar instance
-        val calendar = Calendar.getInstance()
+        // Get date & time
+        val args = arguments
+        var date: String = ""
+        var time: String = ""
+        if (args != null) {
+            val nutriData = args.getParcelable<UserNutritionData>(UpdateNutriFragment.ARG_NUTRI_DATA)
+            date = nutriData?.intake_date.toString()
+            time = nutriData?.intake_time.toString()
+        }
+
+        val calendarDate: Calendar = dateStringToCalendar(date)
+        val calendarTime: Calendar = timeStringToCalendar(time)
 
         // Set initial text for date and time buttons using ViewBinding
-        updateDateButtonText(calendar)
-        updateTimeButtonText(calendar)
+        updateDateButtonText(date)
+        updateTimeButtonText(time)
 
         // Set click listeners for date and time buttons using ViewBinding
-        binding.datePickerButton.setOnClickListener { showDatePicker(calendar) }
-        binding.timePickerButton.setOnClickListener { showTimePicker(calendar) }
+        binding.datePickerButton.setOnClickListener { showDatePicker(calendarDate, date) }
+        binding.timePickerButton.setOnClickListener { showTimePicker(calendarTime, time) }
 
         binding.sizeSeekBar.min = 5
         binding.sizeSeekBar.max = 500
 
         // Set onClick Listener for button
-        binding.saveButton.setOnClickListener{
+        binding.saveButton.setOnClickListener {
             saveUserNutriData()
+        }
+
+        binding.cancelButton.setOnClickListener{
+            dismiss()
         }
 
         // Restore the selected position of foodTypeSpinner if it exists
@@ -103,8 +149,28 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
             foodTypeSelectionPosition = savedInstanceState.getInt("foodTypeSelectionPosition", 0)
             binding.foodTypeSpinner.setSelection(foodTypeSelectionPosition)
         }
+    }
 
-        return view
+    private fun dateStringToCalendar(dateString: String): Calendar {
+        val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val date = sdf.parse(dateString)
+
+        // Create a Calendar instance and set its time to the parsed date
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+
+        return calendar
+    }
+
+    private fun timeStringToCalendar(timeString: String): Calendar {
+        val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        val date = sdf.parse(timeString)
+
+        // Create a Calendar instance and set its time to the parsed time
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+
+        return calendar
     }
 
     private fun getCalories(foodCat: Int, foodType: Int): Double{
@@ -178,6 +244,51 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
         return cal
     }
 
+    private fun getNutriCatPosition(nutriCat: String): Int {
+        val foodCategories = resources.getStringArray(R.array.food_group)
+        val position = foodCategories.indexOf(nutriCat)
+        var selectedPosition: Int = -1
+
+        when (position) {
+            0 -> selectedPosition = 0
+            1 -> selectedPosition = 1
+            2 -> selectedPosition = 2
+            3 -> selectedPosition = 3
+        }
+
+        return selectedPosition
+    }
+
+    private fun getNutriTypePosition(nutriCat: Int, nutriType: String): Int {
+        var selectedPosition: Int = 3
+
+        when (nutriCat) {
+            0 -> {
+                val foodCategories = resources.getStringArray(R.array.fruits_selection)
+                selectedPosition = foodCategories.indexOf(nutriType)
+            }
+            1 -> {
+                val foodCategories = resources.getStringArray(R.array.vegetables_selection)
+                selectedPosition = foodCategories.indexOf(nutriType)
+            }
+            2 -> {
+                val foodCategories = resources.getStringArray(R.array.grains_selection)
+                selectedPosition = foodCategories.indexOf(nutriType)
+            }
+            3 -> {
+                val foodCategories = resources.getStringArray(R.array.protein_foods_selection)
+                selectedPosition = foodCategories.indexOf(nutriType)
+            }
+            4 -> {
+                val foodCategories = resources.getStringArray(R.array.dairy_selection)
+                selectedPosition = foodCategories.indexOf(nutriType)
+            }
+        }
+
+        return selectedPosition
+    }
+
+
     private fun saveUserNutriData(){
         var calObtained: Double = 0.0
         var calObtainedHolder: String = ""
@@ -193,6 +304,7 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
         calObtained = calObtainedHolder.toDouble()
 
         val userNutritionData = UserNutritionData(
+            id = id,
             food_category = binding.foodCategorySpinner.selectedItem.toString(),
             food_type = binding.foodTypeSpinner.selectedItem.toString(),
             food_size = binding.sizeSeekBar.progress.toString().toInt(),
@@ -201,12 +313,14 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
             intake_time = binding.timePickerButton.text.toString(),
             cal_obtained = calObtained)
 
-        nutriDataViewModel.insertNutriData(userNutritionData)
+        nutriDataViewModel.updateNutriData(userNutritionData)
 
-        Toast.makeText(requireContext(), R.string.add_nutri_success, Toast.LENGTH_SHORT).show()
+        dismiss()
+
+        Toast.makeText(requireContext(), R.string.update_nutri_success, Toast.LENGTH_SHORT).show()
     }
 
-    private fun showDatePicker(calendar: Calendar) {
+    private fun showDatePicker(calendar: Calendar, date: String) {
         val datePickerDialog = DatePickerDialog(
             requireContext(),
             R.style.CustomPickerDialog,
@@ -214,7 +328,7 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 calendar.set(Calendar.YEAR, year)
                 calendar.set(Calendar.MONTH, month)
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                updateDateButtonText(calendar)
+                updateDateButtonText(date)
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
@@ -234,14 +348,14 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
         datePickerDialog.show()
     }
 
-    private fun showTimePicker(calendar: Calendar) {
+    private fun showTimePicker(calendar: Calendar, time: String) {
         val timePickerDialog = TimePickerDialog(
             requireContext(),
             R.style.CustomPickerDialog, // Apply your custom dialog style here
             { _, hourOfDay, minute ->
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
                 calendar.set(Calendar.MINUTE, minute)
-                updateTimeButtonText(calendar)
+                updateTimeButtonText(time)
             },
             calendar.get(Calendar.HOUR_OF_DAY),
             calendar.get(Calendar.MINUTE),
@@ -261,14 +375,12 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
         timePickerDialog.show()
     }
 
-    private fun updateDateButtonText(calendar: Calendar) {
-        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-        binding.datePickerButton.text = dateFormat.format(calendar.time)
+    private fun updateDateButtonText(date: String) {
+        binding.datePickerButton.text = date
     }
 
-    private fun updateTimeButtonText(calendar: Calendar) {
-        val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
-        binding.timePickerButton.text = timeFormat.format(calendar.time)
+    private fun updateTimeButtonText(time: String) {
+        binding.timePickerButton.text = time
     }
 
     override fun onDestroyView() {
@@ -294,6 +406,12 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
             binding.foodTypeSpinner.adapter = adapter
+            val args = arguments
+            if (args != null) {
+                val nutriData = args.getParcelable<UserNutritionData>(UpdateNutriFragment.ARG_NUTRI_DATA)
+                val position = getNutriTypePosition(getNutriCatPosition(nutriData?.food_category.toString()), nutriData?.food_type.toString())
+                binding.foodTypeSpinner.setSelection(position)
+            }
         }
     }
 

@@ -277,9 +277,9 @@ class UpdateExecFragment  : DialogFragment(), AdapterView.OnItemSelectedListener
             binding.exerciseTypeSpinner.selectedItemPosition
         )
 
-        when (binding.exerciseCategorySpinner.selectedItem.toString()) {
+        when (binding.exerciseCategorySpinner.selectedItemPosition) {
             // Calculated in Mins
-            "Cardiorespiratory exercise", "Flexibility exercise" -> {
+            0, 1 -> {
                 calBurnt = (3.5 * met * weight) / 200.0
                 calBurnt *= binding.durationSeekBar.progress.toString().toDouble()
                 calBurnt *= binding.exerciseSetSpinner.selectedItem.toString().toDouble()

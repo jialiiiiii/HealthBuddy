@@ -250,4 +250,22 @@
     <string name="day">Day</string>
     <string name="no_data">No data available.</string>
 
+    <!-- Messages & Dialog   -->
+    <string name="del_confirmation">Delete Confirmation</string>
+    <string name="del_confirmation_msg">Are you sure you want to delete this data?</string>
+
+    <string name="del_exec_success">Exercise Data successfully deleted.</string>
+    <string name="del_nutri_success">Nutrition Data successfully deleted.</string>
+
+    <string name="add_exec_success">Exercise Data successfully added.</string>
+    <string name="add_nutri_success">Nutrition Data successfully added.</string>
+
+    <string name="update_exec_success">Exercise Data successfully updated.</string>
+    <string name="update_nutri_success">Nutrition Data successfully updated.</string>
+
+    <string name="del_confirm">DELETE</string>
+    <string name="del_cancel">No</string>
+
+    <string name="graph_desc">Only approximated value is shown</string>
+
 </resources>
