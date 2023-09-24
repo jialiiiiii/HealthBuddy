@@ -126,12 +126,12 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.signOut.setOnClickListener {
             // Ask for confirmation
             AlertDialog.Builder(requireContext())
-                .setTitle("Signing Out")
-                .setMessage("Are you sure to sign out?")
-                .setPositiveButton("Sign Out") { dialog, which ->
+                .setTitle(R.string.signing_out)
+                .setMessage(R.string.sign_out_msg)
+                .setPositiveButton(R.string.confirm_sign_out) { dialog, which ->
                     signOut()
                 }
-                .setNegativeButton("Cancel") { dialog, which ->
+                .setNegativeButton(R.string.cancel_sign_out) { dialog, which ->
                     // User canceled sign out, do nothing or handle as needed
                 }
                 .show()
@@ -285,7 +285,7 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         userRef.updateChildren(userUpdates).addOnCompleteListener {
             if (it.isSuccessful) {
-                Toast.makeText(context, "Profile updated successfully!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.profile_updated, Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
             }
@@ -323,7 +323,7 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 // Data added successfully
                 val editor = sharedPreferences.edit()
                 editor.putBoolean("loggedIn", true)
-                editor.putString("loginMsg", "Welcome to HealthBuddy!")
+                editor.putString("loginMsg", R.string.welcome_msg.toString())
                 editor.putString("userId", id)
                 editor.apply()
 

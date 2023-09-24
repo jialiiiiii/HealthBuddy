@@ -19,13 +19,21 @@
     <string name="cm">厘米</string>
     <string name="button_sign_out">登出</string>
     <string name="button_register">注册</string>
-    <string name="complete_your_profile">填写您的个​​人资料</string>
+    <string name="complete_your_profile">填写您的个人资料</string>
     <string name="appearance">显现</string>
     <string name="about">关于</string>
     <string name="theme">主题</string>
     <string name="language">语言</string>
 
-    <!-- Error Message -->
+    <!-- Message -->
+    <string name="signing_out">登出</string>
+    <string name="sign_out_msg">你确定要登出吗？</string>
+    <string name="confirm_sign_out">登出</string>
+    <string name="cancel_sign_out">取消</string>
+    <string name="profile_updated">个人资料更新成功！</string>
+    <string name="welcome_msg">欢迎来到HealthBuddy！</string>
+    <string name="welcome_back_msg">欢迎回来！</string>
+
     <string name="name_null">请输入你的名字。</string>
     <string name="age_null">请输入你的年龄。</string>
     <string name="weight_null">请输入你的体重。</string>

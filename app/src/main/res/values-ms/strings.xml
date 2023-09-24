@@ -25,7 +25,15 @@
     <string name="theme">Tema</string>
     <string name="language">Bahasa</string>
 
-    <!-- Error Message -->
+    <!-- Message -->
+    <string name="signing_out">Log Keluar</string>
+    <string name="sign_out_msg">Adakah anda pasti untuk log keluar?</string>
+    <string name="confirm_sign_out">Log Keluar</string>
+    <string name="cancel_sign_out">Batalkan</string>
+    <string name="profile_updated">Profil telah dikemas kini!</string>
+    <string name="welcome_msg">Selamat datang ke HealthBuddy!</string>
+    <string name="welcome_back_msg">Selamat kembali!</string>
+
     <string name="name_null">Sila masukkan nama anda.</string>
     <string name="age_null">Sila masukkan umur anda.</string>
     <string name="weight_null">Sila masukkan berat anda.</string>

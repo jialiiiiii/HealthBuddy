@@ -62,8 +62,8 @@ class AccountFragment : Fragment() {
         var viewPagerAdapter = ViewPagerAdapter(requireActivity())
 
         // Add tab items
-        tabLayout.addTab(binding.tabLayout.newTab().setText("Profile"))
-        tabLayout.addTab(binding.tabLayout.newTab().setText("Post"))
+        tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.profile))
+        tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.post))
 
         // Set up viewpager
         viewPager2.setAdapter(viewPagerAdapter)
