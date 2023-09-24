@@ -80,15 +80,23 @@
                     android:layout_marginTop="@dimen/margin_top_icon"
                     app:srcCompat="@drawable/ic_nutrition_outlined" />
 
-                <TextView
-                    android:id="@+id/text_nutrition"
+                <HorizontalScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/dm_sans_medium"
-                    android:gravity="center"
-                    android:text="@string/nutrition"
-                    android:textColor="@color/light_green"
-                    android:textSize="@dimen/font_size_label" />
+                    android:scrollbars="none">
+
+                    <TextView
+                        android:id="@+id/text_nutrition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/dm_sans_medium"
+                        android:gravity="center"
+                        android:text="@string/nutrition"
+                        android:textColor="@color/light_green"
+                        android:textSize="@dimen/font_size_label" />
+
+                </HorizontalScrollView>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -141,15 +149,23 @@
                     android:layout_marginTop="@dimen/margin_top_icon"
                     app:srcCompat="@drawable/ic_exercise_outlined" />
 
-                <TextView
-                    android:id="@+id/text_exercise"
+                <HorizontalScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/dm_sans_medium"
-                    android:gravity="center"
-                    android:text="@string/exercise"
-                    android:textColor="@color/light_green"
-                    android:textSize="@dimen/font_size_label" />
+                    android:scrollbars="none">
+
+                    <TextView
+                        android:id="@+id/text_exercise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/dm_sans_medium"
+                        android:gravity="center"
+                        android:text="@string/exercise"
+                        android:textColor="@color/light_green"
+                        android:textSize="@dimen/font_size_label" />
+
+                </HorizontalScrollView>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

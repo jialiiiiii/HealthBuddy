@@ -1,4 +1,4 @@
-package com.example.healthbuddy.exercise
+package com.example.healthbuddy.nutrition
 
 import android.content.Context
 import android.widget.TextView
@@ -16,7 +16,7 @@ class GraphMarkerView(context: Context, layoutResource: Int) : MarkerView(contex
             val xValue = e.x.toInt()
 
             // Customize the marker text based on the data
-            val markerText = R.string.day.toString() + ": $xValue\n" + R.string.cal_burnt + ": \n${e.y}"
+            val markerText = R.string.day.toString() + ": $xValue\n" + R.string.cal_gained + ": \n${e.y}"
             markerTextView.text = markerText
         }
 

@@ -1,5 +1,6 @@
 package com.example.healthbuddy.com.example.healthbuddy.settings
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -45,7 +46,8 @@ class TermsAndConditionsFragment : Fragment() {
         val progressBar = binding.progressBar
 
         // Determine the selected language
-        val selectedLanguage = "en"
+        val sharedPreferences = requireContext().getSharedPreferences("HealthBuddyPrefs", Context.MODE_PRIVATE)
+        val selectedLanguage = sharedPreferences.getString("language", "en")
 
         // Define the file name based on the selected language
         val fileName = "terms_and_conditions_$selectedLanguage.html"

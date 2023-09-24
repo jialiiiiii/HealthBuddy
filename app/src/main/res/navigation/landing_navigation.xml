@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/landing_navigation"
-    app:startDestination="@id/forumFragment2">
+    app:startDestination="@id/nutriDataFragment">
 
     <fragment
         android:id="@+id/firstFragment"
@@ -76,23 +76,15 @@
         android:label="main_activity"
         tools:layout="@layout/main_activity" />
     <fragment
-        android:id="@+id/forumFragment2"
-        android:name="com.example.healthbuddy.com.example.healthbuddy.forum.ForumFragment"
-        android:label="ForumFragment" >
-        <action
-            android:id="@+id/action_forumFragment2_to_forumDetailsFragment2"
-            app:destination="@id/forumDetailsFragment2" />
-        <action
-            android:id="@+id/action_forumFragment2_to_collectionFragment"
-            app:destination="@id/collectionFragment" />
-    </fragment>
+        android:id="@+id/execDataFragment"
+        android:name="ExecDataFragment"
+        android:label="ExecDataFragment" />
     <fragment
-        android:id="@+id/collectionFragment"
-        android:name="com.example.healthbuddy.forum.CollectionFragment"
-        android:label="CollectionFragment" />
+        android:id="@+id/addUserDataFragment"
+        android:name="com.example.healthbuddy.addUserData.AddUserDataFragment"
+        android:label="AddUserDataFragment" />
     <fragment
-        android:id="@+id/forumDetailsFragment2"
-        android:name="com.example.healthbuddy.forum.ForumDetailsFragment"
-        android:label="fragment_forum_details"
-        tools:layout="@layout/fragment_forum_details" />
+        android:id="@+id/nutriDataFragment"
+        android:name="com.example.healthbuddy.nutrition.NutriDataFragment"
+        android:label="NutriDataFragment" />
 </navigation>

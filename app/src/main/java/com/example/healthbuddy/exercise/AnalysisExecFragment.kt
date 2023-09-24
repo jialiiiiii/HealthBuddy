@@ -3,7 +3,6 @@ package com.example.healthbuddy.exercise
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthbuddy.R
-import com.example.healthbuddy.database.UserExecData
 import com.example.healthbuddy.databinding.FragmentAnalysisExecBinding
 import com.example.healthbuddy.exercise.UpdateExecFragment.Companion.ARG_EXEC_DATA
 import com.github.mikephil.charting.components.XAxis
@@ -77,14 +75,14 @@ class AnalysisExecFragment : Fragment() {
         // Delete
         execAnalysisAdapter.setOnActionDeleteListener { userExecDataToDelete ->
             val alertDialogBuilder = AlertDialog.Builder(requireContext())
-            alertDialogBuilder.setTitle("Delete Confirmation")
-            alertDialogBuilder.setMessage("Are you sure you want to delete this data?")
-            alertDialogBuilder.setPositiveButton("DELETE") { _, _ ->
+            alertDialogBuilder.setTitle(R.string.del_confirmation)
+            alertDialogBuilder.setMessage(R.string.del_confirmation_msg)
+            alertDialogBuilder.setPositiveButton(R.string.del_confirm) { _, _ ->
                 // Assuming userExecDataToDelete is the item to be deleted
                 execDataViewModel.deleteExecData(userExecDataToDelete)
-                Toast.makeText(requireContext(), "Exercise Data successfully deleted.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.del_exec_success, Toast.LENGTH_SHORT).show()
             }
-            alertDialogBuilder.setNegativeButton("No") { dialog, _ ->
+            alertDialogBuilder.setNegativeButton(R.string.del_cancel) { dialog, _ ->
                 dialog.dismiss() // Dismiss the dialog
             }
             val alertDialog = alertDialogBuilder.create()
@@ -115,18 +113,16 @@ class AnalysisExecFragment : Fragment() {
                 // Map the totalCaloriesBurntList to Entry objects and add them to the entries list
                 totalCaloriesBurntList.forEachIndexed { index, totalCaloriesBurnt ->
                     entries.add(Entry(totalCaloriesBurnt.day, totalCaloriesBurnt.totalCaloriesBurnt.toFloat()))
-                    Log.d("Calories Burnt", totalCaloriesBurnt.totalCaloriesBurnt.toString())
-                    Log.d("Day", totalCaloriesBurnt.day.toString())
                 }
 
-                val dataSet = LineDataSet(entries, "Calories Burnt")
+                val dataSet = LineDataSet(entries, R.string.cal_burnt.toString())
                 val dataSets: ArrayList<ILineDataSet> = ArrayList()
                 dataSets.add(dataSet)
 
                 val lineData = LineData(dataSets)
 
                 // Set Description
-                binding.execGraph.description.text = "Only approximated value is shown"
+                binding.execGraph.description.text = R.string.graph_desc.toString()
 
                 // Set marker view
                 val markerView = GraphMarkerView(requireContext(), R.layout.graph_marker_view)

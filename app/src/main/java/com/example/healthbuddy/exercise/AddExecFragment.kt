@@ -152,9 +152,9 @@ class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         var met: Double = getMET(binding.exerciseCategorySpinner.selectedItemPosition, binding.exerciseTypeSpinner.selectedItemPosition)
 
-        when(binding.exerciseCategorySpinner.selectedItem.toString()){
+        when(binding.exerciseCategorySpinner.selectedItemPosition){
             // Calculated in Mins
-            "Cardiorespiratory exercise", "Flexibility exercise" -> {
+            0, 1 -> {
                 calBurnt = (3.5 * met * weight) / 200.0
                 calBurnt *= binding.durationSeekBar.progress.toString().toDouble()
                 calBurnt *= binding.exerciseSetSpinner.selectedItem.toString().toDouble()
@@ -179,7 +179,7 @@ class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         execDataViewModel.insertExecData(userExecData)
 
-        Toast.makeText(requireContext(), "Exercise Data successfully saved.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), R.string.add_exec_success, Toast.LENGTH_SHORT).show()
     }
 
     private fun showDatePicker(calendar: Calendar) {
