@@ -169,8 +169,8 @@ class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
         calBurnt = calBurntHolder.toDouble()
 
         val userExecData = UserExecData(
-            exec_category = binding.exerciseCategorySpinner.selectedItem.toString(),
-            exec_type = binding.exerciseTypeSpinner.selectedItem.toString(),
+            exec_category = binding.exerciseCategorySpinner.selectedItemPosition,
+            exec_type = binding.exerciseTypeSpinner.selectedItemPosition,
             exec_duration_rep = binding.durationSeekBar.progress.toString().toInt(),
             exec_set = binding.exerciseSetSpinner.selectedItem.toString().toInt(),
             exec_date = binding.datePickerButton.text.toString(),

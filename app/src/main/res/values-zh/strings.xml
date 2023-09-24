@@ -235,4 +235,22 @@
     <string name="cal">卡路里</string>
     <string name="day">天</string>
     <string name="no_data">无可用数据。</string>
+
+    <!-- Messages & Dialog   -->
+    <string name="del_confirmation">删除确认</string>
+    <string name="del_confirmation_msg">您确定要删除此数据吗？</string>
+
+    <string name="del_exec_success">成功删除运动数据。</string>
+    <string name="del_nutri_success">成功删除营养数据。</string>
+
+    <string name="add_exec_success">成功添加运动数据。</string>
+    <string name="add_nutri_success">成功添加营养数据。</string>
+
+    <string name="update_exec_success">成功更新运动数据。</string>
+    <string name="update_nutri_success">成功更新营养数据。</string>
+
+    <string name="del_confirm">删除</string>
+    <string name="del_cancel">取消</string>
+
+    <string name="graph_desc">仅显示估计值</string>
 </resources>

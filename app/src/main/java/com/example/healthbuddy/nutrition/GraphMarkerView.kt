@@ -7,8 +7,10 @@ import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight
 
-class GraphMarkerView(context: Context, layoutResource: Int) : MarkerView(context, layoutResource) {
+class GraphMarkerView(context: Context, layoutResource: Int, dayText: String, calGainedText: String) : MarkerView(context, layoutResource) {
     private val markerTextView: TextView = findViewById(R.id.markerTextView)
+    private val dayText = dayText
+    private val calGainedText = calGainedText
 
     override fun refreshContent(e: Entry?, highlight: Highlight?) {
         if (e != null) {
@@ -16,7 +18,7 @@ class GraphMarkerView(context: Context, layoutResource: Int) : MarkerView(contex
             val xValue = e.x.toInt()
 
             // Customize the marker text based on the data
-            val markerText = R.string.day.toString() + ": $xValue\n" + R.string.cal_gained + ": \n${e.y}"
+            val markerText = dayText + ": $xValue\n" + calGainedText + ": \n${e.y}"
             markerTextView.text = markerText
         }
 

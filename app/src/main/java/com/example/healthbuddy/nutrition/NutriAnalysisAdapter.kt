@@ -1,5 +1,6 @@
 package com.example.healthbuddy.nutrition
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,14 +8,19 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healthbuddy.R
-import com.example.healthbuddy.database.UserExecData
 import com.example.healthbuddy.database.UserNutritionData
+import android.content.res.Resources
+import android.util.Log
 
-class NutriAnalysisAdapter : RecyclerView.Adapter<NutriAnalysisAdapter.NutriDataViewHolder>() {
+class NutriAnalysisAdapter(private val resources: Resources) : RecyclerView.Adapter<NutriAnalysisAdapter.NutriDataViewHolder>() {
 
     private var nutriData = emptyList<UserNutritionData>()
     private var actionDelete: ((UserNutritionData) -> Unit)? = null
     private var actionEdit: ((UserNutritionData) -> Unit)? = null
+
+    private var nutriCategory: Array<String> = emptyArray()
+    private var nutriType: Array<String> = emptyArray()
+    private var calories: String = ""
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NutriDataViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.nutri_analysis_item, parent, false)
@@ -26,13 +32,25 @@ class NutriAnalysisAdapter : RecyclerView.Adapter<NutriAnalysisAdapter.NutriData
         return nutriData.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: NutriDataViewHolder, position: Int) {
         val currentData = nutriData[position]
+        calories = resources.getString(R.string.cal)
+
+        // Initialize array
+        nutriCategory = resources.getStringArray(R.array.food_group)
+        when(currentData.food_category){
+            0 -> nutriType = resources.getStringArray(R.array.fruits_selection)
+            1 -> nutriType = resources.getStringArray(R.array.vegetables_selection)
+            2 -> nutriType = resources.getStringArray(R.array.grains_selection)
+            3 -> nutriType = resources.getStringArray(R.array.protein_foods_selection)
+            4 -> nutriType = resources.getStringArray(R.array.dairy_selection)
+        }
 
         holder.dateTime.text = currentData.intake_date.toString() + ", " + currentData.intake_time.toString()
-        holder.foodTypeSelected.text = currentData.food_type.toString()
-        holder.foodCategorySelected.text = currentData.food_category.toString()
-        holder.caloriesGained.text = "+ " + currentData.cal_obtained.toString() + R.string.cal
+        holder.foodTypeSelected.text = nutriType[currentData.food_type]
+        holder.foodCategorySelected.text = nutriCategory[currentData.food_category]
+        holder.caloriesGained.text = "+ " + currentData.cal_obtained + " " + calories
 
         holder.deleteBtn.setOnClickListener {
             actionDelete?.invoke(currentData)

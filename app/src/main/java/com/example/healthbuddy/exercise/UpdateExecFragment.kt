@@ -89,7 +89,7 @@ class UpdateExecFragment  : DialogFragment(), AdapterView.OnItemSelectedListener
             val args = arguments
             if (args != null) {
                 val execData = args.getParcelable<UserExecData>(ARG_EXEC_DATA)
-                binding.exerciseCategorySpinner.setSelection(getExecCatPosition(execData?.exec_category.toString()))
+                binding.exerciseCategorySpinner.setSelection(execData?.exec_category.toString().toInt())
                 binding.durationSeekBar.progress = execData?.exec_duration_rep.toString().toInt()
                 id = execData?.id.toString().toInt()
             }
@@ -223,46 +223,6 @@ class UpdateExecFragment  : DialogFragment(), AdapterView.OnItemSelectedListener
         return met
     }
 
-    private fun getExecCatPosition(execCat: String): Int {
-        val execCategories = resources.getStringArray(R.array.exer_group)
-        val position = execCategories.indexOf(execCat)
-        var selectedPosition: Int = -1
-
-        when (position) {
-            0 -> selectedPosition = 0
-            1 -> selectedPosition = 1
-            2 -> selectedPosition = 2
-            3 -> selectedPosition = 3
-        }
-
-        return selectedPosition
-    }
-
-    private fun getExecTypePosition(execCat: Int, execType: String): Int {
-        var selectedPosition: Int = 3
-
-        when (execCat) {
-            0 -> {
-                val execCategories = resources.getStringArray(R.array.cardio_selection)
-                selectedPosition = execCategories.indexOf(execType)
-            }
-            1 -> {
-                val execCategories = resources.getStringArray(R.array.flex_selection)
-                selectedPosition = execCategories.indexOf(execType)
-            }
-            2 -> {
-                val execCategories = resources.getStringArray(R.array.res_selection)
-                selectedPosition = execCategories.indexOf(execType)
-            }
-            3 -> {
-                val execCategories = resources.getStringArray(R.array.neuro_selection)
-                selectedPosition = execCategories.indexOf(execType)
-            }
-        }
-
-        return selectedPosition
-    }
-
     private fun saveUserExecData() {
         var weight: Double = 65.0
         var calBurnt: Double = 0.0
@@ -298,8 +258,8 @@ class UpdateExecFragment  : DialogFragment(), AdapterView.OnItemSelectedListener
 
         val userExecData = UserExecData(
             id = id,
-            exec_category = binding.exerciseCategorySpinner.selectedItem.toString(),
-            exec_type = binding.exerciseTypeSpinner.selectedItem.toString(),
+            exec_category = binding.exerciseCategorySpinner.selectedItemPosition,
+            exec_type = binding.exerciseTypeSpinner.selectedItemPosition,
             exec_duration_rep = binding.durationSeekBar.progress.toString().toInt(),
             exec_set = binding.exerciseSetSpinner.selectedItem.toString().toInt(),
             exec_date = binding.datePickerButton.text.toString(),
@@ -425,8 +385,7 @@ class UpdateExecFragment  : DialogFragment(), AdapterView.OnItemSelectedListener
             val args = arguments
             if (args != null) {
                 val execData = args.getParcelable<UserExecData>(ARG_EXEC_DATA)
-                val position = getExecTypePosition(getExecCatPosition(execData?.exec_category.toString()), execData?.exec_type.toString())
-                binding.exerciseTypeSpinner.setSelection(position)
+                binding.exerciseTypeSpinner.setSelection(execData?.exec_type.toString().toInt())
             }
         }
     }

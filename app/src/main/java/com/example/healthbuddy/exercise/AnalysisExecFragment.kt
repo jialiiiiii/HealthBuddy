@@ -58,7 +58,7 @@ class AnalysisExecFragment : Fragment() {
         binding.execDataViewModel = execDataViewModel
 
         // Recycler View
-        execAnalysisAdapter = ExecAnalysisAdapter()
+        execAnalysisAdapter = ExecAnalysisAdapter(resources)
 
         // Edit
         execAnalysisAdapter.setOnActionDEditListener { userExecData ->
@@ -115,17 +115,21 @@ class AnalysisExecFragment : Fragment() {
                     entries.add(Entry(totalCaloriesBurnt.day, totalCaloriesBurnt.totalCaloriesBurnt.toFloat()))
                 }
 
-                val dataSet = LineDataSet(entries, R.string.cal_burnt.toString())
+                val label = context?.getString(R.string.cal_burnt)
+                val dataSet = LineDataSet(entries, label)
                 val dataSets: ArrayList<ILineDataSet> = ArrayList()
                 dataSets.add(dataSet)
 
                 val lineData = LineData(dataSets)
 
                 // Set Description
-                binding.execGraph.description.text = R.string.graph_desc.toString()
+                val desc = context?.getString(R.string.graph_desc)
+                binding.execGraph.description.text = desc
 
                 // Set marker view
-                val markerView = GraphMarkerView(requireContext(), R.layout.graph_marker_view)
+                val dayText = getString(R.string.day)
+                val calBurntText = getString(R.string.cal_burnt)
+                val markerView = GraphMarkerView(requireContext(), R.layout.graph_marker_view, dayText, calBurntText)
                 binding.execGraph.marker = markerView
 
                 // Customize the X-axis

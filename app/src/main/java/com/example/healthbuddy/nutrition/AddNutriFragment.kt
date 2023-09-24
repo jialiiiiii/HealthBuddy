@@ -193,8 +193,8 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
         calObtained = calObtainedHolder.toDouble()
 
         val userNutritionData = UserNutritionData(
-            food_category = binding.foodCategorySpinner.selectedItem.toString(),
-            food_type = binding.foodTypeSpinner.selectedItem.toString(),
+            food_category = binding.foodCategorySpinner.selectedItemPosition,
+            food_type = binding.foodTypeSpinner.selectedItemPosition,
             food_size = binding.sizeSeekBar.progress.toString().toInt(),
             food_serving_size = binding.servingSizeSpinner.selectedItem.toString().toInt(),
             intake_date = binding.datePickerButton.text.toString(),

@@ -13,12 +13,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthbuddy.R
-import com.example.healthbuddy.databinding.FragmentAnalysisExecBinding
 import com.example.healthbuddy.databinding.FragmentAnalysisNutriBinding
-import com.example.healthbuddy.exercise.ExecAnalysisAdapter
-import com.example.healthbuddy.exercise.ExecDataViewModel
 import com.example.healthbuddy.exercise.GraphMarkerView
-import com.example.healthbuddy.exercise.UpdateExecFragment
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -63,7 +59,7 @@ class AnalysisNutriFragment : Fragment() {
         binding.nutriDataViewModel = nutriDataViewModel
 
         // Recycler View
-        nutriAnalysisAdapter = NutriAnalysisAdapter()
+        nutriAnalysisAdapter = NutriAnalysisAdapter(resources)
 
         // Edit
         nutriAnalysisAdapter.setOnActionDEditListener { nutriExecData ->
@@ -119,17 +115,21 @@ class AnalysisNutriFragment : Fragment() {
                     entries.add(Entry(totalCaloriesGained.day, totalCaloriesGained.totalCaloriesGained.toFloat()))
                 }
 
-                val dataSet = LineDataSet(entries, R.string.cal_burnt.toString())
+                val label = context?.getString(R.string.cal_gained)
+                val dataSet = LineDataSet(entries, label)
                 val dataSets: ArrayList<ILineDataSet> = ArrayList()
                 dataSets.add(dataSet)
 
                 val lineData = LineData(dataSets)
 
                 // Set Description
-                binding.nutriGraph.description.text = R.string.graph_desc.toString()
+                val desc = context?.getString(R.string.graph_desc)
+                binding.nutriGraph.description.text = desc
 
                 // Set marker view
-                val markerView = GraphMarkerView(requireContext(), R.layout.graph_marker_view)
+                val dayText = getString(R.string.day)
+                val calGainedText = getString(R.string.cal_gained)
+                val markerView = GraphMarkerView(requireContext(), R.layout.graph_marker_view, dayText, calGainedText)
                 binding.nutriGraph.marker = markerView
 
                 // Customize the X-axis

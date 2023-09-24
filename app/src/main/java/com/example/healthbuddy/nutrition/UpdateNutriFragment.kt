@@ -77,7 +77,7 @@ class UpdateNutriFragment : DialogFragment(), AdapterView.OnItemSelectedListener
             val args = arguments
             if (args != null) {
                 val nutriData = args.getParcelable<UserNutritionData>(UpdateNutriFragment.ARG_NUTRI_DATA)
-                binding.foodCategorySpinner.setSelection(getNutriCatPosition(nutriData?.food_category.toString()))
+                binding.foodCategorySpinner.setSelection(nutriData?.food_category.toString().toInt())
                 binding.sizeSeekBar.progress = nutriData?.food_serving_size.toString().toInt()
                 id = nutriData?.id.toString().toInt()
             }
@@ -244,51 +244,6 @@ class UpdateNutriFragment : DialogFragment(), AdapterView.OnItemSelectedListener
         return cal
     }
 
-    private fun getNutriCatPosition(nutriCat: String): Int {
-        val foodCategories = resources.getStringArray(R.array.food_group)
-        val position = foodCategories.indexOf(nutriCat)
-        var selectedPosition: Int = -1
-
-        when (position) {
-            0 -> selectedPosition = 0
-            1 -> selectedPosition = 1
-            2 -> selectedPosition = 2
-            3 -> selectedPosition = 3
-        }
-
-        return selectedPosition
-    }
-
-    private fun getNutriTypePosition(nutriCat: Int, nutriType: String): Int {
-        var selectedPosition: Int = 3
-
-        when (nutriCat) {
-            0 -> {
-                val foodCategories = resources.getStringArray(R.array.fruits_selection)
-                selectedPosition = foodCategories.indexOf(nutriType)
-            }
-            1 -> {
-                val foodCategories = resources.getStringArray(R.array.vegetables_selection)
-                selectedPosition = foodCategories.indexOf(nutriType)
-            }
-            2 -> {
-                val foodCategories = resources.getStringArray(R.array.grains_selection)
-                selectedPosition = foodCategories.indexOf(nutriType)
-            }
-            3 -> {
-                val foodCategories = resources.getStringArray(R.array.protein_foods_selection)
-                selectedPosition = foodCategories.indexOf(nutriType)
-            }
-            4 -> {
-                val foodCategories = resources.getStringArray(R.array.dairy_selection)
-                selectedPosition = foodCategories.indexOf(nutriType)
-            }
-        }
-
-        return selectedPosition
-    }
-
-
     private fun saveUserNutriData(){
         var calObtained: Double = 0.0
         var calObtainedHolder: String = ""
@@ -305,8 +260,8 @@ class UpdateNutriFragment : DialogFragment(), AdapterView.OnItemSelectedListener
 
         val userNutritionData = UserNutritionData(
             id = id,
-            food_category = binding.foodCategorySpinner.selectedItem.toString(),
-            food_type = binding.foodTypeSpinner.selectedItem.toString(),
+            food_category = binding.foodCategorySpinner.selectedItemPosition,
+            food_type = binding.foodTypeSpinner.selectedItemPosition,
             food_size = binding.sizeSeekBar.progress.toString().toInt(),
             food_serving_size = binding.servingSizeSpinner.selectedItem.toString().toInt(),
             intake_date = binding.datePickerButton.text.toString(),
@@ -409,8 +364,7 @@ class UpdateNutriFragment : DialogFragment(), AdapterView.OnItemSelectedListener
             val args = arguments
             if (args != null) {
                 val nutriData = args.getParcelable<UserNutritionData>(UpdateNutriFragment.ARG_NUTRI_DATA)
-                val position = getNutriTypePosition(getNutriCatPosition(nutriData?.food_category.toString()), nutriData?.food_type.toString())
-                binding.foodTypeSpinner.setSelection(position)
+                binding.foodTypeSpinner.setSelection(nutriData?.food_type.toString().toInt())
             }
         }
     }

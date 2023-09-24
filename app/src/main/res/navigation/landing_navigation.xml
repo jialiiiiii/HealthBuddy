@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/landing_navigation"
-    app:startDestination="@id/nutriDataFragment">
+    app:startDestination="@id/execDataFragment">
 
     <fragment
         android:id="@+id/firstFragment"
