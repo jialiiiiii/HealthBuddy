@@ -169,12 +169,10 @@ class CollectionFragment : Fragment() {
     //        })
     //    }
 
-
-
-
     private fun getItemData() {
         db = FirebaseDatabase.getInstance().getReference("Collections")
-        val userId = sharedPreferences.getString("userId", "") ?: ""
+       // val userId = sharedPreferences.getString("userId", "") ?: ""
+        val userId = "5rQ0XILjLtT7B8VEsTVA3ScdLx82"
 
         db.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -217,9 +215,10 @@ class CollectionFragment : Fragment() {
 
                                                 val bundle = Bundle()
                                                 bundle.putString("post_id",nodePath)
+                                                Log.i("Apa ini",nodePath.toString())
 
                                                 // Set where you wanna go here
-                                                //                                                findNavController().navigate(R.id.action_collection_to_forum_details)
+                                                findNavController().navigate(R.id.action_collectionFragment_to_forumDetailsFragment22,bundle)
                                             }
                                         })
 

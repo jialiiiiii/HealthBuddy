@@ -134,7 +134,8 @@ class ForumFragment : Fragment() {
 
                             val bundle = Bundle()
                             bundle.putString("post_id",nodePath)
-                            //findNavController().navigate(R.id.action_forum_to_forum_details, bundle)
+                           // findNavController().navigate(R.id.action_forumFragment3_to_forumDetailsFragment2, bundle)
+                            findNavController().navigate(R.id.action_forumFragment3_to_collectionFragment, bundle)
 
                             // Testing
                             //findNavController().navigate(R.id.action_forumFragment2_to_forumDetailsFragment2,bundle)
