@@ -323,7 +323,7 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 // Data added successfully
                 val editor = sharedPreferences.edit()
                 editor.putBoolean("loggedIn", true)
-                editor.putString("loginMsg", R.string.welcome_msg.toString())
+                editor.putString("loginMsg", resources.getString(R.string.welcome_msg))
                 editor.putString("userId", id)
                 editor.apply()
 

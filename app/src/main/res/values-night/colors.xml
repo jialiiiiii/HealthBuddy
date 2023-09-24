@@ -9,9 +9,10 @@
     <color name="white">#FFFFFF</color>
 
     <!--darker dark_green-->
-    <color name="bg_green">#FF123010</color>
+    <color name="bg_green">#FF061C04</color>
+    <!--lighter_green-->
+    <color name="dark_green">#FFC8E5C3</color>
 
-    <color name="dark_green">#FF2F5329</color>
     <color name="dark_green_55">#8A2F5329</color>
     <color name="light_green">#FF7EB175</color>
     <color name="leaf_green">#FF5ABA4A</color>
