@@ -42,6 +42,8 @@
     <string name="weight_invalid">请确保你的体重在 20 - 500 公斤之间。</string>
     <string name="height_invalid">请确保你的身高在 50 - 250 厘米之间。</string>
 
+    <string name="collection_empty">你还没有收藏任何帖子。</string>
+
     <string-array name="spinner_options">
         <item>营养</item>
         <item>运动</item>

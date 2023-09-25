@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.healthbuddy.AddUserDataViewPagerAdapter
 import com.example.healthbuddy.databinding.FragmentAddUserDataBinding
@@ -29,6 +31,23 @@ class AddUserDataFragment : Fragment() {
         val top = binding.layoutTop
         val bottom = binding.layoutBottom
         top.lineHeader.setBackgroundColor(Color.TRANSPARENT)
+
+        // Make cards clickable
+        top.iconSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_add_to_settings)
+        }
+        bottom.cardForum.setOnClickListener {
+            findNavController().navigate(R.id.action_add_to_forum)
+        }
+        bottom.cardNutrition.setOnClickListener {
+            findNavController().navigate(R.id.action_add_to_nutrition)
+        }
+        bottom.cardExercise.setOnClickListener {
+            findNavController().navigate(R.id.action_add_to_exercise)
+        }
+        bottom.cardAccount.setOnClickListener {
+            findNavController().navigate(R.id.action_add_to_account)
+        }
 
         // Initialize the ViewPager adapter
         postViewPagerAdapter = AddUserDataViewPagerAdapter(requireActivity())

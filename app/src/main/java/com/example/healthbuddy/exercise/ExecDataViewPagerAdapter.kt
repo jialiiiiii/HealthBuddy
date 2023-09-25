@@ -10,7 +10,7 @@ class ExecDataViewPagerAdapter(fragmentActivity: FragmentActivity) :
         return when (position) {
             0 -> AnalysisExecFragment()
             1 -> SuggestExecFragment()
-            2 -> AnalysisExecFragment()
+            2 -> ExecCollectionFragment()
             else -> AnalysisExecFragment()
         }
     }

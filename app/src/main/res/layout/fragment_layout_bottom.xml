@@ -42,15 +42,23 @@
                     android:layout_marginEnd="@dimen/margin_left_right_footer"
                     app:srcCompat="@drawable/ic_forum_outlined" />
 
-                <TextView
-                    android:id="@+id/text_forum"
+                <HorizontalScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/dm_sans_medium"
-                    android:gravity="center"
-                    android:text="@string/forum"
-                    android:textColor="@color/light_green"
-                    android:textSize="@dimen/font_size_label" />
+                    android:scrollbars="none">
+
+                    <TextView
+                        android:id="@+id/text_forum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/dm_sans_medium"
+                        android:gravity="center"
+                        android:text="@string/forum"
+                        android:textColor="@color/light_green"
+                        android:textSize="@dimen/font_size_label" />
+
+                </HorizontalScrollView>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -194,14 +202,22 @@
                     android:layout_marginEnd="@dimen/margin_left_right_footer"
                     app:srcCompat="@drawable/ic_account_outlined" />
 
-                <TextView
-                    android:id="@+id/text_account"
+                <HorizontalScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/dm_sans_medium"
-                    android:text="@string/account"
-                    android:textColor="@color/light_green"
-                    android:textSize="@dimen/font_size_label" />
+                    android:scrollbars="none">
+
+                    <TextView
+                        android:id="@+id/text_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/dm_sans_medium"
+                        android:text="@string/account"
+                        android:textColor="@color/light_green"
+                        android:textSize="@dimen/font_size_label" />
+
+                </HorizontalScrollView>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

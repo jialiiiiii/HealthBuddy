@@ -42,6 +42,8 @@
     <string name="weight_invalid">Sila pastikan berat anda antara 20 - 500 kg.</string>
     <string name="height_invalid">Sila pastikan ketinggian anda antara 50 - 250 cm.</string>
 
+    <string name="collection_empty">Anda belum mengumpul sebarang siaran lagi.</string>
+
     <string-array name="spinner_options">
         <item>Pemakanan</item>
         <item>Senaman</item>

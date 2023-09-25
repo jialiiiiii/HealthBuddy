@@ -44,6 +44,8 @@
     <string name="weight_invalid">Please ensure your weight is between 20 - 500 kg.</string>
     <string name="height_invalid">Please ensure your height is between 50 - 250 cm.</string>
 
+    <string name="collection_empty">You have not collected any posts yet.</string>
+
     <string-array name="spinner_options">
         <item>Nutrition</item>
         <item>Exercise</item>

@@ -1,4 +1,4 @@
-package com.example.healthbuddy.com.example.healthbuddy.settings
+package com.example.healthbuddy.settings
 
 import android.content.Context
 import android.graphics.Bitmap

@@ -47,13 +47,13 @@ class AccountFragment : Fragment() {
             findNavController().navigate(R.id.action_account_to_forum)
         }
         bottom.cardNutrition.setOnClickListener {
-
+            findNavController().navigate(R.id.action_account_to_nutrition)
         }
         bottom.cardAdd.setOnClickListener {
-
+            findNavController().navigate(R.id.action_account_to_add)
         }
         bottom.cardExercise.setOnClickListener {
-
+            findNavController().navigate(R.id.action_account_to_exercise)
         }
 
         // Set up tab layouts
