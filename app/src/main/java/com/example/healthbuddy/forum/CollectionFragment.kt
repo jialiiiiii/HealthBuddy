@@ -171,11 +171,12 @@ class CollectionFragment : Fragment() {
 
     private fun getItemData() {
         db = FirebaseDatabase.getInstance().getReference("Collections")
-       // val userId = sharedPreferences.getString("userId", "") ?: ""
-        val userId = "5rQ0XILjLtT7B8VEsTVA3ScdLx82"
+        val userId = sharedPreferences.getString("userId", "") ?: ""
+        //val userId = "5rQ0XILjLtT7B8VEsTVA3ScdLx82"
 
         db.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                Log.i("Testing123", "postIdssss = $dataSnapshot")
                 if (dataSnapshot.exists()) {
                     val collection = dataSnapshot.getValue(Collection::class.java)
                     val postIds: ArrayList<String>? = collection?.postId
@@ -183,7 +184,7 @@ class CollectionFragment : Fragment() {
                     // Check if the user has any posts in their collection
                     if (!postIds.isNullOrEmpty()) {
 
-                        Log.i("Testing", "postIdssss = $postIds")
+
 
                         // Get one post
                         for (postId in postIds) {
@@ -218,7 +219,7 @@ class CollectionFragment : Fragment() {
                                                 Log.i("Apa ini",nodePath.toString())
 
                                                 // Set where you wanna go here
-                                                findNavController().navigate(R.id.action_collectionFragment_to_forumDetailsFragment22,bundle)
+                                               findNavController().navigate(R.id.action_collectionFragment_to_forumDetailsFragment2,bundle)
                                             }
                                         })
 
