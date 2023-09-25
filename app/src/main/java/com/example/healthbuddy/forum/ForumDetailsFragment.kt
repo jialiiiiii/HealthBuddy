@@ -55,7 +55,6 @@ class ForumDetailsFragment : Fragment() {
         userId = sharedPreferences.getString("userId", "") ?: ""
 
         if (nodeId != "") {
-            Log.i("APA INI???",nodeId)
             displayData()
         }
 
@@ -63,12 +62,11 @@ class ForumDetailsFragment : Fragment() {
         val bookMark = binding.bookMark
         bookMark.setOnCheckedChangeListener { checkBox, isChecked ->
             if (isChecked) {
-               // if (setBookmark(true)) {
-                    //Log.i("Ten Jia Kii", "Hello")
+                if (setBookmark(true)) {
                     Toast.makeText(context, "You added to your collection!", Toast.LENGTH_SHORT)
                         .show()
-                setBookmark(true)
-                //}
+                    setBookmark(true)
+                }
             } else {
                 //if (setBookmark(false)) {
                     Toast.makeText(context, "You removed from your collection!", Toast.LENGTH_SHORT)
