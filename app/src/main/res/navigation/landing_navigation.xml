@@ -88,6 +88,9 @@
         <action
             android:id="@+id/action_forumFragment2_to_addPostFragment"
             app:destination="@id/addPostFragment" />
+        <action
+            android:id="@+id/action_forumFragment2_to_editPostFragment2"
+            app:destination="@id/editPostFragment2" />
     </fragment>
     <fragment
         android:id="@+id/collectionFragment"
@@ -106,4 +109,8 @@
         android:id="@+id/addPostFragment"
         android:name="com.example.healthbuddy.post.AddPostFragment"
         android:label="AddPostFragment" />
+    <fragment
+        android:id="@+id/editPostFragment2"
+        android:name="com.example.healthbuddy.post.EditPostFragment"
+        android:label="EditPostFragment" />
 </navigation>

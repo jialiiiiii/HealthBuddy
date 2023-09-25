@@ -136,7 +136,8 @@ class ForumFragment : Fragment() {
                             bundle.putString("post_id",nodePath)
                            // findNavController().navigate(R.id.action_forumFragment3_to_forumDetailsFragment2, bundle)
                             //findNavController().navigate(R.id.action_forumFragment2_to_collectionFragment, bundle)
-                            findNavController().navigate(R.id.action_forumFragment2_to_addPostFragment, bundle)
+                           // findNavController().navigate(R.id.action_forumFragment2_to_addPostFragment, bundle)
+                            findNavController().navigate(R.id.action_forumFragment2_to_editPostFragment2, bundle)
 
                             // Testing
                             //findNavController().navigate(R.id.action_forumFragment2_to_forumDetailsFragment2,bundle)

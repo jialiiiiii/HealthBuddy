@@ -80,7 +80,7 @@
                     android:layout_marginBottom="15dp"
                     android:background="@color/spinner_background"
                     android:inputType="text"
-                    android:text="Title" />
+                    android:text="" />
 
             </androidx.cardview.widget.CardView>
 
@@ -117,7 +117,7 @@
                     android:layout_marginBottom="15dp"
                     android:background="@color/spinner_background"
                     android:inputType="text"
-                    android:text="Description" />
+                    android:text="" />
 
             </androidx.cardview.widget.CardView>
 
@@ -195,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/inside_box_margin_left_right"
                     android:backgroundTint="@color/secondary_button"
-                    android:text="SAVE"
+                    android:text="CANCEL"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/createPost_button"

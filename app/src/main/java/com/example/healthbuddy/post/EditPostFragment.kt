@@ -12,14 +12,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.healthbuddy.R
+import com.example.healthbuddy.com.example.healthbuddy.forum.ForumFragment
 import com.example.healthbuddy.database.Post
 import com.example.healthbuddy.databinding.FragmentEditPostBinding
 import com.example.healthbuddy.databinding.FragmentPostBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.io.ByteArrayOutputStream
@@ -61,7 +65,7 @@ class EditPostFragment : Fragment() {
                 parent: AdapterView<*>?, view: View?, position: Int, id: Long
             ) {
                 val selectedItem = parent?.getItemAtPosition(position).toString()
-                binding.postTag.text = selectedItem
+              //  binding.postTag.text = selectedItem
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -94,6 +98,7 @@ class EditPostFragment : Fragment() {
         return binding.root
     }
 
+
     private val ActivityResultLauncher = registerForActivityResult<Intent, ActivityResult>(
         ActivityResultContracts.StartActivityForResult()
     )
@@ -110,6 +115,7 @@ class EditPostFragment : Fragment() {
                 binding.postImg.setImageBitmap(myBitmap)
                 inputStream!!.close()
                 Toast.makeText(context, "Image Selected", Toast.LENGTH_SHORT).show()
+
             } catch (ex: Exception) {
                 Toast.makeText(context, ex.message.toString(), Toast.LENGTH_SHORT).show()
             }
@@ -117,28 +123,53 @@ class EditPostFragment : Fragment() {
     }
 
     private fun deleteData() {
-        db = FirebaseDatabase.getInstance().getReference("Posts")
-        db.child(nodeId).removeValue().addOnSuccessListener {
-            binding.postTagSpinner.setSelection(-1)
-            binding.titleText.text.clear()
-            binding.descriptionText.text.clear()
-            sImage = ""
-            binding.postImg.setImageBitmap(null)
-            binding.savePostButton.visibility = View.INVISIBLE
-            binding.delPostButton.visibility = View.INVISIBLE
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.setTitle("Confirm Deletion")
+        alertDialogBuilder.setMessage("Are you sure you want to delete this post?")
+        alertDialogBuilder.setPositiveButton("Delete") { _, _ ->
+            // User confirmed deletion
+            db = FirebaseDatabase.getInstance().getReference("Posts")
+            db.child(nodeId).removeValue().addOnSuccessListener {
+                binding.postTagSpinner.setSelection(-1)
+                binding.titleText.text.clear()
+                binding.descriptionText.text.clear()
+                sImage = ""
+                binding.postImg.setImageBitmap(null)
+                binding.savePostButton.visibility = View.INVISIBLE
+                binding.delPostButton.visibility = View.INVISIBLE
 
-            Toast.makeText(context, "Post Deleted!", Toast.LENGTH_SHORT).show()
-        }.addOnFailureListener() {
-            Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Post Deleted!", Toast.LENGTH_SHORT).show()
+            }.addOnFailureListener { exception ->
+                Toast.makeText(context, "Failed to delete post: ${exception.message}", Toast.LENGTH_SHORT).show()
+            }
         }
+        alertDialogBuilder.setNegativeButton("Cancel") { dialog, _ ->
+            // User canceled deletion
+            dialog.dismiss()
+        }
+
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
+
 
     private fun updateData() {
         val userId = sharedPreferences.getString("userId", "")
-
-        val tag = binding.postTag.text.toString()
+        val tag = binding.postTagSpinner.selectedItem.toString()
+       // val tag = binding.postTag.text.toString()
         val title = binding.titleText.text.toString()
         val description = binding.descriptionText.text.toString()
+
+        // Check if any of the fields are empty
+        if (title.isEmpty() || description.isEmpty()) {
+            if (title.isEmpty()) {
+                binding.titleText.error = "Title cannot be empty"
+            }
+            if (description.isEmpty()) {
+                binding.descriptionText.error = "Description cannot be empty"
+            }
+            return // Exit the function without adding the post
+        }
 
         db = FirebaseDatabase.getInstance().getReference("Posts")
         val post = Post(tag, title, description, sImage, userId)
@@ -152,6 +183,7 @@ class EditPostFragment : Fragment() {
             binding.delPostButton.visibility = View.INVISIBLE
 
             Toast.makeText(context, "Post Updated!", Toast.LENGTH_SHORT).show()
+
         }.addOnFailureListener {
             Toast.makeText(context, "Fail to update post!", Toast.LENGTH_SHORT).show()
         }
@@ -159,12 +191,13 @@ class EditPostFragment : Fragment() {
 
     private fun displayData() {
         db = FirebaseDatabase.getInstance().getReference("Posts")
-        db.child(nodeId).get().addOnSuccessListener {
-            if (it.exists()) {
-                binding.postTag.setText(it.child("postTag").value.toString())
-                binding.titleText.setText(it.child("postTitle").value.toString())
-                binding.descriptionText.setText(it.child("postDescription").value.toString())
-                sImage = it.child("postImage").value.toString()
+        db.child(nodeId).get().addOnSuccessListener { dataSnapshot ->
+            if (dataSnapshot.exists()) {
+                val postTag = dataSnapshot.child("postTag").value.toString()
+                binding.postTagSpinner.setSelection(getIndexOfValue(binding.postTagSpinner, postTag))
+                binding.titleText.setText(dataSnapshot.child("postTitle").value.toString())
+                binding.descriptionText.setText(dataSnapshot.child("postDescription").value.toString())
+                sImage = dataSnapshot.child("postImage").value.toString()
                 val bytes = Base64.decode(sImage, Base64.DEFAULT)
                 val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
                 binding.postImg.setImageBitmap(bitmap)
@@ -173,4 +206,15 @@ class EditPostFragment : Fragment() {
             }
         }
     }
+
+    private fun getIndexOfValue(spinner: Spinner, value: String): Int {
+        val adapter = spinner.adapter
+        for (i in 0 until adapter.count) {
+            if (adapter.getItem(i).toString() == value) {
+                return i
+            }
+        }
+        return 0 // Default to the first item if not found
+    }
+
 }
