@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.healthbuddy.R
 import com.example.healthbuddy.databinding.FragmentExecDataBinding
@@ -33,7 +35,28 @@ class NutriDataFragment : Fragment() {
 
         val top = binding.layoutTop
         val bottom = binding.layoutBottom
+
+        // Change icon and text color
+        bottom.iconNutrition.setImageResource(R.drawable.ic_nutrition_filled)
+        bottom.textNutrition.setTextColor(ContextCompat.getColor(requireContext(), R.color.dark_green))
         top.lineHeader.setBackgroundColor(Color.TRANSPARENT)
+
+        // Make cards clickable
+        top.iconSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_nutrition_to_settings)
+        }
+        bottom.cardForum.setOnClickListener {
+            findNavController().navigate(R.id.action_nutrition_to_forum)
+        }
+        bottom.cardAdd.setOnClickListener {
+            findNavController().navigate(R.id.action_nutrition_to_add)
+        }
+        bottom.cardExercise.setOnClickListener {
+            findNavController().navigate(R.id.action_nutrition_to_exercise)
+        }
+        bottom.cardAccount.setOnClickListener {
+            findNavController().navigate(R.id.action_nutrition_to_account)
+        }
 
         // Bind the TabLayout and ViewPager
         tabLayout = binding.postLayout

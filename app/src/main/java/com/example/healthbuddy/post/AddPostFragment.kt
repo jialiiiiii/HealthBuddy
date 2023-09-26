@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +17,11 @@ import androidx.fragment.app.Fragment
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.example.healthbuddy.R
 import com.example.healthbuddy.database.Post
 import com.example.healthbuddy.databinding.FragmentAddPostBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.io.ByteArrayOutputStream
@@ -29,8 +32,8 @@ class AddPostFragment : Fragment() {
     private lateinit var db: DatabaseReference
     var sImage: String? = ""
     private lateinit var sharedPreferences: SharedPreferences
-    var bookMark: String? = "No"
 
+    private var isImageSelected = false
     private val ActivityResultLauncher = registerForActivityResult<Intent, ActivityResult>(
         ActivityResultContracts.StartActivityForResult()
     ) { result: ActivityResult ->
@@ -46,12 +49,20 @@ class AddPostFragment : Fragment() {
                 sImage = Base64.encodeToString(bytes, Base64.DEFAULT)
                 binding.postImg.setImageBitmap(myBitmap)
                 inputStream!!.close()
-                Toast.makeText(context, "Image Selected", Toast.LENGTH_SHORT).show()
+                isImageSelected = true
+
             } catch (ex: Exception) {
                 Toast.makeText(context, ex.message.toString(), Toast.LENGTH_SHORT).show()
             }
+        } else {
+            // No image selected, set sImage to an empty string
+            sImage = ""
+            isImageSelected = false
+
+
         }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -78,7 +89,7 @@ class AddPostFragment : Fragment() {
                 parent: AdapterView<*>?, view: View?, position: Int, id: Long
             ) {
                 val selectedItem = parent?.getItemAtPosition(position).toString()
-                binding.postTag.text = selectedItem
+                //binding.postTag.text = selectedItem
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) { // Do nothing
@@ -95,15 +106,33 @@ class AddPostFragment : Fragment() {
             addPost()
         }
 
+        binding.cancelButton.setOnClickListener(){
+            findNavController().navigateUp()
+        }
+
         return root
     }
 
     private fun addPost() {
         val userId = sharedPreferences.getString("userId", "")
-
-        val tag = binding.postTag.text.toString()
+        val tag = binding.postTagSpinner.selectedItem.toString()
         val title = binding.titleText.text.toString()
         val description = binding.descriptionText.text.toString()
+
+        // Check if any of the fields are empty
+        if (title.isEmpty() || description.isEmpty()|| !isImageSelected) {
+            if (title.isEmpty()) {
+                binding.titleText.error = getString(R.string.title_empty)
+            }
+            if (description.isEmpty()) {
+                binding.descriptionText.error = getString(R.string.description_empty)
+            }
+            if(!isImageSelected){
+                // Show a Snackbar message here to indicate that no image is selected
+                Snackbar.make(requireView(), getString(R.string.image_empty), Snackbar.LENGTH_SHORT).show()
+            }
+            return // Exit the function without adding the post
+        }
 
         db = FirebaseDatabase.getInstance().getReference("Posts")
 
@@ -117,9 +146,10 @@ class AddPostFragment : Fragment() {
             binding.descriptionText.text.clear()
             sImage = ""
             binding.postImg.setImageBitmap(null)
-            Toast.makeText(context, "Post Created!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.post_created), Toast.LENGTH_SHORT).show()
         }.addOnFailureListener {
-            Toast.makeText(context, "Fail to create post!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.post_failed), Toast.LENGTH_SHORT).show()
         }
     }
+
 }

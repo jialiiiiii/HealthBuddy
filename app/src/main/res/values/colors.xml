@@ -14,15 +14,13 @@
     <color name="light_green">#FF7EB175</color>
     <color name="leaf_green">#FF5ABA4A</color>
     <color name="leaf_green_55">#8A5ABA4A</color>
-    <color name="lighter_green">#FFC8E5C3</color>
+    <color name="lighter_green">#FFE0F0DD</color>
     <color name="button_green">#FF57C331</color>
     <color name="disclaimer_green">#FF8CB086</color>
 
     <color name="background">#F3F8F2</color>
     <color name="box">#E0F0DD</color>
     <color name="forum">#E0F0DD</color>
-    <color name="text">#9FD696</color>
-    <color name="selected_text">#5ABA4A</color>
     <color name="title">#2F5329</color>
     <color name="spinner_background">#FBFFFB</color>
 

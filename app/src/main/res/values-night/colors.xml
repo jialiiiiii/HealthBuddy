@@ -9,30 +9,27 @@
     <color name="white">#FFFFFF</color>
 
     <!--darker dark_green-->
-    <color name="bg_green">#FF061C04</color>
+    <color name="bg_green">#041201</color>
     <!--lighter_green-->
-    <color name="dark_green">#FFC8E5C3</color>
-
-    <color name="dark_green_55">#8A2F5329</color>
-    <color name="light_green">#FF7EB175</color>
-    <color name="leaf_green">#FF5ABA4A</color>
-    <color name="leaf_green_55">#8A5ABA4A</color>
-    <color name="lighter_green">#FFC8E5C3</color>
+    <color name="dark_green">#C7EBC0</color>
+    <color name="dark_green_55">#8AC7EBC0</color>
+    <color name="light_green">#7EB175</color>
+    <!--lighter leaf_green-->
+    <color name="leaf_green">#83C977</color>
+    <color name="leaf_green_55">#8A83C977</color>
+    <color name="lighter_green">#0D3207</color>
     <color name="button_green">#FF57C331</color>
-    <color name="disclaimer_green">#FF8CB086</color>
+    <color name="disclaimer_green">#7EB175</color>
 
-    <color name="background">#F3F8F2</color>
-    <color name="box">#E0F0DD</color>
-    <color name="forum">#E0F0DD</color>
-    <color name="text">#9FD696</color>
-    <color name="selected_text">#5ABA4A</color>
-    <color name="title">#2F5329</color>
-    <color name="spinner_background">#FBFFFB</color>
+    <color name="background">#041201</color>
+    <color name="box">#0D3207</color>
+    <color name="forum">#0D3207</color>
+    <color name="title">#C7EBC0</color>
+    <color name="spinner_background">#2C5F24</color>
 
     <color name="primary_button">#57C331</color>
     <color name="secondary_button">#7F7F7F</color>
     <color name="danger_button">#ED4D4D</color>
 
     <color name="transparent">#00FFFFFF</color>
-
 </resources>

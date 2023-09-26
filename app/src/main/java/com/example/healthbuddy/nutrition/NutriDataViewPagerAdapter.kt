@@ -10,7 +10,7 @@ class NutriDataViewPagerAdapter(fragmentActivity: FragmentActivity) :
         return when (position) {
             0 -> AnalysisNutriFragment()
             1 -> SuggestMealFragment()
-            2 -> AnalysisNutriFragment()
+            2 -> NutriCollectionFragment()
             else -> AnalysisNutriFragment()
         }
     }

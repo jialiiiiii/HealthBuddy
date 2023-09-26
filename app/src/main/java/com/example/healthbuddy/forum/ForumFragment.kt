@@ -63,16 +63,16 @@ class ForumFragment : Fragment() {
 
         // Make cards clickable
         top.iconSettings.setOnClickListener {
-
+            findNavController().navigate(R.id.action_forum_to_settings)
         }
         bottom.cardNutrition.setOnClickListener {
-
+            findNavController().navigate(R.id.action_forum_to_nutrition)
         }
         bottom.cardAdd.setOnClickListener {
-
+            findNavController().navigate(R.id.action_forum_to_add)
         }
         bottom.cardExercise.setOnClickListener {
-
+            findNavController().navigate(R.id.action_forum_to_exercise)
         }
         bottom.cardAccount.setOnClickListener {
             findNavController().navigate(R.id.action_forum_to_account)
@@ -93,7 +93,7 @@ class ForumFragment : Fragment() {
         binding.postList.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
         // Add item decoration for spacing
-        val itemDecoration = RecyclerViewItemDecoration(15, 2)
+        val itemDecoration = RecyclerViewItemDecoration(12, 1)
         binding.postList.addItemDecoration(itemDecoration)
 
         binding.postList.hasFixedSize()
@@ -134,14 +134,8 @@ class ForumFragment : Fragment() {
 
                             val bundle = Bundle()
                             bundle.putString("post_id",nodePath)
-                           // findNavController().navigate(R.id.action_forumFragment3_to_forumDetailsFragment2, bundle)
-//                            findNavController().navigate(R.id.action_forumFragment3_to_collectionFragment, bundle)
 
-                            // Testing
-                            //findNavController().navigate(R.id.action_forumFragment2_to_forumDetailsFragment2,bundle)
-//                            findNavController().navigate(R.id.action_forumFragment2_to_editPostFragment2,bundle)
-//                            findNavController().navigate(R.id.action_forumFragment2_to_addPostFragment2,bundle)
-//                            findNavController().navigate(R.id.action_forumFragment2_to_collectionFragment,bundle)
+                            findNavController().navigate(R.id.action_forum_to_forum_details, bundle)
                         }
                     })
                 }

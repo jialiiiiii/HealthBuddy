@@ -1,149 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg_green"
-    tools:context=".post.AddPostFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <include
-        android:id="@+id/layoutTop"
-        layout="@layout/fragment_layout_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="970dp"
+            tools:context=".post.AddPostFragment">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/post_type_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/box_height"
+                app:cardBackgroundColor="@color/box"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="@dimen/box_margin_top"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:id="@+id/postTag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/inside_box_margin_left_right"
+                    android:layout_marginTop="@dimen/inside_box_margin_top"
+                    android:layout_marginRight="@dimen/inside_box_margin_left_right"
+                    android:layout_marginBottom="@dimen/text_margin_bottom"
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/font_size_normal"
+                    android:fontFamily="@font/dm_sans"
+                    android:text="@string/tag" />
+
+                <Spinner
+                    android:id="@+id/postTag_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/postTag"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_spinner"
+                    android:spinnerMode="dropdown"
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/font_size_normal"
+                    android:layout_marginLeft="@dimen/inside_box_margin_left_right"
+                    android:layout_marginTop="@dimen/inside_box_margin_top"
+                    android:layout_marginRight="@dimen/inside_box_margin_left_right"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/post_title_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/post_type_box"
+                android:minHeight="@dimen/box_height"
+                app:cardBackgroundColor="@color/box"
+                app:layout_constraintTop_toBottomOf="@+id/post_type_box"
+                android:layout_marginTop="@dimen/box_margin_top"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:id="@+id/postTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/inside_box_margin_left_right"
+                    android:layout_marginTop="@dimen/inside_box_margin_top"
+                    android:layout_marginRight="@dimen/inside_box_margin_left_right"
+                    android:layout_marginBottom="@dimen/text_margin_bottom"
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/font_size_normal"
+                    android:fontFamily="@font/dm_sans"
+                    android:text="@string/title" />
+
+                <EditText
+                    android:id="@+id/title_Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="61dp"
+                    android:layout_below="@+id/postTitle"
+                    android:layout_marginLeft="@dimen/inside_box_margin_left_right"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginRight="@dimen/inside_box_margin_left_right"
+                    android:layout_marginBottom="15dp"
+                    android:background="@color/spinner_background"
+                    android:inputType="text"
+                    android:text="" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/post_desc_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/post_title_box"
+                android:minHeight="@dimen/box_height"
+                app:cardBackgroundColor="@color/box"
+                app:layout_constraintTop_toBottomOf="@+id/post_title_box"
+                android:layout_marginTop="@dimen/box_margin_top"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:id="@+id/postDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/inside_box_margin_left_right"
+                    android:layout_marginTop="@dimen/inside_box_margin_top"
+                    android:layout_marginRight="@dimen/inside_box_margin_left_right"
+                    android:layout_marginBottom="@dimen/text_margin_bottom"
+                    android:text="Description" />
+
+                <EditText
+                    android:id="@+id/description_Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="61dp"
+                    android:layout_below="@+id/postDesc"
+                    android:layout_marginLeft="@dimen/inside_box_margin_left_right"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginRight="@dimen/inside_box_margin_left_right"
+                    android:layout_marginBottom="15dp"
+                    android:background="@color/spinner_background"
+                    android:inputType="text"
+                    android:text="" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/post_image_box"
+                android:layout_width="match_parent"
+                android:layout_height="950px"
+                android:minHeight="@dimen/box_height"
+                app:cardBackgroundColor="@color/box"
+                app:layout_constraintTop_toBottomOf="@+id/post_desc_box"
+                tools:layout_editor_absoluteX="16dp"
+                android:layout_marginTop="@dimen/box_margin_top"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:id="@+id/postImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/inside_box_margin_left_right"
+                    android:layout_marginTop="@dimen/inside_box_margin_top"
+                    android:layout_marginRight="@dimen/inside_box_margin_left_right"
+                    android:layout_marginBottom="@dimen/text_margin_bottom"
+                    android:text="@string/image" />
 
 
-    <EditText
-        android:id="@+id/title_Text"
-        android:layout_width="334dp"
-        android:layout_height="34dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Title"
-        app:layout_constraintBottom_toBottomOf="@+id/postTitle"
-        app:layout_constraintTop_toTopOf="@+id/postTitle"
-        tools:layout_editor_absoluteX="42dp" />
+                <ImageView
+                    android:id="@+id/postImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="70dp"
+                    android:layout_marginRight="75dp"
+                    app:layout_constraintBottom_toTopOf="@+id/selectImg_button"
+                    app:layout_constraintTop_toTopOf="@+id/postImage"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:layout_editor_absoluteX="78dp"
+                    tools:src="@tools:sample/avatars" />
 
-    <EditText
-        android:id="@+id/description_Text"
-        android:layout_width="337dp"
-        android:layout_height="123dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Description"
-        app:layout_constraintBottom_toBottomOf="@+id/postDesc"
-        app:layout_constraintTop_toTopOf="@+id/postDesc"
-        tools:layout_editor_absoluteX="45dp" />
+                <Button
+                    android:id="@+id/selectImg_button"
+                    android:layout_width="189dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="300dp"
+                    android:backgroundTint="@color/spinner_background"
+                    android:text="Select Image"
+                    android:textColor="@color/title"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
 
-    <Button
-        android:id="@+id/delPost_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:text="DELETE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postImage"
-        app:layout_constraintVertical_bias="0.516"
-        android:visibility="invisible"/>
+                <!-- The guideline is positioned at the center of the ConstraintLayout
+                    with a layout_constraintGuide_percent value of 0.5, which means it's at
+                    50% of the parent's width.-->
 
-    <TextView
-        android:id="@+id/postTag"
-        android:layout_width="363dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="72dp"
-        android:text="Tag"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/postTitle"
-        android:layout_width="364dp"
-        android:layout_height="76dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="32dp"
-        android:text="Title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postTag" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                app:layout_constraintTop_toBottomOf="@+id/post_image_box"
+                android:layout_marginTop="50dp">
 
-    <TextView
-        android:id="@+id/postDesc"
-        android:layout_width="365dp"
-        android:layout_height="176dp"
-        android:layout_marginTop="20dp"
-        android:text="Description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postTitle" />
+                <Button
+                    android:id="@+id/cancel_button"
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/inside_box_margin_left_right"
+                    android:backgroundTint="@color/secondary_button"
+                    android:text="CANCEL"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/createPost_button"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
-    <Spinner
-        android:id="@+id/postTag_spinner"
-        android:layout_width="337dp"
-        android:layout_height="39dp"
-        app:layout_constraintBottom_toBottomOf="@+id/postTag"
-        app:layout_constraintTop_toTopOf="@+id/postTag"
-        tools:layout_editor_absoluteX="42dp" />
+                <Button
+                    android:id="@+id/createPost_button"
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/inside_box_margin_left_right"
+                    android:layout_marginRight="@dimen/inside_box_margin_left_right"
+                    android:backgroundTint="@color/primary_button"
+                    android:text="CREATE"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/cancel_button"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/savePost_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:text="SAVE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postImage"
-        app:layout_constraintVertical_bias="0.516"
-        android:visibility="invisible"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/postImg"
-        android:layout_width="289dp"
-        android:layout_height="127dp"
-        app:layout_constraintBottom_toTopOf="@+id/selectImg_button"
-        app:layout_constraintTop_toTopOf="@+id/postImage"
-        app:layout_constraintVertical_bias="0.625"
-        tools:layout_editor_absoluteX="61dp"
-        tools:src="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/postImage"
-        android:layout_width="367dp"
-        android:layout_height="215dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
-        android:text="Image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postDesc" />
-
-    <Button
-        android:id="@+id/selectImg_button"
-        android:layout_width="142dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="4dp"
-        android:text="Select Image"
-        app:layout_constraintBottom_toBottomOf="@+id/postImage"
-        app:layout_constraintEnd_toEndOf="@+id/postImage"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="@+id/postImage" />
-
-    <Button
-        android:id="@+id/createPost_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CREATE"
-        android:background="@color/button_green"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/savePost_button"
-        app:layout_constraintStart_toEndOf="@+id/delPost_button"
-        app:layout_constraintTop_toBottomOf="@+id/postImage" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

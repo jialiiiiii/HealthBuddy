@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/termsAndConditionsFragment"
-        android:name="com.example.healthbuddy.com.example.healthbuddy.settings.TermsAndConditionsFragment"
+        android:name="com.example.healthbuddy.settings.TermsAndConditionsFragment"
         android:label="TermsAndConditionsFragment" />
     <fragment
         android:id="@+id/privacyPolicyFragment"

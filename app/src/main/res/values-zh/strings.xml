@@ -24,8 +24,22 @@
     <string name="about">关于</string>
     <string name="theme">主题</string>
     <string name="language">语言</string>
+    <string name="author">作者</string>
+    <string name="tag">标签</string>
+    <string name="title">标题</string>
+    <string name="description">描述</string>
+    <string name="image">图片</string>
 
     <!-- Message -->
+    <string name="title_empty">标题不能为空</string>
+    <string name="description_empty">描述不能为空</string>
+    <string name="image_empty">请选择图片</string>
+    <string name="post_created">帖子已创建！</string>
+    <string name="post_failed">创建帖子失败！</string>
+
+    <string name="add_collection">帖子已添加到你的收藏中！</string>
+    <string name="remove_collection">帖子已从你的收藏中删除！</string>
+
     <string name="signing_out">登出</string>
     <string name="sign_out_msg">你确定要登出吗？</string>
     <string name="confirm_sign_out">登出</string>
@@ -41,6 +55,8 @@
     <string name="age_invalid">请确保你的年龄在 10 - 100 岁之间。</string>
     <string name="weight_invalid">请确保你的体重在 20 - 500 公斤之间。</string>
     <string name="height_invalid">请确保你的身高在 50 - 250 厘米之间。</string>
+
+    <string name="collection_empty">你还没有收藏任何帖子。</string>
 
     <string-array name="spinner_options">
         <item>营养</item>

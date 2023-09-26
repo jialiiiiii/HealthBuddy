@@ -8,6 +8,7 @@
     <dimen name="font_size_normal">14sp</dimen>
 <!--    width/height-->
     <dimen name="width_height_icon">35dp</dimen>
+    <dimen name="width_height_icon_bookmark">45dp</dimen>
     <dimen name="width_height_icon_large">75dp</dimen>
     <dimen name="width_height_icon_large_land">70dp</dimen>
     <dimen name="width_header">55dp</dimen>
@@ -26,13 +27,13 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <!--  Post Design  -->
-    <dimen name="box_height">90dp</dimen>
+    <dimen name="box_height">0dp</dimen>
     <dimen name="box_margin_left_right">15dp</dimen>
     <dimen name="box_margin_top">30dp</dimen>
     <dimen name="spinner_height">48dp</dimen>
-    <dimen name="inside_box_margin_top">8dp</dimen>
+    <dimen name="inside_box_margin_top">5dp</dimen>
     <dimen name="inside_box_margin_left_right">8dp</dimen>
-    <dimen name="text_margin_bottom">70dp</dimen>
+    <dimen name="text_margin_bottom">60dp</dimen>
     <dimen name="button_width">110dp</dimen>
 
     <dimen name="graph_left_margin">40dp</dimen>
