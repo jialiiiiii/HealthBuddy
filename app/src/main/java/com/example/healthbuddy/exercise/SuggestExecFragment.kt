@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,6 @@ import com.example.healthbuddy.post.RecyclerViewItemDecoration
 import com.example.healthbuddy.post.tempData
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 class SuggestExecFragment : Fragment() {
@@ -54,12 +54,12 @@ class SuggestExecFragment : Fragment() {
         nodeList = arrayListOf<tempData>()
 
         // Retrieve and update data for the RecyclerView
-        retrieveData()
+        retrieveAndSortData()
 
         return binding.root
     }
 
-    private fun retrieveData() {
+    private fun retrieveAndSortData() {
         val db = FirebaseDatabase.getInstance().getReference("Exercises")
 
         db.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -81,8 +81,27 @@ class SuggestExecFragment : Fragment() {
                     exerciseList.add(suggestion)
                 }
 
+                // Retrieve favorite meal IDs from SharedPreferences
+                val favoritePostIds = sharedPreferences.getStringSet("favoriteExecIds", mutableSetOf()) ?: mutableSetOf()
+
+                // Sort the exerciseList based on favorite status
+                val sortedList = exerciseList.sortedWith(Comparator { suggestion1, suggestion2 ->
+                    val isFavorite1 = favoritePostIds.contains(suggestion1.postId)
+                    val isFavorite2 = favoritePostIds.contains(suggestion2.postId)
+
+                    // Sort favorites first, non-favorites last
+                    if (isFavorite1 && !isFavorite2) {
+                        -1
+                    } else if (!isFavorite1 && isFavorite2) {
+                        1
+                    } else {
+                        // If both are favorites or both are non-favorites, maintain their original order
+                        0
+                    }
+                })
+
                 // Update the adapter with the retrieved data
-                execSuggestAdapter.updateData(exerciseList)
+                execSuggestAdapter.updateData(sortedList)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

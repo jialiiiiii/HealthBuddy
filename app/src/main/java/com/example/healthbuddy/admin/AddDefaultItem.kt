@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.healthbuddy.database.Post
 import com.example.healthbuddy.database.Suggestion
+import com.example.healthbuddy.database.Suggestionss
 import com.example.healthbuddy.databinding.FragmentAddDefaultExecBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -79,7 +80,7 @@ class AddDefaultExec : Fragment() {
 //        db = FirebaseDatabase.getInstance().getReference("Exercises")
         db = FirebaseDatabase.getInstance().getReference("Nutritions")
 
-        val post = Suggestion(title, description, sImage)
+        val post = Suggestionss(title, description, sImage)
         val databaseReference = FirebaseDatabase.getInstance().reference
         val id = databaseReference.push().key
 

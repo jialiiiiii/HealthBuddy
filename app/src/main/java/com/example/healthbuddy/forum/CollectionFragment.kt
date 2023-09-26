@@ -218,7 +218,7 @@ class CollectionFragment : Fragment() {
                                                 Log.i("Apa ini",nodePath.toString())
 
                                                 // Set where you wanna go here
-                                                findNavController().navigate(R.id.action_collectionFragment_to_forumDetailsFragment22,bundle)
+//                                                findNavController().navigate(R.id.action_collectionFragment_to_forumDetailsFragment22,bundle)
                                             }
                                         })
 

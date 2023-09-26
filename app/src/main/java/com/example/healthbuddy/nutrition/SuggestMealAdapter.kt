@@ -8,6 +8,7 @@ import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,10 +20,13 @@ class SuggestMealAdapter (
     private val suggestions: MutableList<Suggestion>
 ) : RecyclerView.Adapter<SuggestMealAdapter.ViewHolder>() {
 
+    private val sharedPreferences = context.getSharedPreferences("HealthBuddyPrefs", Context.MODE_PRIVATE)
+    private val editor = sharedPreferences.edit()
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleTextView: TextView = itemView.findViewById(R.id.nutri_title)
         val descriptionTextView: TextView = itemView.findViewById(R.id.nutri_desc)
         val imageView: ImageView = itemView.findViewById(R.id.nutri_img)
+        val starBtn: ImageButton = itemView.findViewById(R.id.nutri_star)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -64,6 +68,28 @@ class SuggestMealAdapter (
         }
 
         holder.imageView.setImageBitmap(suggestion.postImage)
+
+        // Check if the post is a favorite and set the starBtn accordingly
+        val favoritePostIds = sharedPreferences.getStringSet("favoriteMealIds", mutableSetOf()) ?: mutableSetOf()
+        holder.starBtn.isSelected = favoritePostIds.contains(suggestion.postId.toString())
+
+
+        // Check if the post is a favorite and set the appropriate image drawable
+        if (favoritePostIds.contains(suggestion.postId.toString())) {
+            // The post is a favorite, set the filled heart icon
+            holder.starBtn.setImageResource(R.drawable.ic_star_filled)
+        } else {
+            // The post is not a favorite, set the outline heart icon
+            holder.starBtn.setImageResource(R.drawable.ic_star_outlined)
+        }
+
+        holder.starBtn.setOnClickListener {
+            val position = holder.adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                val post = suggestions[position]
+                toggleFavorite(suggestion.postId.toString(), holder.starBtn)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -75,5 +101,35 @@ class SuggestMealAdapter (
         suggestions.clear()
         suggestions.addAll(newData)
         notifyDataSetChanged()
+    }
+
+    private fun toggleFavorite(postId: String, starBtn: ImageButton) {
+        val favoritePostIds = sharedPreferences.getStringSet("favoriteMealIds", mutableSetOf()) ?: mutableSetOf()
+
+        if (favoritePostIds.contains(postId)) {
+            // Toggle off
+            favoritePostIds.remove(postId)
+            editor.putStringSet("favoriteMealIds", favoritePostIds)
+            editor.apply()
+
+            // Remove
+            editor.remove("favoriteMealIds").commit()
+            editor.putStringSet("favoriteMealIds", favoritePostIds).commit()
+            editor.apply()
+
+            starBtn.setImageResource(R.drawable.ic_star_outlined)
+        } else {
+            // Toggle on
+            favoritePostIds.add(postId)
+            editor.putStringSet("favoriteMealIds", favoritePostIds)
+            editor.apply()
+
+            // Remove
+            editor.remove("favoriteMealIds").commit()
+            editor.putStringSet("favoriteMealIds", favoritePostIds).commit()
+            editor.apply()
+
+            starBtn.setImageResource(R.drawable.ic_star_filled)
+        }
     }
 }

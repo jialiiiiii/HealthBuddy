@@ -129,8 +129,8 @@ class UpdateNutriFragment : DialogFragment(), AdapterView.OnItemSelectedListener
         updateTimeButtonText(time)
 
         // Set click listeners for date and time buttons using ViewBinding
-        binding.datePickerButton.setOnClickListener { showDatePicker(calendarDate, date) }
-        binding.timePickerButton.setOnClickListener { showTimePicker(calendarTime, time) }
+        binding.datePickerButton.setOnClickListener { showDatePicker(calendarDate) }
+        binding.timePickerButton.setOnClickListener { showTimePicker(calendarTime) }
 
         binding.sizeSeekBar.min = 5
         binding.sizeSeekBar.max = 500
@@ -275,7 +275,7 @@ class UpdateNutriFragment : DialogFragment(), AdapterView.OnItemSelectedListener
         Toast.makeText(requireContext(), R.string.update_nutri_success, Toast.LENGTH_SHORT).show()
     }
 
-    private fun showDatePicker(calendar: Calendar, date: String) {
+    private fun showDatePicker(calendar: Calendar) {
         val datePickerDialog = DatePickerDialog(
             requireContext(),
             R.style.CustomPickerDialog,
@@ -283,7 +283,7 @@ class UpdateNutriFragment : DialogFragment(), AdapterView.OnItemSelectedListener
                 calendar.set(Calendar.YEAR, year)
                 calendar.set(Calendar.MONTH, month)
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                updateDateButtonText(date)
+                updateDateButtonTextCal(calendar)
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
@@ -303,14 +303,14 @@ class UpdateNutriFragment : DialogFragment(), AdapterView.OnItemSelectedListener
         datePickerDialog.show()
     }
 
-    private fun showTimePicker(calendar: Calendar, time: String) {
+    private fun showTimePicker(calendar: Calendar) {
         val timePickerDialog = TimePickerDialog(
             requireContext(),
             R.style.CustomPickerDialog, // Apply your custom dialog style here
             { _, hourOfDay, minute ->
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
                 calendar.set(Calendar.MINUTE, minute)
-                updateTimeButtonText(time)
+                updateTimeButtonTextCal(calendar)
             },
             calendar.get(Calendar.HOUR_OF_DAY),
             calendar.get(Calendar.MINUTE),
@@ -328,6 +328,16 @@ class UpdateNutriFragment : DialogFragment(), AdapterView.OnItemSelectedListener
         }
 
         timePickerDialog.show()
+    }
+
+    private fun updateDateButtonTextCal(calendar: Calendar) {
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        binding.datePickerButton.text = dateFormat.format(calendar.time)
+    }
+
+    private fun updateTimeButtonTextCal(calendar: Calendar) {
+        val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        binding.timePickerButton.text = timeFormat.format(calendar.time)
     }
 
     private fun updateDateButtonText(date: String) {

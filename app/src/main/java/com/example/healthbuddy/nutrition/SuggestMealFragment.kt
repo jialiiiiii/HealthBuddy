@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,12 +56,12 @@ class SuggestMealFragment : Fragment() {
         nodeList = arrayListOf<tempData>()
 
         // Retrieve and update data for the RecyclerView
-        retrieveData()
+        retrieveAndSortData()
 
         return binding.root
     }
 
-    private fun retrieveData() {
+    private fun retrieveAndSortData() {
         val db = FirebaseDatabase.getInstance().getReference("Nutritions")
 
         db.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -82,8 +83,27 @@ class SuggestMealFragment : Fragment() {
                     exerciseList.add(suggestion)
                 }
 
-                // Update the adapter with the retrieved data
-                mealSuggestionAdapter.updateData(exerciseList)
+                // Retrieve favorite meal IDs from SharedPreferences
+                val favoritePostIds = sharedPreferences.getStringSet("favoriteMealIds", mutableSetOf()) ?: mutableSetOf()
+
+                // Sort the exerciseList based on favorite status
+                val sortedList = exerciseList.sortedWith(Comparator { suggestion1, suggestion2 ->
+                    val isFavorite1 = favoritePostIds.contains(suggestion1.postId)
+                    val isFavorite2 = favoritePostIds.contains(suggestion2.postId)
+
+                    // Sort favorites first, non-favorites last
+                    if (isFavorite1 && !isFavorite2) {
+                        -1
+                    } else if (!isFavorite1 && isFavorite2) {
+                        1
+                    } else {
+                        // If both are favorites or both are non-favorites, maintain their original order
+                        0
+                    }
+                })
+
+                // Update the adapter with the sorted data
+                mealSuggestionAdapter.updateData(sortedList)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
