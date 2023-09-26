@@ -26,8 +26,22 @@
     <string name="about">About</string>
     <string name="theme">Theme</string>
     <string name="language">Language</string>
+    <string name="author">Author</string>
+    <string name="tag">Tag</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="image">Image</string>
 
     <!-- Message -->
+    <string name="title_empty">Title cannot be empty</string>
+    <string name="description_empty">Description cannot be empty</string>
+    <string name="image_empty">Please select an image</string>
+    <string name="post_created">Post Created!</string>
+    <string name="post_failed">Fail to create post!</string>
+
+    <string name="add_collection">Post added to your collection!</string>
+    <string name="remove_collection">Post removed from your collection!</string>
+
     <string name="signing_out">Signing Out</string>
     <string name="sign_out_msg">Are you sure to sign out?</string>
     <string name="confirm_sign_out">Sign Out</string>

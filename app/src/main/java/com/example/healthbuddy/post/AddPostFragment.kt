@@ -32,7 +32,6 @@ class AddPostFragment : Fragment() {
     private lateinit var db: DatabaseReference
     var sImage: String? = ""
     private lateinit var sharedPreferences: SharedPreferences
-    var bookMark: String? = "No"
 
     private var isImageSelected = false
     private val ActivityResultLauncher = registerForActivityResult<Intent, ActivityResult>(
@@ -50,7 +49,6 @@ class AddPostFragment : Fragment() {
                 sImage = Base64.encodeToString(bytes, Base64.DEFAULT)
                 binding.postImg.setImageBitmap(myBitmap)
                 inputStream!!.close()
-                Toast.makeText(context, "Image Selected", Toast.LENGTH_SHORT).show()
                 isImageSelected = true
 
             } catch (ex: Exception) {
@@ -124,14 +122,14 @@ class AddPostFragment : Fragment() {
         // Check if any of the fields are empty
         if (title.isEmpty() || description.isEmpty()|| !isImageSelected) {
             if (title.isEmpty()) {
-                binding.titleText.error = "Title cannot be empty"
+                binding.titleText.error = getString(R.string.title_empty)
             }
             if (description.isEmpty()) {
-                binding.descriptionText.error = "Description cannot be empty"
+                binding.descriptionText.error = getString(R.string.description_empty)
             }
             if(!isImageSelected){
                 // Show a Snackbar message here to indicate that no image is selected
-                Snackbar.make(requireView(), "Please select an image", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(requireView(), getString(R.string.image_empty), Snackbar.LENGTH_SHORT).show()
             }
             return // Exit the function without adding the post
         }
@@ -148,9 +146,9 @@ class AddPostFragment : Fragment() {
             binding.descriptionText.text.clear()
             sImage = ""
             binding.postImg.setImageBitmap(null)
-            Toast.makeText(context, "Post Created!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.post_created), Toast.LENGTH_SHORT).show()
         }.addOnFailureListener {
-            Toast.makeText(context, "Fail to create post!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.post_failed), Toast.LENGTH_SHORT).show()
         }
     }
 

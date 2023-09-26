@@ -32,18 +32,24 @@
                     android:layout_marginTop="@dimen/inside_box_margin_top"
                     android:layout_marginRight="@dimen/inside_box_margin_left_right"
                     android:layout_marginBottom="@dimen/text_margin_bottom"
-                    android:text="Post Type" />
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/font_size_normal"
+                    android:fontFamily="@font/dm_sans"
+                    android:text="@string/tag" />
 
                 <Spinner
                     android:id="@+id/postTag_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/spinner_height"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/postTag"
                     android:layout_gravity="center"
+                    android:background="@drawable/bg_spinner"
+                    android:spinnerMode="dropdown"
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/font_size_normal"
                     android:layout_marginLeft="@dimen/inside_box_margin_left_right"
                     android:layout_marginTop="@dimen/inside_box_margin_top"
-                    android:layout_marginRight="@dimen/inside_box_margin_left_right"
-                    android:background="@color/spinner_background" />
+                    android:layout_marginRight="@dimen/inside_box_margin_left_right"/>
 
             </androidx.cardview.widget.CardView>
 
@@ -67,7 +73,10 @@
                     android:layout_marginTop="@dimen/inside_box_margin_top"
                     android:layout_marginRight="@dimen/inside_box_margin_left_right"
                     android:layout_marginBottom="@dimen/text_margin_bottom"
-                    android:text="Post Title" />
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/font_size_normal"
+                    android:fontFamily="@font/dm_sans"
+                    android:text="@string/title" />
 
                 <EditText
                     android:id="@+id/title_Text"
@@ -141,7 +150,7 @@
                     android:layout_marginTop="@dimen/inside_box_margin_top"
                     android:layout_marginRight="@dimen/inside_box_margin_left_right"
                     android:layout_marginBottom="@dimen/text_margin_bottom"
-                    android:text="Image" />
+                    android:text="@string/image" />
 
 
                 <ImageView
@@ -177,7 +186,6 @@
                 <!-- The guideline is positioned at the center of the ConstraintLayout
                     with a layout_constraintGuide_percent value of 0.5, which means it's at
                     50% of the parent's width.-->
-
 
             </androidx.cardview.widget.CardView>
 
