@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +30,7 @@ class SuggestMealFragment : Fragment() {
     private lateinit var postArrayList: ArrayList<Post>
     private lateinit var nodeList: ArrayList<tempData>
     private lateinit var mealSuggestionAdapter: SuggestMealAdapter // Add this adapter
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +38,7 @@ class SuggestMealFragment : Fragment() {
     ): View? {
         // Inflate view and obtain an instance of the binding class
         binding = FragmentMealSuggestionBinding.inflate(inflater, container, false)
+        progressBar = binding.progressBar
 
         // Initialize the adapter with an empty list
         mealSuggestionAdapter = SuggestMealAdapter(requireContext(), mutableListOf())
@@ -104,10 +107,15 @@ class SuggestMealFragment : Fragment() {
 
                 // Update the adapter with the sorted data
                 mealSuggestionAdapter.updateData(sortedList)
+                // Hide the progress bar when data retrieval is complete
+                progressBar.visibility = View.GONE
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
                 // Handle error
+
+                // Hide the progress bar in case of an error
+                progressBar.visibility = View.GONE
             }
         })
     }

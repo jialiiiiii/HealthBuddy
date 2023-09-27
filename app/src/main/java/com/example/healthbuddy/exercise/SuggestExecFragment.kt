@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +28,7 @@ class SuggestExecFragment : Fragment() {
     private lateinit var postArrayList: ArrayList<Post>
     private lateinit var nodeList: ArrayList<tempData>
     private lateinit var execSuggestAdapter: SuggestExecAdapter // Add this adapter
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +36,7 @@ class SuggestExecFragment : Fragment() {
     ): View? {
         // Inflate view and obtain an instance of the binding class
         binding = FragmentExecSuggestionBinding.inflate(inflater, container, false)
+        progressBar = binding.progressBar
 
         // Initialize the adapter with an empty list
         execSuggestAdapter = SuggestExecAdapter(requireContext(), mutableListOf())
@@ -102,10 +105,16 @@ class SuggestExecFragment : Fragment() {
 
                 // Update the adapter with the retrieved data
                 execSuggestAdapter.updateData(sortedList)
+
+                // Hide the progress bar when data retrieval is complete
+                progressBar.visibility = View.GONE
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
                 // Handle error
+
+                // Hide the progress bar in case of an error
+                progressBar.visibility = View.GONE
             }
         })
     }
