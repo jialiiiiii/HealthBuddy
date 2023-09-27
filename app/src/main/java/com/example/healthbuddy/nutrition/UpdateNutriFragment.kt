@@ -19,14 +19,14 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.healthbuddy.R
 import com.example.healthbuddy.database.UserNutritionData
-import com.example.healthbuddy.databinding.FragmentAddNutriBinding
+import com.example.healthbuddy.databinding.FragmentUpdateNutriBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 class UpdateNutriFragment : DialogFragment(), AdapterView.OnItemSelectedListener {
     // hold the View Binding instance for your fragment
-    private var _binding: FragmentAddNutriBinding? = null
+    private var _binding: FragmentUpdateNutriBinding? = null
     // custom getter to access the View Binding instance
     private val binding get() = _binding!!
 
@@ -46,7 +46,7 @@ class UpdateNutriFragment : DialogFragment(), AdapterView.OnItemSelectedListener
         savedInstanceState: Bundle?
     ): View? {
         // Replace the layout inflating code with ViewBinding
-        _binding = FragmentAddNutriBinding.inflate(inflater, container, false)
+        _binding = FragmentUpdateNutriBinding.inflate(inflater, container, false)
         val view = binding.root
 
         // Set the dialog as a full-screen dialog
@@ -60,6 +60,9 @@ class UpdateNutriFragment : DialogFragment(), AdapterView.OnItemSelectedListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Apply the custom style to the dialog fragment
+        setStyle(STYLE_NORMAL, R.style.CustomDialogFragmentStyle)
 
         // Initialize ViewModel
         nutriDataViewModel = ViewModelProvider(this).get(NutriDataViewModel::class.java)
@@ -361,7 +364,7 @@ class UpdateNutriFragment : DialogFragment(), AdapterView.OnItemSelectedListener
             1 -> foodTypeArr = R.array.vegetables_selection
             2 -> foodTypeArr = R.array.grains_selection
             3 -> foodTypeArr = R.array.protein_foods_selection
-            4 -> foodTypeArr = R.array.grains_selection
+            4 -> foodTypeArr = R.array.dairy_selection
         }
 
         // Store the selected position in foodTypeSpinner

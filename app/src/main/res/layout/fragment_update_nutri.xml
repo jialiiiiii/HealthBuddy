@@ -13,14 +13,14 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="match_parent"
             tools:context=".exercise.AddExecFragment">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/nutrition_category_box"
+                android:id="@+id/food_category_box"
                 app:cardBackgroundColor="@color/box"
                 android:minHeight="@dimen/box_height"
                 android:layout_marginLeft="@dimen/box_margin_left_right"
@@ -28,7 +28,7 @@
                 android:layout_marginTop="@dimen/box_margin_top">
 
                 <TextView
-                    android:id="@+id/nutrition_category"
+                    android:id="@+id/food_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/food_category"
@@ -39,11 +39,11 @@
                     />
 
                 <Spinner
-                    android:id="@+id/nutrition_category_spinner"
+                    android:id="@+id/food_category_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/spinner_height"
                     android:layout_gravity="center"
-                    android:layout_below="@+id/nutrition_category"
+                    android:layout_below="@+id/food_category"
                     android:layout_marginLeft="@dimen/inside_box_margin_left_right"
                     android:layout_marginRight="@dimen/inside_box_margin_left_right"
                     android:layout_marginTop="@dimen/inside_box_margin_top"
@@ -55,16 +55,16 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/nutrition_type_box"
+                android:id="@+id/food_type_box"
                 app:cardBackgroundColor="@color/box"
                 android:minHeight="@dimen/box_height"
                 android:layout_marginLeft="@dimen/box_margin_left_right"
                 android:layout_marginRight="@dimen/box_margin_left_right"
                 android:layout_marginTop="@dimen/box_margin_top"
-                android:layout_below="@id/nutrition_category_box">
+                android:layout_below="@id/food_category_box">
 
                 <TextView
-                    android:id="@+id/nutrition_type"
+                    android:id="@+id/food_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/food_type"
@@ -75,11 +75,11 @@
                     />
 
                 <Spinner
-                    android:id="@+id/nutrition_type_spinner"
+                    android:id="@+id/food_type_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/spinner_height"
                     android:layout_gravity="center"
-                    android:layout_below="@+id/nutrition_type"
+                    android:layout_below="@+id/food_type"
                     android:layout_marginLeft="@dimen/inside_box_margin_left_right"
                     android:layout_marginRight="@dimen/inside_box_margin_left_right"
                     android:layout_marginTop="@dimen/inside_box_margin_top"
@@ -92,13 +92,13 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/duration_box"
+                android:id="@+id/size_box"
                 app:cardBackgroundColor="@color/box"
                 android:minHeight="@dimen/box_height"
                 android:layout_marginLeft="@dimen/box_margin_left_right"
                 android:layout_marginRight="@dimen/box_margin_left_right"
                 android:layout_marginTop="@dimen/box_margin_top"
-                android:layout_below="@id/nutrition_type_box">
+                android:layout_below="@id/food_type_box">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -114,25 +114,26 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/duration"
+                            android:id="@+id/size"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/duration"
+                            android:text="@string/size_per_serving"
                             android:paddingRight="@dimen/inside_box_margin_left_right"
                             />
 
                         <TextView
-                            android:id="@+id/duration_value"
+                            android:id="@+id/size_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="5"
                             android:layout_centerVertical="true"
                             />
 
                         <TextView
-                            android:id="@+id/mins"
+                            android:id="@+id/grams"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/duration_mins"
+                            android:text="@string/size_grams"
                             android:layout_centerVertical="true"
                             android:paddingLeft="@dimen/inside_box_margin_left_right"
                             />
@@ -140,7 +141,7 @@
                     </LinearLayout>
 
                     <SeekBar
-                        android:id="@+id/duration_seek_bar"
+                        android:id="@+id/size_seek_bar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -153,11 +154,11 @@
                         android:layout_marginBottom="@dimen/inside_box_margin_top">
 
                         <TextView
-                            android:id="@+id/duration_start"
+                            android:id="@+id/size_start"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
-                            android:text="@string/duration_start"
+                            android:text="@string/size_start"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
@@ -166,11 +167,11 @@
                             app:layout_constraintVertical_bias="0.0" />
 
                         <TextView
-                            android:id="@+id/duration_end"
+                            android:id="@+id/size_end"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:text="@string/duration_end"
+                            android:text="@string/size_end"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="1.0"
@@ -184,19 +185,19 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/set_box"
+                android:id="@+id/serving_box"
                 app:cardBackgroundColor="@color/box"
                 android:minHeight="@dimen/box_height"
                 android:layout_marginLeft="@dimen/box_margin_left_right"
                 android:layout_marginRight="@dimen/box_margin_left_right"
                 android:layout_marginTop="@dimen/box_margin_top"
-                android:layout_below="@id/duration_box">
+                android:layout_below="@id/size_box">
 
                 <TextView
-                    android:id="@+id/set"
+                    android:id="@+id/serving_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/set"
+                    android:text="@string/serving_size"
                     android:layout_marginLeft="@dimen/inside_box_margin_left_right"
                     android:layout_marginRight="@dimen/inside_box_margin_left_right"
                     android:layout_marginTop="@dimen/inside_box_margin_top"
@@ -204,7 +205,7 @@
                     />
 
                 <Spinner
-                    android:id="@+id/nutrition_set_spinner"
+                    android:id="@+id/serving_size_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/spinner_height"
                     android:layout_gravity="center"
@@ -220,16 +221,16 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/nutrition_date_and_time_box"
+                android:id="@+id/serving_date_and_time_box"
                 app:cardBackgroundColor="@color/box"
                 android:minHeight="@dimen/box_height"
                 android:layout_marginLeft="@dimen/box_margin_left_right"
                 android:layout_marginRight="@dimen/box_margin_left_right"
                 android:layout_marginTop="@dimen/box_margin_top"
-                android:layout_below="@id/set_box">
+                android:layout_below="@id/serving_box">
 
                 <TextView
-                    android:id="@+id/nutrition_date_and_time"
+                    android:id="@+id/serving_date_and_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/date_and_time"
@@ -300,7 +301,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/inside_box_margin_top"
                 android:layout_marginTop="@dimen/box_margin_top"
-                android:layout_below="@id/nutrition_date_and_time_box">
+                android:layout_below="@id/serving_date_and_time_box">
 
                 <Button
                     android:id="@+id/cancel_button"
@@ -332,6 +333,8 @@
                     app:layout_constraintVertical_bias="0.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </RelativeLayout>
     </ScrollView>
 </layout>
