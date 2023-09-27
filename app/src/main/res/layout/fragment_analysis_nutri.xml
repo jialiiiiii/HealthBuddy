@@ -26,7 +26,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="@dimen/graph_top_margin"/>
+                android:layout_marginTop="@dimen/graph_top_margin"
+                android:textColor="@color/dark_green"
+                android:textSize="@dimen/font_size_normal"
+                android:fontFamily="@font/dm_sans"/>
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/nutri_graph"
@@ -49,7 +52,10 @@
                 android:rotation="270"
                 android:text="@string/cal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/dark_green"
+                android:textSize="@dimen/font_size_normal"
+                android:fontFamily="@font/dm_sans"/>
 
             <TextView
                 android:id="@+id/day"
@@ -71,7 +77,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/day"
-                app:layout_constraintTop_toBottomOf="@+id/nutri_graph" />
+                app:layout_constraintTop_toBottomOf="@+id/nutri_graph"
+                android:textColor="@color/dark_green"
+                android:textSize="@dimen/font_size_normal"
+                android:fontFamily="@font/dm_sans"/>
 
             <TextView
                 android:id="@+id/no_data"
@@ -83,7 +92,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nutri_graph" />
+                app:layout_constraintTop_toBottomOf="@+id/nutri_graph"
+                android:textColor="@color/dark_green"
+                android:textSize="@dimen/font_size_normal"
+                android:fontFamily="@font/dm_sans"/>
 
             <FrameLayout
                 android:id="@+id/fragment_container"
@@ -91,6 +103,7 @@
                 android:layout_height="match_parent" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="10dp"
                 android:id="@+id/nutri_analysis_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

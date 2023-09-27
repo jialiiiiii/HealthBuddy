@@ -4,13 +4,12 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healthbuddy.R
 import com.example.healthbuddy.database.UserNutritionData
 import android.content.res.Resources
-import android.util.Log
+import android.widget.ImageView
 
 class NutriAnalysisAdapter(private val resources: Resources) : RecyclerView.Adapter<NutriAnalysisAdapter.NutriDataViewHolder>() {
 
@@ -80,7 +79,7 @@ class NutriAnalysisAdapter(private val resources: Resources) : RecyclerView.Adap
         val foodTypeSelected: TextView = itemView.findViewById<TextView>(R.id.food_type_selected)
         val foodCategorySelected: TextView = itemView.findViewById<TextView>(R.id.food_category_selected)
         val caloriesGained: TextView = itemView.findViewById<TextView>(R.id.calories_gained)
-        val deleteBtn: ImageButton = itemView.findViewById<ImageButton>(R.id.delete_btn)
-        val editBtn: ImageButton = itemView.findViewById<ImageButton>(R.id.edit_btn)
+        val deleteBtn: ImageView = itemView.findViewById<ImageView>(R.id.delete_btn)
+        val editBtn: ImageView = itemView.findViewById<ImageView>(R.id.edit_btn)
     }
 }

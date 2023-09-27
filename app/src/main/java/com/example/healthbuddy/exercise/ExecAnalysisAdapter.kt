@@ -1,12 +1,10 @@
 package com.example.healthbuddy.exercise
 
-import ExecDataFragment
-import android.app.AlertDialog
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healthbuddy.R
@@ -77,7 +75,7 @@ class ExecAnalysisAdapter(private val resources: Resources) : RecyclerView.Adapt
         val exerciseTypeSelected: TextView = itemView.findViewById<TextView>(R.id.exercise_type_selected)
         val exerciseCategorySelected: TextView = itemView.findViewById<TextView>(R.id.exercise_category_selected)
         val caloriesBurnt: TextView = itemView.findViewById<TextView>(R.id.calories_burnt)
-        val deleteBtn: ImageButton = itemView.findViewById<ImageButton>(R.id.delete_btn)
-        val editBtn: ImageButton = itemView.findViewById<ImageButton>(R.id.edit_btn)
+        val deleteBtn: ImageView = itemView.findViewById<ImageView>(R.id.delete_btn)
+        val editBtn: ImageView = itemView.findViewById<ImageView>(R.id.edit_btn)
     }
 }

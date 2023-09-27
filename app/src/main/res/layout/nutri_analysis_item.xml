@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="187dp"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
@@ -20,12 +20,15 @@
             android:layout_marginLeft="@dimen/box_margin_left_right"
             android:layout_marginBottom="@dimen/date_time_bottom_margin"
             android:layout_marginTop="@dimen/inside_box_margin_top"
+            android:textColor="@color/dark_green"
+            android:textSize="@dimen/font_size_normal"
+            android:fontFamily="@font/dm_sans"
             android:text="10-08-2023, 6:00 PM" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/exercise_category_box"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/card_height"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/box_margin_left_right"
             android:layout_marginRight="@dimen/box_margin_left_right"
             android:minHeight="@dimen/box_height"
@@ -33,7 +36,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/food_category"
@@ -42,20 +45,27 @@
                     android:layout_marginLeft="@dimen/inside_box_margin_left_right"
                     android:layout_marginTop="@dimen/inside_box_margin_top"
                     android:layout_marginRight="@dimen/inside_box_margin_left_right"
-                    android:layout_marginBottom="@dimen/text_margin_bottom"
                     android:text="@string/food_category"
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/font_size_normal"
+                    android:fontFamily="@font/dm_sans"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/food_category_selected"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/data_height"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/font_size_normal"
+                    android:fontFamily="@font/dm_sans"
                     android:layout_marginLeft="@dimen/inside_box_margin_left_right"
-                    android:layout_marginTop="@dimen/inside_box_margin_top"
+                    android:layout_marginTop="8dp"
                     android:background="@color/spinner_background"
-                    android:paddingLeft="@dimen/inside_box_margin_left_right"
-                    android:paddingTop="@dimen/inside_box_margin_top"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="5dp"
                     android:text="Fruit"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/food_category"
@@ -68,21 +78,30 @@
                     android:layout_marginLeft="@dimen/inside_box_margin_left_right"
                     android:layout_marginTop="@dimen/inside_box_margin_top"
                     android:layout_marginRight="@dimen/inside_box_margin_left_right"
-                    android:layout_marginBottom="@dimen/text_margin_bottom"
                     android:text="@string/food_type"
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/font_size_normal"
+                    android:fontFamily="@font/dm_sans"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/food_category_selected" />
 
                 <TextView
                     android:id="@+id/food_type_selected"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/data_height"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/inside_box_margin_left_right"
-                    android:layout_marginTop="@dimen/inside_box_margin_top"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="@dimen/inside_box_margin_left_right"
                     android:background="@color/spinner_background"
-                    android:paddingLeft="@dimen/inside_box_margin_left_right"
-                    android:paddingTop="@dimen/inside_box_margin_top"
+                    android:fontFamily="@font/dm_sans"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="5dp"
                     android:text="Apple"
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/font_size_normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/food_type"
                     app:layout_constraintWidth_percent="0.7" />
@@ -91,33 +110,37 @@
                     android:id="@+id/calories_gained"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/font_size_normal"
+                    android:fontFamily="@font/dm_sans_medium"
+                    android:textStyle="bold"
                     android:text="+ 75 calories"
                     android:layout_marginTop="@dimen/inside_box_margin_top"
                     android:layout_marginRight="@dimen/inside_box_margin_left_right"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/delete_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="@dimen/inside_box_margin_left_right"
+                    android:background="@color/transparent"
+                    app:layout_constraintBottom_toBottomOf="@+id/edit_btn"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/ic_baseline_delete"
-                    android:background="@color/transparent"
-                    android:layout_marginBottom="@dimen/img_button_margin"
-                    android:layout_marginRight="@dimen/inside_box_margin_left_right" />
+                    app:layout_constraintTop_toTopOf="@+id/edit_btn"
+                    app:srcCompat="@drawable/ic_delete" />
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/edit_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/delete_btn"
-                    app:srcCompat="@drawable/ic_baseline_edit"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="@dimen/inside_box_margin_left_right"
                     android:background="@color/transparent"
-                    android:layout_marginBottom="@dimen/img_button_margin"
-                    android:layout_marginRight="@dimen/inside_box_margin_left_right"/>
+                    app:layout_constraintBottom_toBottomOf="@+id/food_type_selected"
+                    app:layout_constraintEnd_toStartOf="@+id/delete_btn"
+                    app:layout_constraintTop_toTopOf="@+id/food_type_selected"
+                    app:srcCompat="@drawable/ic_edit" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
