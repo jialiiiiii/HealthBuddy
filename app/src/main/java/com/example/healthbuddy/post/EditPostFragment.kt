@@ -18,6 +18,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.example.healthbuddy.R
 import com.example.healthbuddy.com.example.healthbuddy.forum.ForumFragment
 import com.example.healthbuddy.database.Post
@@ -43,6 +44,15 @@ class EditPostFragment : Fragment() {
     ): View? {
         // Inflate view and obtain an instance of the binding class
         binding = FragmentEditPostBinding.inflate(inflater, container, false)
+
+        val top = binding.layoutTop
+        top.iconSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_edit_post_to_settings)
+        }
+
+        binding.imageView.setOnClickListener {
+            activity?.onBackPressed()
+        }
 
         // Initialize shared preferences
         sharedPreferences = requireContext().getSharedPreferences("HealthBuddyPrefs", AppCompatActivity.MODE_PRIVATE)

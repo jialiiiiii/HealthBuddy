@@ -53,7 +53,7 @@ class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
         // Set up exercise category
         binding.exerciseCategorySpinner.onItemSelectedListener = this
 
-        ArrayAdapter.createFromResource(requireContext(), R.array.exer_group, android.R.layout.simple_spinner_item).also{
+        ArrayAdapter.createFromResource(requireContext(), R.array.exer_group, R.layout.spinner_item).also{
                 adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.exerciseCategorySpinner.adapter = adapter
@@ -75,7 +75,7 @@ class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
         })
 
         // Set up set(s) done
-        ArrayAdapter.createFromResource(requireContext(), R.array.times_value, android.R.layout.simple_spinner_item).also{
+        ArrayAdapter.createFromResource(requireContext(), R.array.times_value, R.layout.spinner_item).also{
                 adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.exerciseSetSpinner.adapter = adapter
@@ -279,7 +279,7 @@ class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.durationSeekBar.min = maxValue
         binding.durationSeekBar.max = minValue
 
-        ArrayAdapter.createFromResource(requireContext(), execTypeArr, android.R.layout.simple_spinner_item).also{
+        ArrayAdapter.createFromResource(requireContext(), execTypeArr, R.layout.spinner_item).also{
                 adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.exerciseTypeSpinner.adapter = adapter

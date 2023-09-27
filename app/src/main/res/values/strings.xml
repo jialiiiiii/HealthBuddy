@@ -33,6 +33,9 @@
     <string name="image">Image</string>
 
     <!-- Message -->
+    <string name="select_image">Click to upload image</string>
+    <string name="edit_post">Edit Post</string>
+
     <string name="title_empty">Title cannot be empty</string>
     <string name="description_empty">Description cannot be empty</string>
     <string name="image_empty">Please select an image</string>
@@ -170,7 +173,7 @@
     <!-- Nutrition -->
     <string name="food_category">Food category</string>
     <string name="food_type">Food type</string>
-    <string name="size_per_serving">Size per serving Value:</string>
+    <string name="size_per_serving">Size per serving:</string>
     <string name="size_grams">grams</string>
     <string name="size_start">5 grams</string>
     <string name="size_end">500 grams</string>
@@ -251,6 +254,8 @@
     <string name="select_time">Select time</string>
     <string name="button_cancel">CANCEL</string>
     <string name="button_save">SAVE</string>
+    <string name="button_post">POST</string>
+
     <string-array name="times_value">
         <item>1</item>
         <item>2</item>

@@ -74,7 +74,11 @@
         android:id="@+id/editPostFragment"
         android:name="com.example.healthbuddy.post.EditPostFragment"
         android:label="fragment_edit_post"
-        tools:layout="@layout/fragment_edit_post" />
+        tools:layout="@layout/fragment_edit_post" >
+        <action
+            android:id="@+id/action_edit_post_to_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
     <include app:graph="@navigation/landing_navigation" />
     <fragment
         android:id="@+id/settingsFragment"
@@ -97,7 +101,7 @@
     </fragment>
     <fragment
         android:id="@+id/termsAndConditionsFragment2"
-        android:name="com.example.healthbuddy.com.example.healthbuddy.settings.TermsAndConditionsFragment"
+        android:name="com.example.healthbuddy.settings.TermsAndConditionsFragment"
         android:label="TermsAndConditionsFragment" >
         <action
             android:id="@+id/action_terms_to_settings"

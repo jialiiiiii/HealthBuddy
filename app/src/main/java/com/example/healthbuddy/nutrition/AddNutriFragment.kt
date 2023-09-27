@@ -49,7 +49,7 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
         // Category
         binding.foodCategorySpinner.onItemSelectedListener = this
 
-        ArrayAdapter.createFromResource(requireContext(), R.array.food_group, android.R.layout.simple_spinner_item).also{
+        ArrayAdapter.createFromResource(requireContext(), R.array.food_group, R.layout.spinner_item).also{
                 adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
@@ -73,7 +73,7 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
         })
 
         // Set up serving size
-        ArrayAdapter.createFromResource(requireContext(), R.array.times_value, android.R.layout.simple_spinner_item).also{
+        ArrayAdapter.createFromResource(requireContext(), R.array.times_value, R.layout.spinner_item).also{
                 adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.servingSizeSpinner.adapter = adapter
@@ -290,7 +290,7 @@ class AddNutriFragment : Fragment(), AdapterView.OnItemSelectedListener {
         // Store the selected position in foodTypeSpinner
         foodTypeSelectionPosition = binding.foodTypeSpinner.selectedItemPosition
 
-        ArrayAdapter.createFromResource(requireContext(), foodTypeArr, android.R.layout.simple_spinner_item).also { adapter ->
+        ArrayAdapter.createFromResource(requireContext(), foodTypeArr, R.layout.spinner_item).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
             binding.foodTypeSpinner.adapter = adapter

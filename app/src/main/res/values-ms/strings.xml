@@ -31,6 +31,9 @@
     <string name="image">Imej</string>
 
     <!-- Message -->
+    <string name="select_image">Klik untuk memuat naik imej</string>
+    <string name="edit_post">Sunting Siaran</string>
+
     <string name="title_empty">Tajuk tidak boleh kosong</string>
     <string name="description_empty">Penerangan tidak boleh kosong</string>
     <string name="image_empty">Sila pilih imej</string>
@@ -163,7 +166,7 @@
     <!-- Nutrition -->
     <string name="food_category">Kategori makanan</string>
     <string name="food_type">Jenis makanan</string>
-    <string name="size_per_serving">Saiz setiap hidangan Nilai:</string>
+    <string name="size_per_serving">Saiz setiap hidangan:</string>
     <string name="size_grams">gram</string>
     <string name="size_start">5 gram</string>
     <string name="size_end">500 gram</string>
@@ -244,6 +247,7 @@
     <string name="select_time">Pilih masa</string>
     <string name="button_cancel">BATALKAN</string>
     <string name="button_save">SIMPAN</string>
+    <string name="button_post">SIARKAN</string>
 
     <string name="analysis">Analisis</string>
     <string name="collection">Koleksi</string>

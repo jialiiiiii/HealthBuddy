@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
@@ -51,6 +52,13 @@ class AddPostFragment : Fragment() {
                 inputStream!!.close()
                 isImageSelected = true
 
+                // Change UI
+                binding.selectImgButton.visibility = View.GONE
+                binding.postImg.visibility = View.VISIBLE
+                binding.postImg.setOnClickListener {
+                    binding.selectImgButton.performClick()
+                }
+
             } catch (ex: Exception) {
                 Toast.makeText(context, ex.message.toString(), Toast.LENGTH_SHORT).show()
             }
@@ -78,7 +86,7 @@ class AddPostFragment : Fragment() {
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
-            requireContext(), R.array.spinner_options, android.R.layout.simple_spinner_item
+            requireContext(), R.array.spinner_options, R.layout.spinner_item
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = adapter

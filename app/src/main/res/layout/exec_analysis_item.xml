@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/baseline_delete_24"
+                    app:srcCompat="@drawable/ic_baseline_delete"
                     android:background="@color/transparent"
                     android:layout_marginBottom="@dimen/img_button_margin"
                     android:layout_marginRight="@dimen/inside_box_margin_left_right" />
@@ -114,7 +114,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/delete_btn"
-                    app:srcCompat="@drawable/baseline_mode_edit_outline_24"
+                    app:srcCompat="@drawable/ic_baseline_edit"
                     android:background="@color/transparent"
                     android:layout_marginBottom="@dimen/img_button_margin"
                     android:layout_marginRight="@dimen/inside_box_margin_left_right"/>

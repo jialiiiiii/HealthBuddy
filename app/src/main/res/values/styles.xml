@@ -5,10 +5,16 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/font_size_title</item>
     </style>
+
     <style name="text_tab_selected" parent="@android:style/TextAppearance.Widget.TabWidget">
         <item name="android:fontFamily">@font/dm_sans_medium</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/font_size_title</item>
+    </style>
+
+    <style name="edit_text" parent="@android:style/Widget.EditText">
+        <item name="android:textColor">@color/dark_green</item>
+
     </style>
 
     <style name="CustomPickerDialog" parent="ThemeOverlay.MaterialComponents.Dialog">

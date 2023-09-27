@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    font size-->
+    <!-- font size -->
     <dimen name="font_size_logo">24sp</dimen>
     <dimen name="font_size_trademark">14sp</dimen>
     <dimen name="font_size_title">18sp</dimen>
     <dimen name="font_size_label">16sp</dimen>
     <dimen name="font_size_normal">14sp</dimen>
-<!--    width/height-->
+    <!-- width/height -->
     <dimen name="width_height_icon">35dp</dimen>
     <dimen name="width_height_icon_bookmark">45dp</dimen>
     <dimen name="width_height_icon_large">75dp</dimen>
@@ -16,14 +16,14 @@
     <dimen name="width_footer">80dp</dimen>
     <dimen name="width_footer_land">70dp</dimen>
     <dimen name="width_button_long">130dp</dimen>
-<!--    margin/padding-->
+    <!-- margin/padding -->
     <dimen name="margin_left_right_header">16dp</dimen>
     <dimen name="margin_left_right_footer">24dp</dimen>
     <dimen name="margin_top_icon">10dp</dimen>
     <dimen name="margin_top_icon_land">6dp</dimen>
     <dimen name="margin_left_right_icon">10dp</dimen>
 
-<!--  YeonKee  -->
+    <!--  YeonKee  -->
     <dimen name="fab_margin">16dp</dimen>
 
     <!--  Post Design  -->
@@ -31,8 +31,9 @@
     <dimen name="box_margin_left_right">15dp</dimen>
     <dimen name="box_margin_top">30dp</dimen>
     <dimen name="spinner_height">48dp</dimen>
-    <dimen name="inside_box_margin_top">5dp</dimen>
-    <dimen name="inside_box_margin_left_right">8dp</dimen>
+    <dimen name="inside_box_margin_top">10dp</dimen>
+    <dimen name="inside_box_margin_bottom">12dp</dimen>
+    <dimen name="inside_box_margin_left_right">10dp</dimen>
     <dimen name="text_margin_bottom">60dp</dimen>
     <dimen name="button_width">110dp</dimen>
 
