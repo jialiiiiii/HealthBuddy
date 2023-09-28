@@ -49,8 +49,14 @@ class PrivacyPolicyFragment : Fragment() {
         val sharedPreferences = requireContext().getSharedPreferences("HealthBuddyPrefs", Context.MODE_PRIVATE)
         val selectedLanguage = sharedPreferences.getString("language", "en")
 
+        // Determine the selected theme
+        var selectedTheme = ""
+        if (sharedPreferences.getInt("theme", 0) == 1) {
+            selectedTheme = "_night"
+        }
+
         // Define the file name based on the selected language
-        val fileName = "privacy_policy_$selectedLanguage.html"
+        val fileName = "privacy_policy_$selectedLanguage$selectedTheme.html"
 
         try {
             // Open and read the HTML file from the assets folder

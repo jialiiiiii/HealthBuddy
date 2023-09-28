@@ -249,10 +249,10 @@
     <string name="date_and_time">Tarikh dan masa</string>
     <string name="select_date">Pilih tarikh</string>
     <string name="select_time">Pilih masa</string>
-    <string name="button_cancel">BATALKAN</string>
+    <string name="button_cancel">BATAL</string>
     <string name="button_save">SIMPAN</string>
-    <string name="button_post">SIARKAN</string>
-    <string name="button_delete">PADAMKAN</string>
+    <string name="button_post">SIAR</string>
+    <string name="button_delete">PADAM</string>
 
     <string name="analysis">Analisis</string>
     <string name="collection">Koleksi</string>

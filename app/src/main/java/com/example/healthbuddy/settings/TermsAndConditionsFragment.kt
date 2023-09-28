@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.example.healthbuddy.R
@@ -49,8 +50,14 @@ class TermsAndConditionsFragment : Fragment() {
         val sharedPreferences = requireContext().getSharedPreferences("HealthBuddyPrefs", Context.MODE_PRIVATE)
         val selectedLanguage = sharedPreferences.getString("language", "en")
 
+        // Determine the selected theme
+        var selectedTheme = ""
+        if (sharedPreferences.getInt("theme", 0) == 1) {
+            selectedTheme = "_night"
+        }
+
         // Define the file name based on the selected language
-        val fileName = "terms_and_conditions_$selectedLanguage.html"
+        val fileName = "terms_and_conditions_$selectedLanguage$selectedTheme.html"
 
         try {
             // Open and read the HTML file from the assets folder
