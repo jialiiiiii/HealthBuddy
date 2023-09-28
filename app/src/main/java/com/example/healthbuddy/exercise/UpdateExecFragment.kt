@@ -271,7 +271,7 @@ class UpdateExecFragment  : DialogFragment(), AdapterView.OnItemSelectedListener
 
         dismiss()
 
-        Toast.makeText(requireContext(), "Exercise Data successfully edited.", Toast.LENGTH_SHORT)
+        Toast.makeText(requireContext(), getString(R.string.update_exec_success), Toast.LENGTH_SHORT)
             .show()
     }
 

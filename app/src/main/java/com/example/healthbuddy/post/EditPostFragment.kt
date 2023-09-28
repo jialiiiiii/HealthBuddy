@@ -86,7 +86,6 @@ class EditPostFragment : Fragment() {
         binding.selectImgButton.setOnClickListener() {
             val myfileintent = Intent(Intent.ACTION_GET_CONTENT)
             myfileintent.type = "image/*"
-            // galleryLauncher.launch(myfileintent)
             ActivityResultLauncher.launch(myfileintent)
         }
 
@@ -124,7 +123,13 @@ class EditPostFragment : Fragment() {
                 sImage = Base64.encodeToString(bytes, Base64.DEFAULT)
                 binding.postImg.setImageBitmap(myBitmap)
                 inputStream!!.close()
-                Toast.makeText(context, "Image Selected", Toast.LENGTH_SHORT).show()
+
+                // Change UI
+                binding.selectImgButton.visibility = View.GONE
+                binding.postImg.visibility = View.VISIBLE
+                binding.postImg.setOnClickListener {
+                    binding.selectImgButton.performClick()
+                }
 
             } catch (ex: Exception) {
                 Toast.makeText(context, ex.message.toString(), Toast.LENGTH_SHORT).show()
@@ -134,9 +139,9 @@ class EditPostFragment : Fragment() {
 
     private fun deleteData() {
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
-        alertDialogBuilder.setTitle("Confirm Deletion")
-        alertDialogBuilder.setMessage("Are you sure you want to delete this post?")
-        alertDialogBuilder.setPositiveButton("Delete") { _, _ ->
+        alertDialogBuilder.setTitle(R.string.del_confirmation)
+        alertDialogBuilder.setMessage(R.string.del_confirmation_msg_post)
+        alertDialogBuilder.setPositiveButton(R.string.del_confirm) { _, _ ->
             // User confirmed deletion
             db = FirebaseDatabase.getInstance().getReference("Posts")
             db.child(nodeId).removeValue().addOnSuccessListener {
@@ -148,12 +153,12 @@ class EditPostFragment : Fragment() {
                 binding.savePostButton.visibility = View.INVISIBLE
                 binding.delPostButton.visibility = View.INVISIBLE
 
-                Toast.makeText(context, "Post Deleted!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.post_deleted), Toast.LENGTH_SHORT).show()
             }.addOnFailureListener { exception ->
-                Toast.makeText(context, "Failed to delete post: ${exception.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.post_delete_failed), Toast.LENGTH_SHORT).show()
             }
         }
-        alertDialogBuilder.setNegativeButton("Cancel") { dialog, _ ->
+        alertDialogBuilder.setNegativeButton(R.string.del_cancel) { dialog, _ ->
             // User canceled deletion
             dialog.dismiss()
         }
@@ -173,10 +178,10 @@ class EditPostFragment : Fragment() {
         // Check if any of the fields are empty
         if (title.isEmpty() || description.isEmpty()) {
             if (title.isEmpty()) {
-                binding.titleText.error = "Title cannot be empty"
+                binding.titleText.error = getString(R.string.title_empty)
             }
             if (description.isEmpty()) {
-                binding.descriptionText.error = "Description cannot be empty"
+                binding.descriptionText.error = getString(R.string.description_empty)
             }
             return // Exit the function without adding the post
         }
@@ -192,10 +197,10 @@ class EditPostFragment : Fragment() {
             binding.savePostButton.visibility = View.INVISIBLE
             binding.delPostButton.visibility = View.INVISIBLE
 
-            Toast.makeText(context, "Post Updated!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.post_updated), Toast.LENGTH_SHORT).show()
 
         }.addOnFailureListener {
-            Toast.makeText(context, "Fail to update post!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.post_update_failed), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -211,6 +216,14 @@ class EditPostFragment : Fragment() {
                 val bytes = Base64.decode(sImage, Base64.DEFAULT)
                 val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
                 binding.postImg.setImageBitmap(bitmap)
+
+                // Set UI
+                binding.selectImgButton.visibility = View.GONE
+                binding.postImg.visibility = View.VISIBLE
+                binding.postImg.setOnClickListener {
+                    binding.selectImgButton.performClick()
+                }
+
                 binding.delPostButton.visibility = View.VISIBLE
                 binding.savePostButton.visibility = View.VISIBLE
             }

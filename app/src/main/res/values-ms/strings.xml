@@ -39,6 +39,10 @@
     <string name="image_empty">Sila pilih imej</string>
     <string name="post_created">Siaran Dibuat!</string>
     <string name="post_failed">Gagal membuat siaran!</string>
+    <string name="post_deleted">Siaran Dipadamkan!</string>
+    <string name="post_delete_failed">Gagal memadamkan siaran!</string>
+    <string name="post_updated">Siaran Dikemas Kini!</string>
+    <string name="post_update_failed">Gagal mengemas kini siaran!</string>
 
     <string name="add_collection">Siaran ditambahkan pada koleksi anda!</string>
     <string name="remove_collection">Siaran dialih keluar daripada koleksi anda!</string>
@@ -248,6 +252,7 @@
     <string name="button_cancel">BATALKAN</string>
     <string name="button_save">SIMPAN</string>
     <string name="button_post">SIARKAN</string>
+    <string name="button_delete">PADAMKAN</string>
 
     <string name="analysis">Analisis</string>
     <string name="collection">Koleksi</string>
@@ -259,15 +264,16 @@
     <!-- Messages & Dialog   -->
     <string name="del_confirmation">Pengesahan Padam</string>
     <string name="del_confirmation_msg">Adakah anda pasti ingin memadamkan data ini?</string>
+    <string name="del_confirmation_msg_post">Adakah anda pasti ingin memadamkan siaran ini?</string>
 
-    <string name="del_exec_success">Data Latihan berjaya dipadamkan.</string>
-    <string name="del_nutri_success">Data Pemakanan berjaya dipadamkan.</string>
+    <string name="del_exec_success">Data senaman berjaya dipadamkan.</string>
+    <string name="del_nutri_success">Data pemakanan berjaya dipadamkan.</string>
 
-    <string name="add_exec_success">Data Latihan berjaya ditambah.</string>
-    <string name="add_nutri_success">Data Pemakanan berjaya ditambah.</string>
+    <string name="add_exec_success">Data senaman berjaya ditambah.</string>
+    <string name="add_nutri_success">Data pemakanan berjaya ditambah.</string>
 
-    <string name="update_exec_success">Data Latihan berjaya dikemaskini.</string>
-    <string name="update_nutri_success">Data Pemakanan berjaya dikemaskini.</string>
+    <string name="update_exec_success">Data senaman berjaya dikemaskini.</string>
+    <string name="update_nutri_success">Data pemakanan berjaya dikemaskini.</string>
 
     <string name="del_confirm">PADAM</string>
     <string name="del_cancel">Tidak</string>

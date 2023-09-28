@@ -60,7 +60,6 @@
                         android:background="@drawable/bg_spinner"
                         />
 
-
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

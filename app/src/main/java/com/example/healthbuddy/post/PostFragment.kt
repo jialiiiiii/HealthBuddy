@@ -7,19 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.healthbuddy.R
-import com.example.healthbuddy.com.example.healthbuddy.account.AccountFragment
 import com.example.healthbuddy.database.Post
-import com.example.healthbuddy.databinding.FragmentAddPostBinding
 import com.example.healthbuddy.databinding.FragmentPostBinding
+import com.example.healthbuddy.others.RecyclerViewItemDecoration
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 
 class PostFragment : Fragment() {
@@ -28,7 +25,7 @@ class PostFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var db: DatabaseReference
     private lateinit var postArrayList: ArrayList<Post>
-    private lateinit var nodeList: ArrayList<tempData>
+    private lateinit var nodeList: ArrayList<TempData>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +46,7 @@ class PostFragment : Fragment() {
 
         binding.postList.hasFixedSize()
         postArrayList = arrayListOf<Post>()
-        nodeList = arrayListOf<tempData>()
+        nodeList = arrayListOf<TempData>()
         getItemData()
 
         return binding.root
@@ -75,7 +72,7 @@ class PostFragment : Fragment() {
                             postArrayList.add(post!!)
                             ky = postsnapshot.key.toString()
                             pots = post.postTitle.toString()
-                            val tmppost = tempData(ky, pots)
+                            val tmppost = TempData(ky, pots)
                             nodeList.add(tmppost)
                         }
 
@@ -92,6 +89,9 @@ class PostFragment : Fragment() {
                                 findNavController().navigate(R.id.action_post_to_edit_post, bundle)
                             }
                         })
+
+                        // Hide the progress bar when data retrieval is complete
+                        binding.progressBar.visibility = View.GONE
                     }
                 }
 

@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -16,8 +15,8 @@ import com.example.healthbuddy.database.Collection
 import com.example.healthbuddy.database.Post
 import com.example.healthbuddy.databinding.FragmentNutriCollectionBinding
 import com.example.healthbuddy.post.PostAdapter
-import com.example.healthbuddy.post.RecyclerViewItemDecoration
-import com.example.healthbuddy.post.tempData
+import com.example.healthbuddy.others.RecyclerViewItemDecoration
+import com.example.healthbuddy.post.TempData
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -31,7 +30,7 @@ class NutriCollectionFragment : Fragment() {
     private lateinit var db: DatabaseReference
 
     private lateinit var postArrayList: ArrayList<Post>
-    private lateinit var nodeList: ArrayList<tempData>
+    private lateinit var nodeList: ArrayList<TempData>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +55,7 @@ class NutriCollectionFragment : Fragment() {
 
         binding.postList.hasFixedSize()
         postArrayList = arrayListOf<Post>()
-        nodeList = arrayListOf<tempData>()
+        nodeList = arrayListOf<TempData>()
         getItemData()
 
         return binding.root
@@ -92,7 +91,7 @@ class NutriCollectionFragment : Fragment() {
                                             postArrayList.add(post)
                                             ky = snapshot.key.toString()
                                             pots = post.postTitle.toString()
-                                            val tmppost = tempData(ky, pots)
+                                            val tmppost = TempData(ky, pots)
                                             nodeList.add(tmppost)
 
                                             binding.msg.text = ""
@@ -114,6 +113,9 @@ class NutriCollectionFragment : Fragment() {
                                                 findNavController().navigate(R.id.action_nutrition_collection_to_forum_details, bundle)
                                             }
                                         })
+
+                                        // Hide the progress bar when data retrieval is complete
+                                        binding.progressBar.visibility = View.GONE
                                     }
                                 }
 
@@ -126,10 +128,16 @@ class NutriCollectionFragment : Fragment() {
                     } else {
                         // Handle case where the user has no posts in their collection
                         binding.msg.text = resources.getString(R.string.collection_empty)
+
+                        // Hide the progress bar
+                        binding.progressBar.visibility = View.GONE
                     }
                 } else {
                     // Handle case where the collection for the user does not exist
                     binding.msg.text = resources.getString(R.string.collection_empty)
+
+                    // Hide the progress bar
+                    binding.progressBar.visibility = View.GONE
                 }
             }
 

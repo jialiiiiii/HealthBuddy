@@ -156,12 +156,13 @@
                         android:paddingTop="4dp"
                         android:paddingRight="8dp"
                         android:paddingBottom="5dp"
-                        android:lines="5"
                         android:background="@color/spinner_background"
                         android:textColor="@color/dark_green"
                         android:textSize="@dimen/font_size_normal"
                         android:fontFamily="@font/dm_sans"
                         android:inputType="textMultiLine"
+                        android:lines="5"
+                        android:gravity="top|start"
                         android:text="" />
 
                 </LinearLayout>

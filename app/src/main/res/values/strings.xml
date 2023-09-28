@@ -41,6 +41,10 @@
     <string name="image_empty">Please select an image</string>
     <string name="post_created">Post Created!</string>
     <string name="post_failed">Fail to create post!</string>
+    <string name="post_deleted">Post Deleted!</string>
+    <string name="post_delete_failed">Failed to delete post!</string>
+    <string name="post_updated">Post Updated!</string>
+    <string name="post_update_failed">Failed to update post!</string>
 
     <string name="add_collection">Post added to your collection!</string>
     <string name="remove_collection">Post removed from your collection!</string>
@@ -255,6 +259,7 @@
     <string name="button_cancel">CANCEL</string>
     <string name="button_save">SAVE</string>
     <string name="button_post">POST</string>
+    <string name="button_delete">DELETE</string>
 
     <string-array name="times_value">
         <item>1</item>
@@ -274,15 +279,16 @@
     <!-- Messages & Dialog   -->
     <string name="del_confirmation">Delete Confirmation</string>
     <string name="del_confirmation_msg">Are you sure you want to delete this data?</string>
+    <string name="del_confirmation_msg_post">Are you sure you want to delete this post?</string>
 
-    <string name="del_exec_success">Exercise Data successfully deleted.</string>
-    <string name="del_nutri_success">Nutrition Data successfully deleted.</string>
+    <string name="del_exec_success">Exercise data successfully deleted.</string>
+    <string name="del_nutri_success">Nutrition data successfully deleted.</string>
 
-    <string name="add_exec_success">Exercise Data successfully added.</string>
-    <string name="add_nutri_success">Nutrition Data successfully added.</string>
+    <string name="add_exec_success">Exercise data successfully added.</string>
+    <string name="add_nutri_success">Nutrition data successfully added.</string>
 
-    <string name="update_exec_success">Exercise Data successfully updated.</string>
-    <string name="update_nutri_success">Nutrition Data successfully updated.</string>
+    <string name="update_exec_success">Exercise data successfully updated.</string>
+    <string name="update_nutri_success">Nutrition data successfully updated.</string>
 
     <string name="del_confirm">DELETE</string>
     <string name="del_cancel">No</string>

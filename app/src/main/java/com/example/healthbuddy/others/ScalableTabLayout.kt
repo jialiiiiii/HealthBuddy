@@ -1,4 +1,4 @@
-package com.example.healthbuddy
+package com.example.healthbuddy.others
 
 import android.content.Context
 import android.util.AttributeSet

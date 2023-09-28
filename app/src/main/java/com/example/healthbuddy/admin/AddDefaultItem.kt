@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.example.healthbuddy.R
 import com.example.healthbuddy.database.Post
 import com.example.healthbuddy.database.Suggestion
 import com.example.healthbuddy.database.Suggestionss
@@ -44,7 +45,6 @@ class AddDefaultExec : Fragment() {
                 sImage = Base64.encodeToString(bytes, Base64.DEFAULT)
                 binding.postImg.setImageBitmap(myBitmap)
                 inputStream!!.close()
-                Toast.makeText(context, "Image Selected", Toast.LENGTH_SHORT).show()
             } catch (ex: Exception) {
                 Toast.makeText(context, ex.message.toString(), Toast.LENGTH_SHORT).show()
             }
@@ -77,7 +77,6 @@ class AddDefaultExec : Fragment() {
         val title = binding.titleText.text.toString()
         val description = binding.descriptionText.text.toString()
 
-//        db = FirebaseDatabase.getInstance().getReference("Exercises")
         db = FirebaseDatabase.getInstance().getReference("Nutritions")
 
         val post = Suggestionss(title, description, sImage)
@@ -89,9 +88,9 @@ class AddDefaultExec : Fragment() {
             binding.descriptionText.text.clear()
             sImage = ""
             binding.postImg.setImageBitmap(null)
-            Toast.makeText(context, "Post Created!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.post_created), Toast.LENGTH_SHORT).show()
         }.addOnFailureListener {
-            Toast.makeText(context, "Fail to create post!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.post_failed), Toast.LENGTH_SHORT).show()
         }
     }
 }

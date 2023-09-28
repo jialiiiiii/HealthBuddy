@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
-            <com.example.healthbuddy.ScalableTabLayout
+            <com.example.healthbuddy.others.ScalableTabLayout
                 android:id="@+id/post_layout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layoutTop"
@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/collection" />
 
-            </com.example.healthbuddy.ScalableTabLayout>
+            </com.example.healthbuddy.others.ScalableTabLayout>
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager"

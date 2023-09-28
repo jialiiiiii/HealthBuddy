@@ -154,6 +154,8 @@ class AddPostFragment : Fragment() {
             binding.descriptionText.text.clear()
             sImage = ""
             binding.postImg.setImageBitmap(null)
+            binding.postImg.visibility = View.GONE
+            binding.selectImgButton.visibility = View.VISIBLE
             Toast.makeText(context, getString(R.string.post_created), Toast.LENGTH_SHORT).show()
         }.addOnFailureListener {
             Toast.makeText(context, getString(R.string.post_failed), Toast.LENGTH_SHORT).show()

@@ -1,11 +1,9 @@
 package com.example.healthbuddy.nutrition
 
-import SuggestExecAdapter
 import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthbuddy.database.Post
 import com.example.healthbuddy.database.Suggestion
-import com.example.healthbuddy.databinding.FragmentExecSuggestionBinding
 import com.example.healthbuddy.databinding.FragmentMealSuggestionBinding
-import com.example.healthbuddy.nutrition.SuggestMealAdapter
-import com.example.healthbuddy.post.RecyclerViewItemDecoration
-import com.example.healthbuddy.post.tempData
+import com.example.healthbuddy.post.TempData
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -29,7 +24,7 @@ class SuggestMealFragment : Fragment() {
     private lateinit var binding: FragmentMealSuggestionBinding
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var postArrayList: ArrayList<Post>
-    private lateinit var nodeList: ArrayList<tempData>
+    private lateinit var nodeList: ArrayList<TempData>
     private lateinit var mealSuggestionAdapter: SuggestMealAdapter // Add this adapter
     private lateinit var progressBar: ProgressBar
 
@@ -56,7 +51,7 @@ class SuggestMealFragment : Fragment() {
 
         binding.nutriSuggestionView.hasFixedSize()
         postArrayList = arrayListOf<Post>()
-        nodeList = arrayListOf<tempData>()
+        nodeList = arrayListOf<TempData>()
 
         // Retrieve and update data for the RecyclerView
         retrieveAndSortData()

@@ -39,6 +39,10 @@
     <string name="image_empty">请选择图片</string>
     <string name="post_created">帖子已创建！</string>
     <string name="post_failed">创建帖子失败！</string>
+    <string name="post_deleted">帖子已删除！</string>
+    <string name="post_delete_failed">删除帖子失败！</string>
+    <string name="post_updated">帖子已更新！</string>
+    <string name="post_update_failed">更新帖子失败！</string>
 
     <string name="add_collection">帖子已添加到你的收藏中！</string>
     <string name="remove_collection">帖子已从你的收藏中删除！</string>
@@ -248,6 +252,7 @@
     <string name="button_cancel">取消</string>
     <string name="button_save">保存</string>
     <string name="button_post">发布</string>
+    <string name="button_delete">删除</string>
 
     <string name="analysis">分析</string>
     <string name="collection">收藏</string>
@@ -258,7 +263,8 @@
 
     <!-- Messages & Dialog   -->
     <string name="del_confirmation">删除确认</string>
-    <string name="del_confirmation_msg">您确定要删除此数据吗？</string>
+    <string name="del_confirmation_msg">你确定要删除此数据吗？</string>
+    <string name="del_confirmation_msg_post">你确定要删除此帖子吗？</string>
 
     <string name="del_exec_success">成功删除运动数据。</string>
     <string name="del_nutri_success">成功删除营养数据。</string>
