@@ -1,14 +1,10 @@
 package com.example.healthbuddy.nutrition
 
 import android.content.Context
-import android.text.Spannable
-import android.text.SpannableString
 import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +13,8 @@ import com.example.healthbuddy.database.Suggestion
 
 class SuggestMealAdapter (
     private val context: Context,
-    private val suggestions: MutableList<Suggestion>
+    private val suggestions: MutableList<Suggestion>,
+    private val suggestMealFragment: SuggestMealFragment
 ) : RecyclerView.Adapter<SuggestMealAdapter.ViewHolder>() {
 
     private val sharedPreferences = context.getSharedPreferences("HealthBuddyPrefs", Context.MODE_PRIVATE)
@@ -26,7 +23,7 @@ class SuggestMealAdapter (
         val titleTextView: TextView = itemView.findViewById(R.id.nutri_title)
         val descriptionTextView: TextView = itemView.findViewById(R.id.nutri_desc)
         val imageView: ImageView = itemView.findViewById(R.id.nutri_img)
-        val starBtn: ImageButton = itemView.findViewById(R.id.nutri_star)
+        val starBtn: ImageView = itemView.findViewById(R.id.nutri_star)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,26 +41,31 @@ class SuggestMealAdapter (
 
         // Check if the full description is longer than the maximum length
         if (fullDescription.length > maxShortenLength) {
-            // Show the shortened description with "Read More"
-            val shortenedText = fullDescription.substring(0, maxShortenLength) + "... Read More"
+            // Show the shortened description
+            val shortenedText = fullDescription.substring(0, maxShortenLength) + "..."
 
-            // Create a SpannableString to make "Read More" clickable
-            val spannable = SpannableString(shortenedText)
-            val clickableSpan = object : ClickableSpan() {
-                override fun onClick(widget: View) {
-                    // Handle "Read More" click here
+            // Define a boolean variable to track the description state
+            var isDescExpanded = false
+
+            // Set an OnClickListener for the descriptionTextView
+            holder.descriptionTextView.setOnClickListener {
+                if (isDescExpanded) {
+                    val shortenedText = fullDescription.substring(0, maxShortenLength) + "..."
+                    holder.descriptionTextView.text = shortenedText
+                    holder.descriptionTextView.movementMethod = LinkMovementMethod.getInstance()
+                } else {
                     holder.descriptionTextView.text = fullDescription
                 }
+
+                // Toggle the description state
+                isDescExpanded = !isDescExpanded
             }
 
-            // Apply the ClickableSpan to "Read More"
-            spannable.setSpan(clickableSpan, maxShortenLength + 1, spannable.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-            // Set the text and make it clickable
-            holder.descriptionTextView.text = spannable
+            // Set the text
+            holder.descriptionTextView.text = shortenedText
             holder.descriptionTextView.movementMethod = LinkMovementMethod.getInstance()
         } else {
-            // If the description is shorter, display it without "Read More"
+            // If the description is shorter, display it directly
             holder.descriptionTextView.text = fullDescription
         }
 
@@ -103,7 +105,7 @@ class SuggestMealAdapter (
         notifyDataSetChanged()
     }
 
-    private fun toggleFavorite(postId: String, starBtn: ImageButton) {
+    private fun toggleFavorite(postId: String, starBtn: ImageView) {
         val favoritePostIds = sharedPreferences.getStringSet("favoriteMealIds", mutableSetOf()) ?: mutableSetOf()
 
         if (favoritePostIds.contains(postId)) {
@@ -131,5 +133,9 @@ class SuggestMealAdapter (
 
             starBtn.setImageResource(R.drawable.ic_star_filled)
         }
+
+        // Update UI
+        suggestMealFragment.retrieveAndSortData()
+        suggestMealFragment.scrollTop()
     }
 }

@@ -10,6 +10,7 @@
         android:id="@+id/exer_suggestion_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/box_margin_left_right"
         tools:listitem="@layout/exec_suggestion_item"/>
 
     <ProgressBar

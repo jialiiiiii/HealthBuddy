@@ -24,6 +24,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+
 class SuggestMealFragment : Fragment() {
     private lateinit var binding: FragmentMealSuggestionBinding
     private lateinit var sharedPreferences: SharedPreferences
@@ -41,18 +42,17 @@ class SuggestMealFragment : Fragment() {
         progressBar = binding.progressBar
 
         // Initialize the adapter with an empty list
-        mealSuggestionAdapter = SuggestMealAdapter(requireContext(), mutableListOf())
+        mealSuggestionAdapter = SuggestMealAdapter(requireContext(), mutableListOf(), this)
 
         // Set the adapter on your RecyclerView
         binding.nutriSuggestionView.layoutManager = LinearLayoutManager(requireContext())
         binding.nutriSuggestionView.adapter = mealSuggestionAdapter
 
         // Initialize shared preferences
-        sharedPreferences = requireContext().getSharedPreferences("HealthBuddyPrefs", AppCompatActivity.MODE_PRIVATE)
-
-        // Add item decoration for spacing
-        val itemDecoration = RecyclerViewItemDecoration(15, 2)
-        binding.nutriSuggestionView.addItemDecoration(itemDecoration)
+        sharedPreferences = requireContext().getSharedPreferences(
+            "HealthBuddyPrefs",
+            AppCompatActivity.MODE_PRIVATE
+        )
 
         binding.nutriSuggestionView.hasFixedSize()
         postArrayList = arrayListOf<Post>()
@@ -64,7 +64,7 @@ class SuggestMealFragment : Fragment() {
         return binding.root
     }
 
-    private fun retrieveAndSortData() {
+    fun retrieveAndSortData() {
         val db = FirebaseDatabase.getInstance().getReference("Nutritions")
 
         db.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -87,7 +87,9 @@ class SuggestMealFragment : Fragment() {
                 }
 
                 // Retrieve favorite meal IDs from SharedPreferences
-                val favoritePostIds = sharedPreferences.getStringSet("favoriteMealIds", mutableSetOf()) ?: mutableSetOf()
+                val favoritePostIds =
+                    sharedPreferences.getStringSet("favoriteMealIds", mutableSetOf())
+                        ?: mutableSetOf()
 
                 // Sort the exerciseList based on favorite status
                 val sortedList = exerciseList.sortedWith(Comparator { suggestion1, suggestion2 ->
@@ -118,5 +120,9 @@ class SuggestMealFragment : Fragment() {
                 progressBar.visibility = View.GONE
             }
         })
+    }
+
+    fun scrollTop() {
+        binding.nutriSuggestionView.scrollToPosition(0)
     }
 }

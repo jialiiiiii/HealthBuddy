@@ -4,12 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".exercise.SuggestExecFragment">
+    tools:context=".nutrition.SuggestMealFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/nutri_suggestion_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/box_margin_left_right"
         tools:listitem="@layout/nutri_suggestion_item"/>
 
     <ProgressBar

@@ -39,7 +39,7 @@ class SuggestExecFragment : Fragment() {
         progressBar = binding.progressBar
 
         // Initialize the adapter with an empty list
-        execSuggestAdapter = SuggestExecAdapter(requireContext(), mutableListOf())
+        execSuggestAdapter = SuggestExecAdapter(requireContext(), mutableListOf(), this)
 
         // Set the adapter on your RecyclerView
         binding.exerSuggestionView.layoutManager = LinearLayoutManager(requireContext())
@@ -47,10 +47,6 @@ class SuggestExecFragment : Fragment() {
 
         // Initialize shared preferences
         sharedPreferences = requireContext().getSharedPreferences("HealthBuddyPrefs", AppCompatActivity.MODE_PRIVATE)
-
-        // Add item decoration for spacing
-        val itemDecoration = RecyclerViewItemDecoration(15, 2)
-        binding.exerSuggestionView.addItemDecoration(itemDecoration)
 
         binding.exerSuggestionView.hasFixedSize()
         postArrayList = arrayListOf<Post>()
@@ -62,7 +58,7 @@ class SuggestExecFragment : Fragment() {
         return binding.root
     }
 
-    private fun retrieveAndSortData() {
+    fun retrieveAndSortData() {
         val db = FirebaseDatabase.getInstance().getReference("Exercises")
 
         db.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -117,5 +113,9 @@ class SuggestExecFragment : Fragment() {
                 progressBar.visibility = View.GONE
             }
         })
+    }
+
+    fun scrollTop() {
+        binding.exerSuggestionView.scrollToPosition(0)
     }
 }
