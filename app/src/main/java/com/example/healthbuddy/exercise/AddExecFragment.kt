@@ -243,7 +243,8 @@ class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun updateTimeButtonText(calendar: Calendar) {
-        val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        val englishLocale = Locale("en", "US") // Explicitly set the locale to English (United States)
+        val timeFormat = SimpleDateFormat("hh:mm a", englishLocale)
         binding.timePickerButton.text = timeFormat.format(calendar.time)
     }
 
