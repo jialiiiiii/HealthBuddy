@@ -169,7 +169,7 @@
             app:destination="@id/settingsFragment" />
         <action
             android:id="@+id/action_nutrition_collection_to_forum_details"
-            app:destination="@id/collectionNutriFragment" />
+            app:destination="@id/forumDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/execDataFragment"
@@ -200,14 +200,6 @@
             app:destination="@id/settingsFragment" />
         <action
             android:id="@+id/action_exercise_collection_to_forum_details"
-            app:destination="@id/execCollectionFragment" />
+            app:destination="@id/forumDetailsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/collectionNutriFragment"
-        android:name="com.example.healthbuddy.nutrition.NutriCollectionFragment"
-        android:label="CollectionNutriFragment" />
-    <fragment
-        android:id="@+id/execCollectionFragment"
-        android:name="com.example.healthbuddy.exercise.ExecCollectionFragment"
-        android:label="ExecCollectionFragment" />
 </navigation>
