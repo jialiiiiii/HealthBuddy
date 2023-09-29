@@ -150,6 +150,8 @@ class EditPostFragment : Fragment() {
                 binding.descriptionText.text.clear()
                 sImage = ""
                 binding.postImg.setImageBitmap(null)
+                binding.postImg.visibility = View.GONE
+                binding.selectImgButton.visibility = View.VISIBLE
                 binding.savePostButton.visibility = View.INVISIBLE
                 binding.delPostButton.visibility = View.INVISIBLE
 
