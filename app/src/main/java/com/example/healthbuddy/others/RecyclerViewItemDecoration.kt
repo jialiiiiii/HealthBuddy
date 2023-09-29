@@ -22,17 +22,16 @@ class RecyclerViewItemDecoration (
         val lp = view.layoutParams as StaggeredGridLayoutManager.LayoutParams
 
         val spanIndex = lp.spanIndex
-        if (position > 0) {
-            // set top & left margin to all
-            outRect.top = margin
-            outRect.left = margin
 
-            if (spanIndex == 0) {
-                outRect.right = 0
-            } else {
-                // set right margin to 2nd column only
-                outRect.right = margin
-            }
+        // set top & left margin to all
+        outRect.top = margin
+        outRect.left = margin
+
+        if (spanIndex == 0) {
+            outRect.right = 0
+        } else {
+            // set right margin to 2nd column only
+            outRect.right = margin
         }
     }
 }
