@@ -3,7 +3,9 @@ package com.example.healthbuddy.exercise
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.DialogInterface
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,9 +17,17 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.healthbuddy.R
+import com.example.healthbuddy.database.AppDatabase
+import com.example.healthbuddy.database.UserDao
 import com.example.healthbuddy.database.UserExecData
 import com.example.healthbuddy.databinding.FragmentAddExecBinding
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -36,6 +46,9 @@ class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private lateinit var execDataViewModel: ExecDataViewModel
 
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var db: DatabaseReference
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +57,10 @@ class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
         // Replace the layout inflating code with ViewBinding
         _binding = FragmentAddExecBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        // Initialize SharedPreferences
+        sharedPreferences =
+            requireContext().getSharedPreferences("HealthBuddyPrefs", Context.MODE_PRIVATE)
 
         // Initialize ViewModel
         execDataViewModel = ViewModelProvider(this).get(ExecDataViewModel::class.java)
@@ -142,44 +159,56 @@ class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun saveUserExecData(){
-        var weight: Double = 65.0
+        var weight: Double = 0.0
         var calBurnt: Double = 0.0
         var calBurntHolder: String = ""
 
-        // Formula
-        // Total Calories Burned (per minute) = (3.5 * MET * Weight in kilograms) / 200
-        // Calories Burned per Repetition     = (3.5 * MET * Weight in kilograms) / (200 * Repetitions)
+        db = FirebaseDatabase.getInstance().getReference("Users")
+        // Get user id
+        val userId = sharedPreferences.getString("userId","") ?: ""
 
-        var met: Double = getMET(binding.exerciseCategorySpinner.selectedItemPosition, binding.exerciseTypeSpinner.selectedItemPosition)
+        db.child(userId).get().addOnSuccessListener { userSnapshot ->
+            if (userSnapshot.exists()) {
+                weight = userSnapshot.child("weight").value.toString().toDouble()
 
-        when(binding.exerciseCategorySpinner.selectedItemPosition){
-            // Calculated in Mins
-            0, 1 -> {
-                calBurnt = (3.5 * met * weight) / 200.0
-                calBurnt *= binding.durationSeekBar.progress.toString().toDouble()
-                calBurnt *= binding.exerciseSetSpinner.selectedItem.toString().toDouble()
-            }
-            else -> {
-                calBurnt = (3.5 * met * weight) / (200.0 * binding.durationSeekBar.progress.toString().toDouble())
-                calBurnt *= binding.exerciseSetSpinner.selectedItem.toString().toDouble()
+                // Formula
+                // Total Calories Burned (per minute) = (3.5 * MET * Weight in kilograms) / 200
+                // Calories Burned per Repetition     = (3.5 * MET * Weight in kilograms) / (200 * Repetitions)
+
+                var met: Double = getMET(binding.exerciseCategorySpinner.selectedItemPosition, binding.exerciseTypeSpinner.selectedItemPosition)
+
+                when(binding.exerciseCategorySpinner.selectedItemPosition){
+                    // Calculated in Mins
+                    0, 1 -> {
+                        calBurnt = (3.5 * met * weight) / 200.0
+                        calBurnt *= binding.durationSeekBar.progress.toString().toDouble()
+                        calBurnt *= binding.exerciseSetSpinner.selectedItem.toString().toDouble()
+                    }
+                    else -> {
+                        calBurnt = (3.5 * met * weight) / (200.0 * binding.durationSeekBar.progress.toString().toDouble())
+                        calBurnt *= binding.exerciseSetSpinner.selectedItem.toString().toDouble()
+                    }
+                }
+
+                calBurntHolder = String.format("%.2f", calBurnt)
+                calBurnt = calBurntHolder.toDouble()
+
+                val userExecData = UserExecData(
+                    exec_category = binding.exerciseCategorySpinner.selectedItemPosition,
+                    exec_type = binding.exerciseTypeSpinner.selectedItemPosition,
+                    exec_duration_rep = binding.durationSeekBar.progress.toString().toInt(),
+                    exec_set = binding.exerciseSetSpinner.selectedItem.toString().toInt(),
+                    exec_date = binding.datePickerButton.text.toString(),
+                    exec_time = binding.timePickerButton.text.toString(),
+                    cal_burnt = calBurnt)
+
+                execDataViewModel.insertExecData(userExecData)
+
+                Toast.makeText(requireContext(), R.string.add_exec_success, Toast.LENGTH_SHORT).show()
+            }else{
+//                Toast.makeText(requireContext(), "yay", Toast.LENGTH_SHORT).show()
             }
         }
-
-        calBurntHolder = String.format("%.2f", calBurnt)
-        calBurnt = calBurntHolder.toDouble()
-
-        val userExecData = UserExecData(
-            exec_category = binding.exerciseCategorySpinner.selectedItemPosition,
-            exec_type = binding.exerciseTypeSpinner.selectedItemPosition,
-            exec_duration_rep = binding.durationSeekBar.progress.toString().toInt(),
-            exec_set = binding.exerciseSetSpinner.selectedItem.toString().toInt(),
-            exec_date = binding.datePickerButton.text.toString(),
-            exec_time = binding.timePickerButton.text.toString(),
-            cal_burnt = calBurnt)
-
-        execDataViewModel.insertExecData(userExecData)
-
-        Toast.makeText(requireContext(), R.string.add_exec_success, Toast.LENGTH_SHORT).show()
     }
 
     private fun showDatePicker(calendar: Calendar) {
@@ -317,4 +346,5 @@ class AddExecFragment : Fragment(), AdapterView.OnItemSelectedListener {
         // Save the selected position of foodTypeSpinner
         outState.putInt("execTypeSelectionPosition", execTypeSelectionPosition)
     }
+
 }

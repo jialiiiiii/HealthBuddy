@@ -167,7 +167,8 @@ class UpdateNutriFragment : DialogFragment(), AdapterView.OnItemSelectedListener
     }
 
     private fun timeStringToCalendar(timeString: String): Calendar {
-        val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        val englishLocale = Locale("en", "US")
+        val sdf = SimpleDateFormat("hh:mm a", englishLocale)
         val date = sdf.parse(timeString)
 
         // Create a Calendar instance and set its time to the parsed time

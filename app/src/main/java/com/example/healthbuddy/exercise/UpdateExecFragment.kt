@@ -3,17 +3,14 @@ package com.example.healthbuddy.exercise
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.DialogInterface
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -25,6 +22,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.healthbuddy.R
 import com.example.healthbuddy.database.UserExecData
 import com.example.healthbuddy.databinding.FragmentUpdateExecBinding
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -43,6 +43,9 @@ class UpdateExecFragment  : DialogFragment(), AdapterView.OnItemSelectedListener
 
     private lateinit var execDataViewModel: ExecDataViewModel
 
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var db: DatabaseReference
+
     private var id: Int = 0
 
     companion object {
@@ -57,6 +60,11 @@ class UpdateExecFragment  : DialogFragment(), AdapterView.OnItemSelectedListener
         // Replace the layout inflating code with ViewBinding
         _binding = FragmentUpdateExecBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        // Initialize SharedPreferences
+        sharedPreferences =
+            requireContext().getSharedPreferences("HealthBuddyPrefs", Context.MODE_PRIVATE)
+
 
         // Set the dialog as a full-screen dialog
         dialog?.window?.setLayout(
@@ -176,7 +184,8 @@ class UpdateExecFragment  : DialogFragment(), AdapterView.OnItemSelectedListener
     }
 
     private fun timeStringToCalendar(timeString: String): Calendar {
-        val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        val englishLocale = Locale("en", "US")
+        val sdf = SimpleDateFormat("hh:mm a", englishLocale)
         val date = sdf.parse(timeString)
 
         // Create a Calendar instance and set its time to the parsed time
@@ -224,55 +233,67 @@ class UpdateExecFragment  : DialogFragment(), AdapterView.OnItemSelectedListener
     }
 
     private fun saveUserExecData() {
-        var weight: Double = 65.0
+        var weight: Double = 0.0
         var calBurnt: Double = 0.0
         var calBurntHolder: String = ""
 
-        // Formula
-        // Total Calories Burned (per minute) = (3.5 * MET * Weight in kilograms) / 200
-        // Calories Burned per Repetition     = (3.5 * MET * Weight in kilograms) / (200 * Repetitions)
+        db = FirebaseDatabase.getInstance().getReference("Users")
+        // Get user id
+        val userId = sharedPreferences.getString("userId","") ?: ""
 
-        var met: Double = getMET(
-            binding.exerciseCategorySpinner.selectedItemPosition,
-            binding.exerciseTypeSpinner.selectedItemPosition
-        )
+        db.child(userId).get().addOnSuccessListener { userSnapshot ->
+            if (userSnapshot.exists()) {
+                weight = userSnapshot.child("weight").value.toString().toDouble()
 
-        when (binding.exerciseCategorySpinner.selectedItemPosition) {
-            // Calculated in Mins
-            0, 1 -> {
-                calBurnt = (3.5 * met * weight) / 200.0
-                calBurnt *= binding.durationSeekBar.progress.toString().toDouble()
-                calBurnt *= binding.exerciseSetSpinner.selectedItem.toString().toDouble()
-            }
+                // Formula
+                // Total Calories Burned (per minute) = (3.5 * MET * Weight in kilograms) / 200
+                // Calories Burned per Repetition     = (3.5 * MET * Weight in kilograms) / (200 * Repetitions)
 
-            else -> {
-                calBurnt =
-                    (3.5 * met * weight) / (200.0 * binding.durationSeekBar.progress.toString()
-                        .toDouble())
-                calBurnt *= binding.exerciseSetSpinner.selectedItem.toString().toDouble()
+                var met: Double = getMET(
+                    binding.exerciseCategorySpinner.selectedItemPosition,
+                    binding.exerciseTypeSpinner.selectedItemPosition
+                )
+
+                when (binding.exerciseCategorySpinner.selectedItemPosition) {
+                    // Calculated in Mins
+                    0, 1 -> {
+                        calBurnt = (3.5 * met * weight) / 200.0
+                        calBurnt *= binding.durationSeekBar.progress.toString().toDouble()
+                        calBurnt *= binding.exerciseSetSpinner.selectedItem.toString().toDouble()
+                    }
+
+                    else -> {
+                        calBurnt =
+                            (3.5 * met * weight) / (200.0 * binding.durationSeekBar.progress.toString()
+                                .toDouble())
+                        calBurnt *= binding.exerciseSetSpinner.selectedItem.toString().toDouble()
+                    }
+                }
+
+                calBurntHolder = String.format("%.2f", calBurnt)
+                calBurnt = calBurntHolder.toDouble()
+
+                val userExecData = UserExecData(
+                    id = id,
+                    exec_category = binding.exerciseCategorySpinner.selectedItemPosition,
+                    exec_type = binding.exerciseTypeSpinner.selectedItemPosition,
+                    exec_duration_rep = binding.durationSeekBar.progress.toString().toInt(),
+                    exec_set = binding.exerciseSetSpinner.selectedItem.toString().toInt(),
+                    exec_date = binding.datePickerButton.text.toString(),
+                    exec_time = binding.timePickerButton.text.toString(),
+                    cal_burnt = calBurnt
+                )
+
+                execDataViewModel.updateExecData(userExecData)
+
+                dismiss()
+
+                Toast.makeText(requireContext(), getString(R.string.update_exec_success), Toast.LENGTH_SHORT)
+                    .show()
+            }else{
+//                Toast.makeText(requireContext(), "yay", Toast.LENGTH_SHORT).show()
             }
         }
-
-        calBurntHolder = String.format("%.2f", calBurnt)
-        calBurnt = calBurntHolder.toDouble()
-
-        val userExecData = UserExecData(
-            id = id,
-            exec_category = binding.exerciseCategorySpinner.selectedItemPosition,
-            exec_type = binding.exerciseTypeSpinner.selectedItemPosition,
-            exec_duration_rep = binding.durationSeekBar.progress.toString().toInt(),
-            exec_set = binding.exerciseSetSpinner.selectedItem.toString().toInt(),
-            exec_date = binding.datePickerButton.text.toString(),
-            exec_time = binding.timePickerButton.text.toString(),
-            cal_burnt = calBurnt
-        )
-
-        execDataViewModel.updateExecData(userExecData)
-
-        dismiss()
-
-        Toast.makeText(requireContext(), getString(R.string.update_exec_success), Toast.LENGTH_SHORT)
-            .show()
     }
 
     private fun showDatePicker(calendar: Calendar) {
@@ -318,7 +339,7 @@ class UpdateExecFragment  : DialogFragment(), AdapterView.OnItemSelectedListener
             true // Set to true for 24-hour format
         )
 
-        // Set the text color for the buttons using a color resource
+        //Set the text color for the buttons using a color resource
         timePickerDialog.setOnShowListener { dialog ->
             val negativeButton =
                 (dialog as TimePickerDialog).getButton(DialogInterface.BUTTON_NEGATIVE)
@@ -338,9 +359,14 @@ class UpdateExecFragment  : DialogFragment(), AdapterView.OnItemSelectedListener
     }
 
     private fun updateTimeButtonTextCal(calendar: Calendar) {
-        val englishLocale = Locale("en", "US") // Explicitly set the locale to English (United States)
-        val timeFormat = SimpleDateFormat("hh:mm a", englishLocale)
-        binding.timePickerButton.text = timeFormat.format(calendar.time)
+        try {
+            val englishLocale = Locale("en", "US") // Explicitly set the locale to English (United States)
+            val timeFormat = SimpleDateFormat("hh:mm a", englishLocale)
+            binding.timePickerButton.text = timeFormat.format(calendar.time)
+        } catch (e: ParseException) {
+            Log.d("Error", "Error")
+        }
+
     }
 
     private fun updateDateButtonText(date: String) {
