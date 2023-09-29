@@ -78,13 +78,14 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
             val email = args.getString("email", "")
 
             binding.titleRegister.visibility = View.VISIBLE
+            binding.save.visibility = View.GONE
             binding.signOut.visibility = View.GONE
-            binding.saveOrRegister.text = getString(R.string.button_register)
+            binding.register.visibility = View.VISIBLE
 
             binding.textEmail.text = email
             binding.editName.setText(name)
 
-            binding.saveOrRegister.setOnClickListener {
+            binding.register.setOnClickListener {
                 if (validateInput()) {
                     registerUser(id, email)
                 }
@@ -117,7 +118,7 @@ class ProfileFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         }
 
-        binding.saveOrRegister.setOnClickListener {
+        binding.save.setOnClickListener {
             if (validateInput()) {
                 updateUser(userId)
             }

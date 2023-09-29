@@ -2,6 +2,7 @@ package com.example.healthbuddy.com.example.healthbuddy.forum
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -147,5 +148,17 @@ class ForumFragment : Fragment() {
             }
 
         })
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+
+        // Configuration has changed, refresh the RecyclerView
+        refreshRecyclerView()
+    }
+
+    private fun refreshRecyclerView() {
+        // Update the RecyclerView with the refreshed data
+        binding.postList.adapter?.notifyDataSetChanged()
     }
 }

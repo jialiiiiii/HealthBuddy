@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -81,7 +82,7 @@ class UpdateNutriFragment : DialogFragment(), AdapterView.OnItemSelectedListener
             if (args != null) {
                 val nutriData = args.getParcelable<UserNutritionData>(UpdateNutriFragment.ARG_NUTRI_DATA)
                 binding.foodCategorySpinner.setSelection(nutriData?.food_category.toString().toInt())
-                binding.sizeSeekBar.progress = nutriData?.food_serving_size.toString().toInt()
+                binding.sizeSeekBar.progress = nutriData?.food_size.toString().toInt()
                 id = nutriData?.id.toString().toInt()
             }
         }
