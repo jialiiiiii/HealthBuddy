@@ -31,23 +31,30 @@
             android:layout_height="match_parent"
             android:background="@color/bg_green">
 
-            <TextView
-                android:id="@+id/postTitle"
+            <HorizontalScrollView
+                android:id="@+id/titleScrollView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="12dp"
-                android:ellipsize="end"
-                android:fontFamily="@font/dm_sans_medium"
-                android:maxLines="1"
-                android:text="Title"
-                android:textColor="@color/dark_green"
-                android:textSize="@dimen/font_size_label"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/backButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/backButton"
-                app:layout_constraintTop_toTopOf="@+id/backButton" />
+                app:layout_constraintTop_toTopOf="@+id/backButton"
+                android:scrollbars="none">
+
+                <TextView
+                    android:id="@+id/postTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dm_sans_medium"
+                    android:maxLines="1"
+                    android:text="Title"
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/font_size_label"
+                    android:textStyle="bold" />
+
+            </HorizontalScrollView>
 
             <ImageView
                 android:id="@+id/backButton"
@@ -69,7 +76,7 @@
                 android:adjustViewBounds="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/postTitle"
+                app:layout_constraintTop_toBottomOf="@+id/titleScrollView"
                 tools:src="@tools:sample/avatars" />
 
             <TextView
@@ -79,6 +86,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="12dp"
+                android:paddingBottom="24dp"
                 android:fontFamily="@font/dm_sans"
                 android:text="Description"
                 android:textColor="@color/dark_green"
@@ -86,7 +94,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.643"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/postImg" />
+                app:layout_constraintTop_toBottomOf="@+id/postImg"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

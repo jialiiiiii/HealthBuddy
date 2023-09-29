@@ -6,9 +6,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/bg_green"
-        android:fillViewport="true">
+        android:layout_height="wrap_content"
+        android:background="@color/bg_green">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/frameLayout"
@@ -30,6 +29,8 @@
                 android:id="@+id/msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:minHeight="300dp"
                 android:fontFamily="@font/dm_sans"
                 android:textColor="@color/dark_green"
                 android:textSize="@dimen/font_size_normal"

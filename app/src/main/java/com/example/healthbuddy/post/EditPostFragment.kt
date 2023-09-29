@@ -189,16 +189,7 @@ class EditPostFragment : Fragment() {
         db = FirebaseDatabase.getInstance().getReference("Posts")
         val post = Post(tag, title, description, sImage, userId)
         db.child(nodeId).setValue(post).addOnSuccessListener {
-            binding.postTagSpinner.setSelection(-1)
-            binding.titleText.text.clear()
-            binding.descriptionText.text.clear()
-            sImage = ""
-            binding.postImg.setImageBitmap(null)
-            binding.savePostButton.visibility = View.INVISIBLE
-            binding.delPostButton.visibility = View.INVISIBLE
-
             Toast.makeText(context, getString(R.string.post_updated), Toast.LENGTH_SHORT).show()
-
         }.addOnFailureListener {
             Toast.makeText(context, getString(R.string.post_update_failed), Toast.LENGTH_SHORT).show()
         }

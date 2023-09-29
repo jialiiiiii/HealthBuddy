@@ -96,9 +96,6 @@ class NutriCollectionFragment : Fragment() {
 
                                             binding.msg.text = ""
                                         }
-                                        else {
-                                            binding.msg.text = resources.getString(R.string.collection_empty)
-                                        }
 
                                         var adapter = PostAdapter(postArrayList)
                                         binding.postList.adapter = adapter
@@ -113,31 +110,20 @@ class NutriCollectionFragment : Fragment() {
                                                 findNavController().navigate(R.id.action_nutrition_collection_to_forum_details, bundle)
                                             }
                                         })
-
-                                        // Hide the progress bar when data retrieval is complete
-                                        binding.progressBar.visibility = View.GONE
                                     }
                                 }
 
                                 override fun onCancelled(error: DatabaseError) {
-                                    // Handle database error
+
                                 }
                             })
                         }
 
                     } else {
-                        // Handle case where the user has no posts in their collection
-                        binding.msg.text = resources.getString(R.string.collection_empty)
 
-                        // Hide the progress bar
-                        binding.progressBar.visibility = View.GONE
                     }
                 } else {
-                    // Handle case where the collection for the user does not exist
-                    binding.msg.text = resources.getString(R.string.collection_empty)
 
-                    // Hide the progress bar
-                    binding.progressBar.visibility = View.GONE
                 }
             }
 

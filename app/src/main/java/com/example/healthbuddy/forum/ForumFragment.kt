@@ -140,11 +140,14 @@ class ForumFragment : Fragment() {
 
                     // Hide the progress bar when data retrieval is complete
                     binding.progressBar.visibility = View.GONE
+                    binding.layoutBottom.root.visibility = View.VISIBLE
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-
+                // Hide the progress bar when error
+                binding.progressBar.visibility = View.GONE
+                binding.layoutBottom.root.visibility = View.VISIBLE
             }
 
         })

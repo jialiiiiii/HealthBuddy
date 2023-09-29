@@ -96,11 +96,13 @@ class PostFragment : Fragment() {
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
-                    // Handle the error here if necessary
+                    // Hide the progress bar when error
+                    binding.progressBar.visibility = View.GONE
                 }
             })
         } else {
-            // Handle the case where userId is blank or not found in SharedPreferences
+            // Hide the progress bar when userId is blank or not found in SharedPreferences
+            binding.progressBar.visibility = View.GONE
         }
     }
 
